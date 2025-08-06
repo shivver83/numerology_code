@@ -18,8 +18,8 @@ function App() {
       <header className="App-header">
         <h1>Life Path Numbers Guide</h1>
         <img
-          src="/life_path_numbers_guide.png"
-          alt="Life Path Numbers Guide"
+          src="/calculation_guide.png"
+          alt="Life Path Numbers Calculation Guide"
           className="guide-image"
         />
       </header>
