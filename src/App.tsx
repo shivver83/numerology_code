@@ -1,9 +1,9 @@
-import './App.css'
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      {/* Navigation Menu */}
+      {/* Top Navigation Bar */}
       <nav className="navbar">
         <div className="logo">🔮 Numerology</div>
         <ul className="nav-links">
@@ -18,13 +18,13 @@ function App() {
       <header className="App-header">
         <h1>Life Path Numbers Guide</h1>
         <img
-          src="/calculation_guide.png"
-          alt="Life Path Numbers Calculation Guide"
+          src="/life_path_numbers_guide.png"
+          alt="Life Path Numbers Guide"
           className="guide-image"
         />
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
