@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.guide-image {
+  max-width: 90%;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
