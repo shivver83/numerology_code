@@ -23,7 +23,9 @@ function App() {
       <div className="App">
         {/* Navigation Bar */}
         <nav className="navbar full-width">
-          <div className="logo">🔮 Numerology</div>
+          <div className="logo">
+            <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
+          </div>
           <ul className="nav-links">
             <li><Link to="/">Home</Link></li>
             <li><a href="#about">About Happiness Creations</a></li>
@@ -48,4 +50,3 @@ function App() {
 }
 
 export default App;
-
