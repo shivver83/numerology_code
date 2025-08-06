@@ -1,72 +1,41 @@
-/* App.css */
-.App {
-  text-align: center;
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  padding: 1rem;
   background-color: #222;
   color: white;
-  padding: 1rem 2rem;
-  width: 100%;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
+  gap: 1rem;
+  list-style-type: none;
 }
 
-.nav-links li a {
+.nav-links a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-links li a:hover {
-  text-decoration: underline;
 }
 
 .App-header {
-  flex: 1;
+  text-align: center;
   padding: 2rem;
 }
 
 .guide-image-full {
   width: 100%;
+  max-width: 100%;
   height: auto;
-  max-height: 600px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 1rem;
 }
 
 .footer {
-  background-color: #222;
-  color: white;
-  padding: 1rem;
   text-align: center;
+  padding: 1rem;
+  background-color: #f2f2f2;
 }
 
 .rate-link {
-  color: #ffd700;
+  color: #007bff;
   text-decoration: none;
-  font-weight: bold;
 }
 
-.rate-link:hover {
-  text-decoration: underline;
-}
