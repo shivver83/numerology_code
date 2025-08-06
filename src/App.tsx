@@ -16,4 +16,20 @@ function App() {
 
       {/* Main Content */}
       <header className="App-header">
-        <h1>Life Path Numbers Gui
+        <h1>Life Path Numbers Guide</h1>
+        <img
+          src="/numerology.png"
+          alt="What Numbers Speak ...."
+          className="guide-image-full"
+        />
+      </header>
+
+      {/* Bottom Pane */}
+      <footer className="footer">
+        <a href="#rateus" className="rate-link">⭐ Rate Us</a>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
