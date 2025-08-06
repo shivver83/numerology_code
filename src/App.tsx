@@ -20,9 +20,14 @@ function App() {
         <img
           src="/numerology.png"
           alt="What Numbers Speak ...."
-          className="guide-image"
+          className="guide-image half-width"
         />
       </header>
+
+      {/* Bottom Menu */}
+      <footer className="footer">
+        <a href="#rateus">⭐ Rate Us</a>
+      </footer>
     </div>
   );
 }
