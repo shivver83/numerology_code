@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <>
       <header className="App-header">
-        <h1>Life Path Numbers Guide</h1>
+        <h1>🔢 Discover Your Life Path Number</h1>
         <img
           src="/numerology.png"
           alt="What Numbers Speak ...."
