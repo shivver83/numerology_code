@@ -4,7 +4,7 @@ function App() {
   return (
     <div className="App">
       {/* Top Navigation Bar */}
-      <nav className="navbar">
+      <nav className="navbar full-width">
         <div className="logo">🔮 Numerology</div>
         <ul className="nav-links">
           <li><a href="/">Home</a></li>
@@ -16,20 +16,4 @@ function App() {
 
       {/* Main Content */}
       <header className="App-header">
-        <h1>Life Path Numbers Guide</h1>
-        <img
-          src="/numerology.png"
-          alt="What Numbers Speak ...."
-          className="guide-image half-width"
-        />
-      </header>
-
-      {/* Bottom Menu */}
-      <footer className="footer">
-        <a href="#rateus">⭐ Rate Us</a>
-      </footer>
-    </div>
-  );
-}
-
-export default App;
+        <h1>Life Path Numbers Gui
