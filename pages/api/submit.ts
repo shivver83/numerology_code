@@ -1,13 +1,9 @@
-// pages/api/submit.ts
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Pool } from 'pg';
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL, // Set this in Vercel's environment variables
-  ssl: {
-    rejectUnauthorized: false, // Required for Neon
-  },
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -35,4 +31,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(500).json({ message: 'Error saving data', error });
   }
 }
-
