@@ -20,33 +20,39 @@ function HomePage() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitMessage('');
 
-    // Basic validation
-    if (!formData.name.trim() || !formData.dateOfBirth) {
-      setSubmitMessage('Please fill in all fields');
-      setIsSubmitting(false);
-      return;
-    }
+  if (!formData.name.trim() || !formData.dateOfBirth) {
+    setSubmitMessage('Please fill in all fields');
+    setIsSubmitting(false);
+    return;
+  }
 
-    try {
-      // For now, we'll just log the data and show a success message
-      // In a real application, you would send this to a backend API
-      console.log('Form submitted:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+  try {
+    const response = await fetch('http://localhost:5000/api/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
       setSubmitMessage('Thank you! Your information has been submitted successfully.');
       setFormData({ name: '', dateOfBirth: '' });
-    } catch (error) {
-      setSubmitMessage('There was an error submitting your information. Please try again.');
-    } finally {
-      setIsSubmitting(false);
+    } else {
+      setSubmitMessage(`Error: ${data.message}`);
     }
-  };
+  } catch (error) {
+    setSubmitMessage('There was an error submitting your information. Please try again.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <>
