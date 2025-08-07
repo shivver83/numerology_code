@@ -175,17 +175,18 @@ const [conductorNumber, setConductorNumber] = useState<number | null>(null);
               </div>
             )}
           </form>
+          {driverNumber !== null && conductorNumber !== null && (
+          <div className="numerology-result">
+          <h3>Your Numerology Numbers</h3>
+          <p><strong>🔢 Driver Number:</strong> {driverNumber}</p>
+          <p><strong>🛤️ Conductor (Life Path) Number:</strong> {conductorNumber}</p>
+          </div>
+        )}
         </div>
       </section>
     </div>
   );
 }
-{driverNumber !== null && conductorNumber !== null && (
-  <div className="numerology-result">
-    <h3>Your Numerology Numbers</h3>
-    <p><strong>🔢 Driver Number:</strong> {driverNumber}</p>
-    <p><strong>🛤️ Conductor (Life Path) Number:</strong> {conductorNumber}</p>
-  </div>
-)}
+
 
 export default App;
