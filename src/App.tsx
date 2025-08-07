@@ -70,8 +70,8 @@ function App() {
       {/* NAVIGATION HEADER */}
       <nav className="navbar">
         <div className="navbar-logo">
-          <img src="/logo.png" alt="Numerology Logo" className="logo-img" />
-          <span>HC</span>
+          <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
+          <span className="brand-name">Numerology</span>
         </div>
         <ul className="navbar-menu">
           <li><a href="#">Home</a></li>
