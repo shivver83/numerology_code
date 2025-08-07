@@ -71,7 +71,7 @@ function App() {
       <nav className="navbar">
         <div className="navbar-logo">
           <img src="/logo.png" alt="Numerology Logo" className="logo-img" />
-          <span>Numerology Path</span>
+          <span>HC</span>
         </div>
         <ul className="navbar-menu">
           <li><a href="#">Home</a></li>
