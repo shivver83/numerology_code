@@ -32,3 +32,8 @@ DB details-
 psql 'postgresql://neondb_owner:npg_OWr5vZJ9QVGm@ep-green-bird-a739ckoi-pooler.ap-southeast-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
 username - neondb_owner
 password - npg_OWr5vZJ9QVGm
+
+
+6) Access DB using - 
+
+https://console.neon.tech/app/projects/curly-wave-12174988/branches/br-cool-salad-a7jr6uus/sql-editor?database=neondb
