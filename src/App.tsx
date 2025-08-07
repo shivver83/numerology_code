@@ -19,16 +19,25 @@ function HomePage() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-  setSubmitMessage('');
+//  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+ // e.preventDefault();
+//  setIsSubmitting(true);
+ // setSubmitMessage('');
 
-  if (!formData.name.trim() || !formData.dateOfBirth) {
-    setSubmitMessage('Please fill in all fields');
-    setIsSubmitting(false);
-    return;
-  }
+  //if (!formData.name.trim() || !formData.dateOfBirth) {
+   // setSubmitMessage('Please fill in all fields');
+ //   setIsSubmitting(false);
+//    return;
+//  }
+  // inside App.tsx
+const handleSubmit = async () => {
+  await fetch('/api/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, dob }),
+  });
+};
+
 
   try {
     const response = await fetch('http://localhost:5000/api/submit', {
