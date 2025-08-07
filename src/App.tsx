@@ -1,4 +1,3 @@
-// src/App.tsx
 import './App.css';
 import { useState } from 'react';
 
@@ -21,9 +20,7 @@ function App() {
     }));
   };
 
-  // ✅ Numerology Calculation Function
   const calculateLifePathNumber = (dob: string): number => {
-    // Format: YYYY-MM-DD → remove dashes → add digits until single digit
     const digits = dob.replace(/-/g, '').split('').map(Number);
     let sum = digits.reduce((a, b) => a + b, 0);
     while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
@@ -70,15 +67,31 @@ function App() {
 
   return (
     <div className="App">
+      {/* NAVIGATION HEADER */}
+      <nav className="navbar">
+        <div className="navbar-logo">
+          <img src="/logo.png" alt="Numerology Logo" className="logo-img" />
+          <span>Numerology Path</span>
+        </div>
+        <ul className="navbar-menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Get Your Journey</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      {/* HERO IMAGE */}
       <header className="App-header">
         <h1>🔢 Discover Your Life Path Number</h1>
         <img
           src="/numerology.png"
-          alt="What Numbers Speak ...."
+          alt="What Numbers Speak..."
           className="guide-image-full"
         />
       </header>
 
+      {/* FORM SECTION */}
       <section className="user-form-section">
         <div className="form-container">
           <h2>Get Your Personal Numerology Reading</h2>
@@ -136,20 +149,12 @@ function App() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="submit-btn"
-              disabled={isSubmitting}
-            >
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
               {isSubmitting ? 'Submitting...' : 'Get My Reading'}
             </button>
 
             {submitMessage && (
-              <div
-                className={`submit-message ${
-                  submitMessage.includes('error') ? 'error' : 'success'
-                }`}
-              >
+              <div className={`submit-message ${submitMessage.includes('❌') ? 'error' : 'success'}`}>
                 {submitMessage}
               </div>
             )}
