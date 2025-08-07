@@ -1,7 +1,6 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Pool } from 'pg';
+import type { NowRequest, NowResponse } from '@vercel/node'; // Optional, remove if not available
 
-// Create pool using Neon DB credentials
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -9,7 +8,7 @@ const pool = new Pool({
   },
 });
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   console.log('Incoming request:', req.method);
 
   if (req.method !== 'POST') {
