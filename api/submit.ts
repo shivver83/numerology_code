@@ -1,4 +1,4 @@
-//import { VercelRequest, VercelResponse } from '@vercel/node';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Pool } from 'pg';
 
 // Create pool using Neon DB credentials
