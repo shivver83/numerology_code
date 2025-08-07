@@ -20,34 +20,36 @@ function App() {
       [name]: value
     }));
   };
-  // Inside your form submit handler in App.tsx
-  const handleSubmit = async () => {
-   const response = await fetch('/api/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name,
-      date_of_birth,
-      life_path_number: calculateLifePathNumber(date_of_birth),
-      email,
-      phone,
-    }),
-  });
 
-   const result = await response.json();
-   console.log(result);
+  // ✅ Numerology Calculation Function
+  const calculateLifePathNumber = (dob: string): number => {
+    // Format: YYYY-MM-DD → remove dashes → add digits until single digit
+    const digits = dob.replace(/-/g, '').split('').map(Number);
+    let sum = digits.reduce((a, b) => a + b, 0);
+    while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+      sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
+    }
+    return sum;
   };
- 
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
+
     try {
       const response = await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name,
-          date_of_birth: dateOfBirth,
-          email,
-          phone
-        }),
+          name: formData.name,
+          date_of_birth: formData.dateOfBirth,
+          life_path_number: lifePathNumber,
+          email: formData.email,
+          phone: formData.phone
+        })
       });
 
       const result = await response.json();
@@ -59,6 +61,7 @@ function App() {
         setSubmitMessage(`❌ Error: ${result.message}`);
       }
     } catch (error) {
+      console.error('Submission error:', error);
       setSubmitMessage('❌ There was an error submitting your information.');
     } finally {
       setIsSubmitting(false);
@@ -133,8 +136,8 @@ function App() {
               />
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="submit-btn"
               disabled={isSubmitting}
             >
@@ -142,7 +145,11 @@ function App() {
             </button>
 
             {submitMessage && (
-              <div className={`submit-message ${submitMessage.includes('error') ? 'error' : 'success'}`}>
+              <div
+                className={`submit-message ${
+                  submitMessage.includes('error') ? 'error' : 'success'
+                }`}
+              >
                 {submitMessage}
               </div>
             )}
