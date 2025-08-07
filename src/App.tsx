@@ -20,20 +20,24 @@ function App() {
       [name]: value
     }));
   };
+  // Inside your form submit handler in App.tsx
+  const handleSubmit = async () => {
+   const response = await fetch('/api/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      date_of_birth,
+      life_path_number: calculateLifePathNumber(date_of_birth),
+      email,
+      phone,
+    }),
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitMessage('');
-
-    const { name, dateOfBirth, email, phone } = formData;
-
-    if (!name.trim() || !dateOfBirth) {
-      setSubmitMessage('Please fill in all required fields.');
-      setIsSubmitting(false);
-      return;
-    }
-
+   const result = await response.json();
+   console.log(result);
+  };
+ 
     try {
       const response = await fetch('/api/submit', {
         method: 'POST',
