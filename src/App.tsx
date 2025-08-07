@@ -68,7 +68,7 @@ const [conductorNumber, setConductorNumber] = useState<number | null>(null);
       const result = await response.json();
 
       if (response.ok) {
-        setSubmitMessage('✅ Thank you! Your information has been submitted.');
+        setSubmitMessage(`✅ Thank you, ${formData.name}! Your information has been submitted.`);
         setFormData({ name: '', dateOfBirth: '', email: '', phone: '' });
       } else {
         setSubmitMessage(`❌ Error: ${result.message}`);
