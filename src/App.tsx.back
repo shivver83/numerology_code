@@ -129,44 +129,35 @@ const handleSubmit = async () => {
 }
 
 function App() {
-  const [name, setName] = useState('');
-  const [dob, setDob] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setMessage('Submitting...');
-
-    const response = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, date_of_birth: dob, email, phone }),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      setMessage('Submission successful!');
-    } else {
-      setMessage(`Error: ${result.message}`);
-    }
-  };
-
   return (
-    <div>
-      <h1>Numerology Submission</h1>
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
-        <input type="date" value={dob} onChange={e => setDob(e.target.value)} />
-        <input placeholder="Email (optional)" value={email} onChange={e => setEmail(e.target.value)} />
-        <input placeholder="Phone (optional)" value={phone} onChange={e => setPhone(e.target.value)} />
-        <button type="submit">Submit</button>
-      </form>
-      <p>{message}</p>
-    </div>
+    <Router>
+      <div className="App">
+        {/* Navigation Bar */}
+        <nav className="navbar full-width">
+          <div className="logo">
+            <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
+          </div>
+          <ul className="nav-links">
+            <li><Link to="/">Home</Link></li>
+            <li><a href="#about">About Happiness Creations</a></li>
+            <li><a href="#consultation">Consultation</a></li>
+            <li><Link to="/contact">Contact Us</Link></li>
+          </ul>
+        </nav>
+
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+
+        {/* Footer */}
+        <footer className="footer">
+          <a href="#rateus" className="rate-link">⭐ Rate Us</a>
+        </footer>
+      </div>
+    </Router>
   );
 }
 
 export default App;
-
