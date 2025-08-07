@@ -8,6 +8,8 @@ function App() {
     email: '',
     phone: ''
   });
+const [driverNumber, setDriverNumber] = useState<number | null>(null);
+const [conductorNumber, setConductorNumber] = useState<number | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -28,6 +30,16 @@ function App() {
     }
     return sum;
   };
+  
+  const calculateDriverNumber = (dob: string): number => {
+  const day = new Date(dob).getDate();
+  if ([11, 22, 33].includes(day)) return day;
+  let sum = day;
+  while (sum > 9) {
+    sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
+  }
+  return sum;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +47,11 @@ function App() {
     setSubmitMessage('');
 
     const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
+    const driver = calculateDriverNumber(formData.dateOfBirth);
 
+    setConductorNumber(lifePathNumber);
+    setDriverNumber(driver);
+    
     try {
       const response = await fetch('/api/submit', {
         method: 'POST',
@@ -164,5 +180,12 @@ function App() {
     </div>
   );
 }
+{driverNumber !== null && conductorNumber !== null && (
+  <div className="numerology-result">
+    <h3>Your Numerology Numbers</h3>
+    <p><strong>🔢 Driver Number:</strong> {driverNumber}</p>
+    <p><strong>🛤️ Conductor (Life Path) Number:</strong> {conductorNumber}</p>
+  </div>
+)}
 
 export default App;
