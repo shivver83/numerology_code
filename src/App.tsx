@@ -1,13 +1,15 @@
+// src/App.tsx
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { useState } from 'react';
-import ContactPage from './ContactPage';
 
-function HomePage() {
+function App() {
   const [formData, setFormData] = useState({
     name: '',
-    dateOfBirth: ''
+    dateOfBirth: '',
+    email: '',
+    phone: ''
   });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
@@ -19,52 +21,48 @@ function HomePage() {
     }));
   };
 
-//  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
- // e.preventDefault();
-//  setIsSubmitting(true);
- // setSubmitMessage('');
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
 
-  //if (!formData.name.trim() || !formData.dateOfBirth) {
-   // setSubmitMessage('Please fill in all fields');
- //   setIsSubmitting(false);
-//    return;
-//  }
-  // inside App.tsx
-const handleSubmit = async () => {
-  await fetch('/api/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, dob }),
-  });
-};
+    const { name, dateOfBirth, email, phone } = formData;
 
-
-  try {
-    const response = await fetch('http://localhost:5000/api/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      setSubmitMessage('Thank you! Your information has been submitted successfully.');
-      setFormData({ name: '', dateOfBirth: '' });
-    } else {
-      setSubmitMessage(`Error: ${data.message}`);
+    if (!name.trim() || !dateOfBirth) {
+      setSubmitMessage('Please fill in all required fields.');
+      setIsSubmitting(false);
+      return;
     }
-  } catch (error) {
-    setSubmitMessage('There was an error submitting your information. Please try again.');
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          date_of_birth: dateOfBirth,
+          email,
+          phone
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitMessage('✅ Thank you! Your information has been submitted.');
+        setFormData({ name: '', dateOfBirth: '', email: '', phone: '' });
+      } else {
+        setSubmitMessage(`❌ Error: ${result.message}`);
+      }
+    } catch (error) {
+      setSubmitMessage('❌ There was an error submitting your information.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <>
+    <div className="App">
       <header className="App-header">
         <h1>🔢 Discover Your Life Path Number</h1>
         <img
@@ -74,12 +72,11 @@ const handleSubmit = async () => {
         />
       </header>
 
-      {/* User Information Form */}
       <section className="user-form-section">
         <div className="form-container">
           <h2>Get Your Personal Numerology Reading</h2>
           <p>Enter your details below to receive a personalized numerology analysis</p>
-          
+
           <form onSubmit={handleSubmit} className="user-form">
             <div className="form-group">
               <label htmlFor="name">Full Name:</label>
@@ -108,6 +105,30 @@ const handleSubmit = async () => {
               />
             </div>
 
+            <div className="form-group">
+              <label htmlFor="email">Email (optional):</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="phone">Phone (optional):</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+              />
+            </div>
+
             <button 
               type="submit" 
               className="submit-btn"
@@ -124,49 +145,8 @@ const handleSubmit = async () => {
           </form>
         </div>
       </section>
-    </>
-  );
-}
-
-function App() {
-  const [name, setName] = useState('');
-  const [dob, setDob] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setMessage('Submitting...');
-
-    const response = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, date_of_birth: dob, email, phone }),
-    });
-
-    const result = await response.json();
-    if (response.ok) {
-      setMessage('Submission successful!');
-    } else {
-      setMessage(`Error: ${result.message}`);
-    }
-  };
-
-  return (
-    <div>
-      <h1>Numerology Submission</h1>
-      <form onSubmit={handleSubmit}>
-        <input placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
-        <input type="date" value={dob} onChange={e => setDob(e.target.value)} />
-        <input placeholder="Email (optional)" value={email} onChange={e => setEmail(e.target.value)} />
-        <input placeholder="Phone (optional)" value={phone} onChange={e => setPhone(e.target.value)} />
-        <button type="submit">Submit</button>
-      </form>
-      <p>{message}</p>
     </div>
   );
 }
 
 export default App;
-
