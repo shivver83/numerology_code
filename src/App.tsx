@@ -37,7 +37,8 @@ function App() {
     name: '',
     dateOfBirth: '',
     email: '',
-    phone: ''
+    phone: '',
+    gender: ''
   });
 
   const [driverNumber, setDriverNumber] = useState<number | null>(null);
@@ -120,7 +121,8 @@ function App() {
           date_of_birth: formData.dateOfBirth,
           life_path_number: lifePathNumber,
           email: formData.email,
-          phone: formData.phone
+          phone: formData.phone,
+          gender: formData.gender
         })
       });
 
@@ -188,6 +190,18 @@ function App() {
                 onChange={handleInputChange} placeholder="Enter your full name"
                 required disabled={isSubmitting} />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="gender">Gender:</label>
+              <select id="gender" name="gender" value={formData.gender}
+                onChange={handleInputChange} required disabled={isSubmitting}>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
 
             <div className="form-group">
               <label htmlFor="dateOfBirth">Date of Birth:</label>
