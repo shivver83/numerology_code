@@ -237,64 +237,71 @@ function App() {
           </form>
 
           {/* NUMEROLOGY RESULTS */}
-          {driverNumber !== null && conductorNumber !== null && (
-            <div className="numerology-result">
-              <h3>Your Numerology Numbers</h3>
-              <p><strong>🔢 Driver Number:</strong> {driverNumber}</p>
-              <p><strong>🛤️ Conductor (Life Path) Number:</strong> {conductorNumber}</p>
-
-              {/* CHALDEAN CHART */}
-              <h3>Chaldean Numerology Chart for "{formData.name}"</h3>
-              <table border={1} cellPadding={5} style={{ margin: '10px auto', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr><th>Letter</th><th>Value</th></tr>
-                </thead>
-                <tbody>
-                  {chaldeanData.map((lv, index) => (
-                    <tr key={index}>
-                      <td>{lv.letter}</td>
-                      <td>{lv.value}</td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <td><strong>Total</strong></td>
-                    <td><strong>{nameTotal}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              {/* LOSHU GRID */}
-              {loshuGrid && (
-                <>
-                  <h3>🧮 Loshu Grid</h3>
-                  <table border={1} cellPadding={10} style={{ margin: '10px auto', borderCollapse: 'collapse', textAlign: 'center' }}>
-                    <tbody>
-                      <tr>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(4)}</td>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(9)}</td>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(2)}</td>
-                      </tr>
-                      <tr>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(3)}</td>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(5)}</td>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(7)}</td>
-                      </tr>
-                      <tr>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(8)}</td>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(1)}</td>
-                        <td style={{ minWidth: 60 }}>{renderLoshuCell(6)}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <p style={{ color: '#666', textAlign: 'center' }}>
-                    (Numbers repeated = presence, '-' = missing)
-                  </p>
-                </>
-              )}
-            </div>
-          )}
+          {/* NUMEROLOGY RESULTS */}
+{driverNumber !== null && conductorNumber !== null && (
+  <div className="numerology-result-container">
+    
+    <div className="result-card fade-in">
+      <h3>🌟 Your Core Numbers</h3>
+      <div className="core-numbers">
+        <div className="core-number">
+          <span className="number-icon">🔢</span>
+          <p>Driver Number</p>
+          <h2>{driverNumber}</h2>
         </div>
+        <div className="core-number">
+          <span className="number-icon">🛤️</span>
+          <p>Conductor Number</p>
+          <h2>{conductorNumber}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div className="result-card fade-in">
+      <h3>🔮 Chaldean Numerology Chart</h3>
+      <table className="styled-table">
+        <thead>
+          <tr>
+            <th>Letter</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {chaldeanData.map((lv, index) => (
+            <tr key={index}>
+              <td>{lv.letter}</td>
+              <td>{lv.value}</td>
+            </tr>
+          ))}
+          <tr className="total-row">
+            <td><strong>Total</strong></td>
+            <td><strong>{nameTotal}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {loshuGrid && (
+      <div className="result-card fade-in">
+        <h3>🧮 Loshu Grid</h3>
+        <div className="loshu-grid">
+          <div>{renderLoshuCell(4)}</div>
+          <div>{renderLoshuCell(9)}</div>
+          <div>{renderLoshuCell(2)}</div>
+          <div>{renderLoshuCell(3)}</div>
+          <div>{renderLoshuCell(5)}</div>
+          <div>{renderLoshuCell(7)}</div>
+          <div>{renderLoshuCell(8)}</div>
+          <div>{renderLoshuCell(1)}</div>
+          <div>{renderLoshuCell(6)}</div>
+        </div>
+        <p className="grid-note">(Numbers repeated = presence, "-" = missing)</p>
+      </div>
+    )}
+
+  </div>
+)}
+       </div>
       </section>
     </div>
   );
