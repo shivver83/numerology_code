@@ -36,15 +36,16 @@ export default async function handler(req: any, res: any) {
         life_path_number INTEGER,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         email VARCHAR(255),
-        phone VARCHAR(20)
+        phone VARCHAR(20),
+        gender VARCHAR(20)
       );`
     );
     console.log('Ensured table exists');
 
     await client.query(
-      `INSERT INTO user_submissions (name, date_of_birth, life_path_number, email, phone)
-       VALUES ($1, $2, $3, $4, $5);`,
-      [name, date_of_birth, life_path_number, email || null, phone || null]
+      `INSERT INTO user_submissions (name, date_of_birth, life_path_number, email, phone, gender)
+       VALUES ($1, $2, $3, $4, $5, $6);`,
+      [name, date_of_birth, life_path_number, email || null, phone || null, gender || null]
     );
     console.log('Inserted data into table');
 
