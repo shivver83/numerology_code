@@ -50,7 +50,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -131,7 +131,7 @@ function App() {
       if (response.ok) {
         setSubmitMessage(`✅ Thank you, ${formData.name}! Your information has been submitted.`);
         // NOTE: if you want to keep results visible after clearing the form, you may want to NOT clear here.
-        setFormData({ name: '', dateOfBirth: '', email: '', phone: '' });
+        setFormData({ name: '', dateOfBirth: '', email: '', phone: '', gender: '' });
       } else {
         setSubmitMessage(`❌ Error: ${result.message}`);
       }
