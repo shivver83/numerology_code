@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 
-// Chaldean mapping
+// Chaldean mapping (unchanged)
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
   B: 2, K: 2, R: 2,
@@ -20,14 +20,16 @@ const reduceToSingleDigit = (num: number) => {
   return num;
 };
 
-// Generate Loshu grid from DOB
+// Generate Loshu grid counts (1..9) from any date string (handles yyyy-mm-dd or dd/mm/yyyy)
 const generateLoshuGrid = (dob: string) => {
-  const digits = dob.replace(/-/g, '').split('').map(Number).filter(n => n !== 0); // remove 0s
-  const grid: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
-  digits.forEach(num => {
-    if (grid[num] !== undefined) grid[num] += 1;
+  if (!dob) return null;
+  // extract only digits from input
+  const digits = dob.replace(/\D/g, '').split('').map(Number).filter(n => n >= 1 && n <= 9);
+  const counts: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
+  digits.forEach(n => {
+    if (counts[n] !== undefined) counts[n] += 1;
   });
-  return grid;
+  return counts;
 };
 
 function App() {
@@ -56,7 +58,7 @@ function App() {
   };
 
   const calculateLifePathNumber = (dob: string): number => {
-    const digits = dob.replace(/-/g, '').split('').map(Number);
+    const digits = dob.replace(/\D/g, '').split('').map(Number);
     let sum = digits.reduce((a, b) => a + b, 0);
     while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
       sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
@@ -65,13 +67,22 @@ function App() {
   };
 
   const calculateDriverNumber = (dob: string): number => {
-    const day = new Date(dob).getDate();
-    if ([11, 22, 33].includes(day)) return day;
-    let sum = day;
-    while (sum > 9) {
-      sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
+    // Support dd/mm/yyyy or yyyy-mm-dd by extracting digits and focusing on the day part
+    // If input is from <input type="date"> it will be 'yyyy-mm-dd', so day is last two digits
+    const digits = dob.replace(/\D/g, '');
+    if (digits.length >= 8) {
+      // try to detect format; if it was yyyy-mm-dd -> digits = YYYYMMDD, day = last two
+      const dayStr = digits.slice(-2);
+      let day = parseInt(dayStr, 10);
+      if (isNaN(day)) day = 0;
+      if ([11, 22, 33].includes(day)) return day;
+      let sum = day;
+      while (sum > 9) {
+        sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
+      }
+      return sum;
     }
-    return sum;
+    return 0;
   };
 
   const calculateChaldeanChart = (name: string) => {
@@ -117,6 +128,7 @@ function App() {
 
       if (response.ok) {
         setSubmitMessage(`✅ Thank you, ${formData.name}! Your information has been submitted.`);
+        // NOTE: if you want to keep results visible after clearing the form, you may want to NOT clear here.
         setFormData({ name: '', dateOfBirth: '', email: '', phone: '' });
       } else {
         setSubmitMessage(`❌ Error: ${result.message}`);
@@ -127,6 +139,18 @@ function App() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // helper to render the Loshu cell: show repeated digits if present, else '-'
+  const renderLoshuCell = (num: number) => {
+    if (!loshuGrid) return '-';
+    const count = loshuGrid[num] || 0;
+    if (count <= 0) return <span style={{ color: '#999' }}>-</span>;
+    // show repeated digit with small spacing
+    const items = Array.from({ length: count }, (_, i) => (
+      <span key={i} style={{ margin: '0 3px', fontWeight: 600 }}>{num}</span>
+    ));
+    return <div style={{ display: 'inline-block' }}>{items}</div>;
   };
 
   return (
@@ -170,6 +194,7 @@ function App() {
               <input type="date" id="dateOfBirth" name="dateOfBirth"
                 value={formData.dateOfBirth} onChange={handleInputChange}
                 required disabled={isSubmitting} />
+              <small style={{ color: '#666' }}>If testing with manual text, formats like dd/mm/yyyy or yyyy-mm-dd both work.</small>
             </div>
 
             <div className="form-group">
@@ -231,22 +256,26 @@ function App() {
                   <table border={1} cellPadding={10} style={{ margin: '10px auto', borderCollapse: 'collapse', textAlign: 'center' }}>
                     <tbody>
                       <tr>
-                        <td>{loshuGrid[4] || '-'}</td>
-                        <td>{loshuGrid[9] || '-'}</td>
-                        <td>{loshuGrid[2] || '-'}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(4)}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(9)}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(2)}</td>
                       </tr>
                       <tr>
-                        <td>{loshuGrid[3] || '-'}</td>
-                        <td>{loshuGrid[5] || '-'}</td>
-                        <td>{loshuGrid[7] || '-'}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(3)}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(5)}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(7)}</td>
                       </tr>
                       <tr>
-                        <td>{loshuGrid[8] || '-'}</td>
-                        <td>{loshuGrid[1] || '-'}</td>
-                        <td>{loshuGrid[6] || '-'}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(8)}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(1)}</td>
+                        <td style={{ minWidth: 60 }}>{renderLoshuCell(6)}</td>
                       </tr>
                     </tbody>
                   </table>
+
+                  <p style={{ color: '#666', textAlign: 'center' }}>
+                    (Numbers repeated = presence, '-' = missing)
+                  </p>
                 </>
               )}
             </div>
