@@ -1,6 +1,24 @@
 import './App.css';
 import { useState } from 'react';
 
+const chaldeanMap: Record<string, number> = {
+  A: 1, I: 1, J: 1, Q: 1, Y: 1,
+  B: 2, K: 2, R: 2,
+  C: 3, G: 3, L: 3, S: 3,
+  D: 4, M: 4, T: 4,
+  E: 5, H: 5, N: 5, X: 5,
+  U: 6, V: 6, W: 6,
+  O: 7, Z: 7,
+  F: 8, P: 8
+};
+
+const reduceToSingleDigit = (num: number) => {
+  while (num > 9 && num !== 11 && num !== 22) {
+    num = num.toString().split("").reduce((sum, digit) => sum + parseInt(digit), 0);
+  }
+  return num;
+};
+
 function App() {
   const [formData, setFormData] = useState({
     name: '',
@@ -8,8 +26,11 @@ function App() {
     email: '',
     phone: ''
   });
-const [driverNumber, setDriverNumber] = useState<number | null>(null);
-const [conductorNumber, setConductorNumber] = useState<number | null>(null);
+
+  const [driverNumber, setDriverNumber] = useState<number | null>(null);
+  const [conductorNumber, setConductorNumber] = useState<number | null>(null);
+  const [chaldeanData, setChaldeanData] = useState<{ letter: string; value: number }[]>([]);
+  const [nameTotal, setNameTotal] = useState<number | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -30,15 +51,25 @@ const [conductorNumber, setConductorNumber] = useState<number | null>(null);
     }
     return sum;
   };
-  
+
   const calculateDriverNumber = (dob: string): number => {
-  const day = new Date(dob).getDate();
-  if ([11, 22, 33].includes(day)) return day;
-  let sum = day;
-  while (sum > 9) {
-    sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
-  }
-  return sum;
+    const day = new Date(dob).getDate();
+    if ([11, 22, 33].includes(day)) return day;
+    let sum = day;
+    while (sum > 9) {
+      sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
+    }
+    return sum;
+  };
+
+  const calculateChaldeanChart = (name: string) => {
+    const cleanName = name.toUpperCase().replace(/[^A-Z]/g, '');
+    const letterValues = cleanName.split('').map(letter => ({
+      letter,
+      value: chaldeanMap[letter] || 0
+    }));
+    const total = reduceToSingleDigit(letterValues.reduce((sum, lv) => sum + lv.value, 0));
+    return { letterValues, total };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,7 +82,11 @@ const [conductorNumber, setConductorNumber] = useState<number | null>(null);
 
     setConductorNumber(lifePathNumber);
     setDriverNumber(driver);
-    
+
+    const { letterValues, total } = calculateChaldeanChart(formData.name);
+    setChaldeanData(letterValues);
+    setNameTotal(total);
+
     try {
       const response = await fetch('/api/submit', {
         method: 'POST',
@@ -175,18 +210,42 @@ const [conductorNumber, setConductorNumber] = useState<number | null>(null);
               </div>
             )}
           </form>
+
+          {/* NUMEROLOGY RESULT */}
           {driverNumber !== null && conductorNumber !== null && (
-          <div className="numerology-result">
-          <h3>Your Numerology Numbers</h3>
-          <p><strong>🔢 Driver Number:</strong> {driverNumber}</p>
-          <p><strong>🛤️ Conductor (Life Path) Number:</strong> {conductorNumber}</p>
-          </div>
-        )}
+            <div className="numerology-result">
+              <h3>Your Numerology Numbers</h3>
+              <p><strong>🔢 Driver Number:</strong> {driverNumber}</p>
+              <p><strong>🛤️ Conductor (Life Path) Number:</strong> {conductorNumber}</p>
+
+              {/* CHALDEAN CHART */}
+              <h3>Chaldean Numerology Chart for "{formData.name}"</h3>
+              <table border={1} cellPadding={5} style={{ margin: '10px auto', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr>
+                    <th>Letter</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {chaldeanData.map((lv, index) => (
+                    <tr key={index}>
+                      <td>{lv.letter}</td>
+                      <td>{lv.value}</td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>{nameTotal}</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </section>
     </div>
   );
 }
-
 
 export default App;
