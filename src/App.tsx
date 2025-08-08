@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 
-// Chaldean mapping (unchanged)
+// Chaldean mapping
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
   B: 2, K: 2, R: 2,
@@ -20,15 +20,11 @@ const reduceToSingleDigit = (num: number) => {
   return num;
 };
 
-// Generate Loshu grid counts (1..9) from any date string (handles yyyy-mm-dd or dd/mm/yyyy)
 const generateLoshuGrid = (dob: string) => {
   if (!dob) return null;
-  // extract only digits from input
   const digits = dob.replace(/\D/g, '').split('').map(Number).filter(n => n >= 1 && n <= 9);
   const counts: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
-  digits.forEach(n => {
-    if (counts[n] !== undefined) counts[n] += 1;
-  });
+  digits.forEach(n => { counts[n] += 1; });
   return counts;
 };
 
@@ -52,10 +48,7 @@ function App() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const calculateLifePathNumber = (dob: string): number => {
@@ -68,20 +61,16 @@ function App() {
   };
 
   const calculateDriverNumber = (dob: string): number => {
-    // Support dd/mm/yyyy or yyyy-mm-dd by extracting digits and focusing on the day part
-    // If input is from <input type="date"> it will be 'yyyy-mm-dd', so day is last two digits
     const digits = dob.replace(/\D/g, '');
     if (digits.length >= 8) {
-      // try to detect format; if it was yyyy-mm-dd -> digits = YYYYMMDD, day = last two
       const dayStr = digits.slice(-2);
       let day = parseInt(dayStr, 10);
       if (isNaN(day)) day = 0;
       if ([11, 22, 33].includes(day)) return day;
-      let sum = day;
-      while (sum > 9) {
-        sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
+      while (day > 9) {
+        day = day.toString().split('').reduce((a, b) => a + Number(b), 0);
       }
-      return sum;
+      return day;
     }
     return 0;
   };
@@ -127,13 +116,11 @@ function App() {
       });
 
       const result = await response.json();
-
       if (response.ok) {
         setSubmitMessage(`✅ Thank you, ${formData.name}! Your information has been submitted.`);
-        // NOTE: if you want to keep results visible after clearing the form, you may want to NOT clear here.
         setFormData({ name: '', dateOfBirth: '', email: '', phone: '', gender: '' });
       } else {
-        setSubmitMessage(`❌ Hey, Here is some Error: ${result.message}`);
+        setSubmitMessage(`❌ Error: ${result.message}`);
       }
     } catch (error) {
       console.error('Submission error:', error);
@@ -143,16 +130,17 @@ function App() {
     }
   };
 
-  // helper to render the Loshu cell: show repeated digits if present, else '-'
   const renderLoshuCell = (num: number) => {
     if (!loshuGrid) return '-';
     const count = loshuGrid[num] || 0;
     if (count <= 0) return <span style={{ color: '#999' }}>-</span>;
-    // show repeated digit with small spacing
-    const items = Array.from({ length: count }, (_, i) => (
-      <span key={i} style={{ margin: '0 3px', fontWeight: 600 }}>{num}</span>
-    ));
-    return <div style={{ display: 'inline-block' }}>{items}</div>;
+    return (
+      <div>
+        {Array.from({ length: count }, (_, i) => (
+          <span key={i} style={{ margin: '0 3px', fontWeight: 600 }}>{num}</span>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -171,149 +159,102 @@ function App() {
         </ul>
       </nav>
 
-      {/* HERO IMAGE */}
-      {/* HERO VIDEO */}
-<header className="App-header">
-  <h1>🔢 Discover Your Numerology</h1>
-  <video
-    className="guide-video-full"
-    src="/numerology.mp4"
-    autoPlay
-    loop
-    muted
-    playsInline
-  />
-</header>
-
+      {/* HERO */}
+      <header className="App-header">
+        <h1>🔢 Discover Your Numerology</h1>
+        <video className="guide-video-full" src="/numerology.mp4" autoPlay loop muted playsInline />
+      </header>
 
       {/* FORM SECTION */}
       <section className="user-form-section">
-  <div className="form-container mystic-form">
-    <h2 className="fade-in-title">🔮 Get Your Personal Numerology Reading</h2>
-    <p className="fade-in-subtitle">Enter your details below to receive a personalized numerology analysis</p>
+        <div className="form-container mystic-form">
+          <h2>🔮 Get Your Personal Numerology Reading</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Full Name:</label>
+              <input type="text" name="name" value={formData.name} onChange={handleInputChange} required disabled={isSubmitting} />
+            </div>
+            <div>
+              <label>Gender:</label>
+              <select name="gender" value={formData.gender} onChange={handleInputChange} required disabled={isSubmitting}>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label>Date of Birth:</label>
+              <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} required disabled={isSubmitting} />
+            </div>
+            <div>
+              <label>Email (optional):</label>
+              <input type="email" name="email" value={formData.email} onChange={handleInputChange} disabled={isSubmitting} />
+            </div>
+            <div>
+              <label>Phone (optional):</label>
+              <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} disabled={isSubmitting} />
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? '✨ Calculating...' : 'Get My Reading'}
+            </button>
+          </form>
+          {submitMessage && <div>{submitMessage}</div>}
+        </div>
+      </section>
 
-    <form onSubmit={handleSubmit} className="user-form">
-      <div className="form-group slide-up">
-        <label htmlFor="name">Full Name:</label>
-        <input type="text" id="name" name="name" value={formData.name}
-          onChange={handleInputChange} placeholder="Enter your full name"
-          required disabled={isSubmitting} />
-      </div>
+      {/* RESULTS */}
+      {driverNumber !== null && conductorNumber !== null && (
+        <div className="numerology-result-container">
+          <div className="result-card">
+            <h3>🌟 Your Core Numbers</h3>
+            <p>Driver Number: {driverNumber}</p>
+            <p>Conductor Number: {conductorNumber}</p>
+          </div>
 
-      <div className="form-group slide-up">
-        <label htmlFor="gender">Gender:</label>
-        <select id="gender" name="gender" value={formData.gender}
-          onChange={handleInputChange} required disabled={isSubmitting}>
-          <option value="">Select Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
+          <div className="result-card">
+            <h3>🔮 Chaldean Numerology Chart</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Letter</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chaldeanData.map((lv, i) => (
+                  <tr key={i}>
+                    <td>{lv.letter}</td>
+                    <td>{lv.value}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <td><strong>Total</strong></td>
+                  <td><strong>{nameTotal}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-      <div className="form-group slide-up">
-        <label htmlFor="dateOfBirth">Date of Birth:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth"
-          value={formData.dateOfBirth} onChange={handleInputChange}
-          required disabled={isSubmitting} />
-        <small className="note">If testing, formats like dd/mm/yyyy or yyyy-mm-dd both work.</small>
-      </div>
-
-      <div className="form-group slide-up">
-        <label htmlFor="email">Email (optional):</label>
-        <input type="email" id="email" name="email"
-          value={formData.email} onChange={handleInputChange}
-          disabled={isSubmitting} />
-      </div>
-
-      <div className="form-group slide-up">
-        <label htmlFor="phone">Phone (optional):</label>
-        <input type="tel" id="phone" name="phone"
-          value={formData.phone} onChange={handleInputChange}
-          disabled={isSubmitting} />
-      </div>
-
-      <button type="submit" className="mystic-btn pulse" disabled={isSubmitting}>
-        {isSubmitting ? '✨ Calculating...' : 'Get My Reading'}
-      </button>
-
-      {submitMessage && (
-        <div className={`submit-message ${submitMessage.includes('❌') ? 'error' : 'success'}`}>
-          {submitMessage}
+          {loshuGrid && (
+            <div className="result-card">
+              <h3>🧮 Loshu Grid</h3>
+              <div className="loshu-grid">
+                <div>{renderLoshuCell(4)}</div>
+                <div>{renderLoshuCell(9)}</div>
+                <div>{renderLoshuCell(2)}</div>
+                <div>{renderLoshuCell(3)}</div>
+                <div>{renderLoshuCell(5)}</div>
+                <div>{renderLoshuCell(7)}</div>
+                <div>{renderLoshuCell(8)}</div>
+                <div>{renderLoshuCell(1)}</div>
+                <div>{renderLoshuCell(6)}</div>
+              </div>
+              <p>(Numbers repeated = presence, "-" = missing)</p>
+            </div>
+          )}
         </div>
       )}
-    </form>
-  </div>
-</section>
-
-
-          {/* NUMEROLOGY RESULTS */}
-          {/* NUMEROLOGY RESULTS */}
-{driverNumber !== null && conductorNumber !== null && (
-  <div className="numerology-result-container">
-    
-    <div className="result-card fade-in">
-      <h3>🌟 Your Core Numbers</h3>
-      <div className="core-numbers">
-        <div className="core-number">
-          <span className="number-icon">🔢</span>
-          <p>Driver Number</p>
-          <h2>{driverNumber}</h2>
-        </div>
-        <div className="core-number">
-          <span className="number-icon">🛤️</span>
-          <p>Conductor Number</p>
-          <h2>{conductorNumber}</h2>
-        </div>
-      </div>
-    </div>
-
-    <div className="result-card fade-in">
-      <h3>🔮 Chaldean Numerology Chart</h3>
-      <table className="styled-table">
-        <thead>
-          <tr>
-            <th>Letter</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {chaldeanData.map((lv, index) => (
-            <tr key={index}>
-              <td>{lv.letter}</td>
-              <td>{lv.value}</td>
-            </tr>
-          ))}
-          <tr className="total-row">
-            <td><strong>Total</strong></td>
-            <td><strong>{nameTotal}</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    {loshuGrid && (
-      <div className="result-card fade-in">
-        <h3>🧮 Loshu Grid</h3>
-        <div className="loshu-grid">
-          <div>{renderLoshuCell(4)}</div>
-          <div>{renderLoshuCell(9)}</div>
-          <div>{renderLoshuCell(2)}</div>
-          <div>{renderLoshuCell(3)}</div>
-          <div>{renderLoshuCell(5)}</div>
-          <div>{renderLoshuCell(7)}</div>
-          <div>{renderLoshuCell(8)}</div>
-          <div>{renderLoshuCell(1)}</div>
-          <div>{renderLoshuCell(6)}</div>
-        </div>
-        <p className="grid-note">(Numbers repeated = presence, "-" = missing)</p>
-      </div>
-    )}
-
-  </div>
-)}
-       </div>
-      </section>
     </div>
   );
 }
