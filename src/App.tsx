@@ -133,7 +133,7 @@ function App() {
         // NOTE: if you want to keep results visible after clearing the form, you may want to NOT clear here.
         setFormData({ name: '', dateOfBirth: '', email: '', phone: '', gender: '' });
       } else {
-        setSubmitMessage(`❌ Error: ${result.message}`);
+        setSubmitMessage(`❌ Hey, Here is some Error: ${result.message}`);
       }
     } catch (error) {
       console.error('Submission error:', error);
