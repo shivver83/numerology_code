@@ -172,10 +172,19 @@ function App() {
       </nav>
 
       {/* HERO IMAGE */}
-      <header className="App-header">
-        <h1>🔢 Discover Your Numerology</h1>
-        <img src="/numerology.png" alt="What Numbers Speak..." className="guide-image-full" />
-      </header>
+      {/* HERO VIDEO */}
+<header className="App-header">
+  <h1>🔢 Discover Your Numerology</h1>
+  <video
+    className="guide-video-full"
+    src="/numerology.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+  />
+</header>
+
 
       {/* FORM SECTION */}
       <section className="user-form-section">
