@@ -17,8 +17,8 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const { name, date_of_birth, email, phone, life_path_number } = req.body;
-    console.log('Received form data:', { name, date_of_birth, email, phone, life_path_number });
+    const { name, date_of_birth, email, phone, life_path_number, gender } = req.body;
+    console.log('Received form data:', { name, date_of_birth, email, phone, life_path_number, gender });
 
     if (!name || !date_of_birth) {
       console.log('Missing required fields');
