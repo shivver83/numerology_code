@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 
+// Chaldean mapping
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
   B: 2, K: 2, R: 2,
@@ -19,6 +20,16 @@ const reduceToSingleDigit = (num: number) => {
   return num;
 };
 
+// Generate Loshu grid from DOB
+const generateLoshuGrid = (dob: string) => {
+  const digits = dob.replace(/-/g, '').split('').map(Number).filter(n => n !== 0); // remove 0s
+  const grid: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
+  digits.forEach(num => {
+    if (grid[num] !== undefined) grid[num] += 1;
+  });
+  return grid;
+};
+
 function App() {
   const [formData, setFormData] = useState({
     name: '',
@@ -31,6 +42,7 @@ function App() {
   const [conductorNumber, setConductorNumber] = useState<number | null>(null);
   const [chaldeanData, setChaldeanData] = useState<{ letter: string; value: number }[]>([]);
   const [nameTotal, setNameTotal] = useState<number | null>(null);
+  const [loshuGrid, setLoshuGrid] = useState<Record<number, number> | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -79,13 +91,14 @@ function App() {
 
     const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
     const driver = calculateDriverNumber(formData.dateOfBirth);
+    const { letterValues, total } = calculateChaldeanChart(formData.name);
+    const grid = generateLoshuGrid(formData.dateOfBirth);
 
     setConductorNumber(lifePathNumber);
     setDriverNumber(driver);
-
-    const { letterValues, total } = calculateChaldeanChart(formData.name);
     setChaldeanData(letterValues);
     setNameTotal(total);
+    setLoshuGrid(grid);
 
     try {
       const response = await fetch('/api/submit', {
@@ -134,12 +147,8 @@ function App() {
 
       {/* HERO IMAGE */}
       <header className="App-header">
-        <h1>🔢 Discover Your Life Path Number</h1>
-        <img
-          src="/numerology.png"
-          alt="What Numbers Speak..."
-          className="guide-image-full"
-        />
+        <h1>🔢 Discover Your Numerology</h1>
+        <img src="/numerology.png" alt="What Numbers Speak..." className="guide-image-full" />
       </header>
 
       {/* FORM SECTION */}
@@ -151,53 +160,30 @@ function App() {
           <form onSubmit={handleSubmit} className="user-form">
             <div className="form-group">
               <label htmlFor="name">Full Name:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                placeholder="Enter your full name"
-                required
-                disabled={isSubmitting}
-              />
+              <input type="text" id="name" name="name" value={formData.name}
+                onChange={handleInputChange} placeholder="Enter your full name"
+                required disabled={isSubmitting} />
             </div>
 
             <div className="form-group">
               <label htmlFor="dateOfBirth">Date of Birth:</label>
-              <input
-                type="date"
-                id="dateOfBirth"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleInputChange}
-                required
-                disabled={isSubmitting}
-              />
+              <input type="date" id="dateOfBirth" name="dateOfBirth"
+                value={formData.dateOfBirth} onChange={handleInputChange}
+                required disabled={isSubmitting} />
             </div>
 
             <div className="form-group">
               <label htmlFor="email">Email (optional):</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                disabled={isSubmitting}
-              />
+              <input type="email" id="email" name="email"
+                value={formData.email} onChange={handleInputChange}
+                disabled={isSubmitting} />
             </div>
 
             <div className="form-group">
               <label htmlFor="phone">Phone (optional):</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                disabled={isSubmitting}
-              />
+              <input type="tel" id="phone" name="phone"
+                value={formData.phone} onChange={handleInputChange}
+                disabled={isSubmitting} />
             </div>
 
             <button type="submit" className="submit-btn" disabled={isSubmitting}>
@@ -211,7 +197,7 @@ function App() {
             )}
           </form>
 
-          {/* NUMEROLOGY RESULT */}
+          {/* NUMEROLOGY RESULTS */}
           {driverNumber !== null && conductorNumber !== null && (
             <div className="numerology-result">
               <h3>Your Numerology Numbers</h3>
@@ -222,10 +208,7 @@ function App() {
               <h3>Chaldean Numerology Chart for "{formData.name}"</h3>
               <table border={1} cellPadding={5} style={{ margin: '10px auto', borderCollapse: 'collapse' }}>
                 <thead>
-                  <tr>
-                    <th>Letter</th>
-                    <th>Value</th>
-                  </tr>
+                  <tr><th>Letter</th><th>Value</th></tr>
                 </thead>
                 <tbody>
                   {chaldeanData.map((lv, index) => (
@@ -240,6 +223,32 @@ function App() {
                   </tr>
                 </tbody>
               </table>
+
+              {/* LOSHU GRID */}
+              {loshuGrid && (
+                <>
+                  <h3>🧮 Loshu Grid</h3>
+                  <table border={1} cellPadding={10} style={{ margin: '10px auto', borderCollapse: 'collapse', textAlign: 'center' }}>
+                    <tbody>
+                      <tr>
+                        <td>{loshuGrid[4] || '-'}</td>
+                        <td>{loshuGrid[9] || '-'}</td>
+                        <td>{loshuGrid[2] || '-'}</td>
+                      </tr>
+                      <tr>
+                        <td>{loshuGrid[3] || '-'}</td>
+                        <td>{loshuGrid[5] || '-'}</td>
+                        <td>{loshuGrid[7] || '-'}</td>
+                      </tr>
+                      <tr>
+                        <td>{loshuGrid[8] || '-'}</td>
+                        <td>{loshuGrid[1] || '-'}</td>
+                        <td>{loshuGrid[6] || '-'}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </>
+              )}
             </div>
           )}
         </div>
