@@ -8,6 +8,13 @@
   padding: 1rem 2rem;
 }
 
+.guide-video-full {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
