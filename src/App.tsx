@@ -188,62 +188,64 @@ function App() {
 
       {/* FORM SECTION */}
       <section className="user-form-section">
-        <div className="form-container">
-          <h2>Get Your Personal Numerology Reading</h2>
-          <p>Enter your details below to receive a personalized numerology analysis</p>
+  <div className="form-container mystic-form">
+    <h2 className="fade-in-title">🔮 Get Your Personal Numerology Reading</h2>
+    <p className="fade-in-subtitle">Enter your details below to receive a personalized numerology analysis</p>
 
-          <form onSubmit={handleSubmit} className="user-form">
-            <div className="form-group">
-              <label htmlFor="name">Full Name:</label>
-              <input type="text" id="name" name="name" value={formData.name}
-                onChange={handleInputChange} placeholder="Enter your full name"
-                required disabled={isSubmitting} />
-            </div>
+    <form onSubmit={handleSubmit} className="user-form">
+      <div className="form-group slide-up">
+        <label htmlFor="name">Full Name:</label>
+        <input type="text" id="name" name="name" value={formData.name}
+          onChange={handleInputChange} placeholder="Enter your full name"
+          required disabled={isSubmitting} />
+      </div>
 
-            <div className="form-group">
-              <label htmlFor="gender">Gender:</label>
-              <select id="gender" name="gender" value={formData.gender}
-                onChange={handleInputChange} required disabled={isSubmitting}>
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+      <div className="form-group slide-up">
+        <label htmlFor="gender">Gender:</label>
+        <select id="gender" name="gender" value={formData.gender}
+          onChange={handleInputChange} required disabled={isSubmitting}>
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
 
+      <div className="form-group slide-up">
+        <label htmlFor="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" name="dateOfBirth"
+          value={formData.dateOfBirth} onChange={handleInputChange}
+          required disabled={isSubmitting} />
+        <small className="note">If testing, formats like dd/mm/yyyy or yyyy-mm-dd both work.</small>
+      </div>
 
-            <div className="form-group">
-              <label htmlFor="dateOfBirth">Date of Birth:</label>
-              <input type="date" id="dateOfBirth" name="dateOfBirth"
-                value={formData.dateOfBirth} onChange={handleInputChange}
-                required disabled={isSubmitting} />
-              <small style={{ color: '#666' }}>If testing with manual text, formats like dd/mm/yyyy or yyyy-mm-dd both work.</small>
-            </div>
+      <div className="form-group slide-up">
+        <label htmlFor="email">Email (optional):</label>
+        <input type="email" id="email" name="email"
+          value={formData.email} onChange={handleInputChange}
+          disabled={isSubmitting} />
+      </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email (optional):</label>
-              <input type="email" id="email" name="email"
-                value={formData.email} onChange={handleInputChange}
-                disabled={isSubmitting} />
-            </div>
+      <div className="form-group slide-up">
+        <label htmlFor="phone">Phone (optional):</label>
+        <input type="tel" id="phone" name="phone"
+          value={formData.phone} onChange={handleInputChange}
+          disabled={isSubmitting} />
+      </div>
 
-            <div className="form-group">
-              <label htmlFor="phone">Phone (optional):</label>
-              <input type="tel" id="phone" name="phone"
-                value={formData.phone} onChange={handleInputChange}
-                disabled={isSubmitting} />
-            </div>
+      <button type="submit" className="mystic-btn pulse" disabled={isSubmitting}>
+        {isSubmitting ? '✨ Calculating...' : 'Get My Reading'}
+      </button>
 
-            <button type="submit" className="submit-btn" disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting...' : 'Get My Reading'}
-            </button>
+      {submitMessage && (
+        <div className={`submit-message ${submitMessage.includes('❌') ? 'error' : 'success'}`}>
+          {submitMessage}
+        </div>
+      )}
+    </form>
+  </div>
+</section>
 
-            {submitMessage && (
-              <div className={`submit-message ${submitMessage.includes('❌') ? 'error' : 'success'}`}>
-                {submitMessage}
-              </div>
-            )}
-          </form>
 
           {/* NUMEROLOGY RESULTS */}
           {/* NUMEROLOGY RESULTS */}
