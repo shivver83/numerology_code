@@ -434,3 +434,22 @@ body {
     padding: 0.5rem 0.8rem;
   }
 }
+
+/* Visit count styles */
+.visit-count-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.visit-count-container h2 {
+  color: black;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.visit-count-container p {
+  color: black;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
