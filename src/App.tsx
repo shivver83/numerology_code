@@ -64,7 +64,7 @@ function MainApp() {
 
   const [driverNumber, setDriverNumber] = useState<number | null>(null);
   const [conductorNumber, setConductorNumber] = useState<number | null>(null);
-  const [kuanNumber, setKuanNumber] = useState<number | null>(null); // NEW
+  const [kuanNumber, setKuanNumber] = useState<number | null>(null);
   const [chaldeanData, setChaldeanData] = useState<{ letter: string; value: number }[]>([]);
   const [nameTotal, setNameTotal] = useState<number | null>(null);
   const [loshuGrid, setLoshuGrid] = useState<Record<number, number> | null>(null);
@@ -84,7 +84,6 @@ function MainApp() {
   // Ref for scrolling
   const formSectionRef = useRef<HTMLDivElement>(null);
 
-  // Stop glowing when user navigates away
   useEffect(() => {
     setContactUsGlow(false);
   }, [location]);
@@ -169,13 +168,13 @@ function MainApp() {
 
     const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
     const driver = calculateDriverNumber(formData.dateOfBirth);
-    const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender); // NEW
+    const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender);
     const { letterValues, total } = calculateChaldeanChart(formData.name);
     const grid = generateLoshuGrid(formData.dateOfBirth);
 
     setConductorNumber(lifePathNumber);
     setDriverNumber(driver);
-    setKuanNumber(kuan); // NEW
+    setKuanNumber(kuan);
     setChaldeanData(letterValues);
     setNameTotal(total);
     setLoshuGrid(grid);
@@ -215,21 +214,23 @@ function MainApp() {
     }
   };
 
-  // Updated renderLoshuCell to highlight Kuan number cell
+  // Render each Loshu grid cell with count and highlight for Kuan number,
+  // plus show Kuan number digit as a badge next to the count digits
   const renderLoshuCell = (num: number) => {
     if (!loshuGrid) return '-';
     const count = loshuGrid[num] || 0;
     const isKuan = kuanNumber === num;
 
-    // Compose display elements: repeated numbers + kuan highlight
     return (
-      <div style={{ position: 'relative', padding: '5px' }}>
+      <div style={{ position: 'relative', padding: '5px', minHeight: '32px', fontWeight: '600', fontSize: '1.2rem', color: isKuan ? '#ff8c00' : '#000' }}>
         {count <= 0 ? (
           <span style={{ color: '#999' }}>-</span>
         ) : (
-          Array.from({ length: count }, (_, i) => (
-            <span key={i} style={{ margin: '0 3px', fontWeight: 600 }}>{num}</span>
-          ))
+          <>
+            {Array.from({ length: count }, (_, i) => (
+              <span key={i} style={{ margin: '0 3px' }}>{num}</span>
+            ))}
+          </>
         )}
         {isKuan && (
           <span
@@ -240,9 +241,9 @@ function MainApp() {
               backgroundColor: '#ff8c00',
               color: 'white',
               borderRadius: '50%',
-              width: '18px',
-              height: '18px',
-              fontSize: '0.8rem',
+              width: '22px',
+              height: '22px',
+              fontSize: '0.9rem',
               fontWeight: 'bold',
               display: 'flex',
               alignItems: 'center',
@@ -254,7 +255,7 @@ function MainApp() {
             }}
             title="Kuan Number"
           >
-            K
+            {kuanNumber}
           </span>
         )}
       </div>
@@ -430,7 +431,6 @@ function MainApp() {
             <div className="result-card">
               <h3>🧮 Loshu Grid</h3>
               <div className="loshu-grid">
-                {/* Pass kuanNumber to highlight the block */}
                 <div>{renderLoshuCell(4)}</div>
                 <div>{renderLoshuCell(9)}</div>
                 <div>{renderLoshuCell(2)}</div>
@@ -445,7 +445,6 @@ function MainApp() {
             </div>
           )}
 
-          {/* Stylish message on center-right */}
           {loshuGrid && (
             <div
               className="contact-us-message"
