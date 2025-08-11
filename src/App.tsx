@@ -1,3 +1,4 @@
+// App.tsx
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
@@ -293,19 +294,46 @@ function MainApp() {
 
       {driverNumber !== null && conductorNumber !== null && (
         <div className="numerology-result-container">
-          {/* UPDATED: Added explicit styling to ensure visibility */}
-          <div className="result-card" style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'rgba(255, 255, 255, 0.9)', color: '#333', borderRadius: '10px' }}>
-            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2c3e50', marginBottom: '1rem' }}>
+          <div className="result-card" style={{
+            background: 'linear-gradient(145deg, #2a2a2a, #4a4a4a)',
+            border: '2px solid #ffd700',
+            boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)',
+            color: '#ffffff'
+          }}>
+            <p style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              color: '#00bfff',
+              textAlign: 'center',
+              marginBottom: '1rem',
+              textShadow: '0 0 10px rgba(0, 191, 255, 0.7)'
+            }}>
               Here is your initial analysis....
             </p>
-            <h3 style={{ fontSize: '1.5rem', color: '#e74c3c', marginBottom: '1rem' }}>
+            <h3 style={{
+              fontSize: '2rem',
+              color: '#ff4500',
+              textAlign: 'center',
+              marginBottom: '1.5rem',
+              textShadow: '0 0 10px rgba(255, 69, 0, 0.7)'
+            }}>
               🌟 Your Core Numbers
             </h3>
-            <p style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
-              <strong>Driver Number:</strong> {driverNumber}
+            <p style={{
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: '#ffffff',
+              marginBottom: '0.5rem'
+            }}>
+              Driver Number: {driverNumber}
             </p>
-            <p style={{ fontSize: '1.1rem' }}>
-              <strong>Conductor Number:</strong> {conductorNumber}
+            <p style={{
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: '#ffffff',
+              marginBottom: '0.5rem'
+            }}>
+              Conductor Number: {conductorNumber}
             </p>
           </div>
 
