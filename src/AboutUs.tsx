@@ -7,7 +7,32 @@ const AboutUs: React.FC = () => {
       <video autoPlay muted loop className="background-video">
         <source src="/numerology.mp4" type="video/mp4" />
         </video>
-
+      <nav className="navbar">
+        <div className="navbar-logo">
+          <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
+          <span className="brand-name">Happiness Ccreattions</span>
+        </div>
+        <ul className="navbar-menu">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/aboutus">About Us</Link></li>
+          <li><a href="#">Get Your Journey</a></li>
+          <li>
+            <Link
+              to="/contact"
+              className={contactUsGlow ? "contact-us-glow" : undefined}
+              data-testid="contact-us-link"
+            >
+              Contact Us
+            </Link>
+          </li>
+          <li
+            style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }}
+            onClick={handleVisitCountClick}
+          >
+            Visit Count
+          </li>
+        </ul>
+      </nav>
       <div className="aboutus-content">
         <h1>About Us</h1>
         <p>
