@@ -74,39 +74,11 @@ body {
   text-decoration: underline;
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #222; /* dark background */
-  color: white;
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
 
 .navbar a {
   color: white;
   text-decoration: none;
   margin: 0 1rem;
-}
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #222;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  justify-content: space-between; /* was space-evenly */
-  align-items: center;
-  z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-left {
