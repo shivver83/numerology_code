@@ -187,6 +187,10 @@ function App() {
   return (
     <div className="App">
       <div className="video-background" />
+      <video autoPlay loop muted playsInline>
+          <source src="/numerology.mp4" type="video/mp4" />
+      </video>
+      </div>
       <nav className="navbar">
         <div className="navbar-logo">
           <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
