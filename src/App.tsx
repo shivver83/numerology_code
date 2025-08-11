@@ -271,7 +271,7 @@ function MainApp() {
       <nav className="navbar">
         <div className="navbar-logo">
           <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
-          <span className="brand-name">Numerology</span>
+          <span className="brand-name">happinessccreattions</span>
         </div>
         <ul className="navbar-menu">
           <li><Link to="/">Home</Link></li>
