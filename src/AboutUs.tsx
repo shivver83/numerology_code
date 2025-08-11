@@ -11,7 +11,7 @@ const AboutUs: React.FC = () => {
       <div className="aboutus-content">
         <h1>About Us</h1>
         <p>
-          I am Amit Gupta, a passionate and trained numerologist and life coach dedicated to helping you unlock the hidden power of numbers in your life. Numerology is much more than just numbers — it is an ancient science that reveals the unique vibrations influencing your personality, relationships, career, and destiny.
+          Myself Amit Gupta, a passionate and trained numerologist and life coach dedicated to helping you unlock the hidden power of numbers in your life. Numerology is much more than just numbers — it is an ancient science that reveals the unique vibrations influencing your personality, relationships, career, and destiny.
         </p>
         <p>
           Through personalized numerology readings, I guide you to understand your core strengths, challenges, and life’s purpose. By decoding your birth numbers and name vibrations, I provide insightful guidance to help you overcome obstacles, make confident decisions, and align your actions with your true path.
