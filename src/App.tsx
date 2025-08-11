@@ -333,12 +333,12 @@ function MainApp() {
               <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
             <div>
-              <label>Email (optional):</label>
+              <label>Email:</label>
               <input type="email" name="email" value={formData.email} onChange={handleInputChange} disabled={isSubmitting} />
             </div>
             <div>
-              <label>Phone (optional):</label>
-              <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} disabled={isSubmitting} />
+              <label>Phone:</label>
+              <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
             <button type="submit" disabled={isSubmitting} className="mystic-btn">
               {isSubmitting ? '✨ Calculating...' : 'Get My Reading'}
