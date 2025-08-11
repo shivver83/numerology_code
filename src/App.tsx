@@ -341,10 +341,35 @@ function MainApp() {
             </div>
           )}
 
-          {/* Stylish message after loshu grid */}
+          {/* Stylish message on center-right */}
           {loshuGrid && (
-            <div className="contact-us-message" style={{ marginTop: '20px', fontWeight: '600', fontSize: '1.3rem', color: '#ff9900', textAlign: 'center', fontFamily: "'Brush Script MT', cursive", userSelect: 'none' }}>
-              To get your detailed Life path report kindly <Link to="/contact" style={{ textDecoration: 'underline', color: '#ffd700', fontWeight: '700' }}>Contact Us</Link>
+            <div
+              className="contact-us-message"
+              style={{
+                position: 'fixed',
+                top: '50%',
+                right: '2rem',
+                transform: 'translateY(-50%)',
+                fontWeight: '700',
+                fontSize: '2rem',
+                color: '#ff8c00',
+                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                padding: '1rem 1.5rem',
+                borderRadius: '12px',
+                boxShadow: '0 0 15px 3px rgba(255, 140, 0, 0.7)',
+                userSelect: 'none',
+                zIndex: 1000,
+                textAlign: 'center',
+                maxWidth: '320px',
+                cursor: 'default',
+                lineHeight: 1.3
+              }}
+            >
+              To get your detailed Life path report kindly{' '}
+              <Link to="/contact" style={{ textDecoration: 'underline', color: '#ff4500', fontWeight: '900' }}>
+                Contact Us
+              </Link>
             </div>
           )}
         </div>
