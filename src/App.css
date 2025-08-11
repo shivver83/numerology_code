@@ -187,7 +187,7 @@ body {
   margin: 2rem auto;
   max-width: 900px;
   padding: 0 1rem;
-  scroll-margin-top: 80px; /* Offset for fixed navbar */
+  scroll-margin-top: 200px; /* Offset for fixed navbar */
   /* Optional: allow vertical scrolling if container is big */
   overflow-y: auto;
 }
