@@ -1,7 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 
-// Chaldean mapping
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
   B: 2, K: 2, R: 2,
@@ -46,16 +45,28 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  // New: Visit count state
-  const [visitCount, setVisitCount] = useState(0);
+  // Visit count from backend
+  const [visitCount, setVisitCount] = useState<number>(0);
 
-  // Track visits in localStorage
-  useEffect(() => {
-    const storedCount = localStorage.getItem("visitCount");
-    const newCount = storedCount ? parseInt(storedCount) + 1 : 1;
-    localStorage.setItem("visitCount", newCount.toString());
-    setVisitCount(newCount);
-  }, []);
+  const handleVisitCountClick = async () => {
+    try {
+      const res = await fetch('/api/count');
+      const data = await res.json();
+      if (res.ok && typeof data.count === 'number') {
+        // Open in new page
+        const newWindow = window.open('', '_blank');
+        if (newWindow) {
+          newWindow.document.write(`<h1>Total Visits: ${data.count}</h1>`);
+          newWindow.document.title = "Visit Count";
+        }
+      } else {
+        alert("Failed to fetch visit count");
+      }
+    } catch (err) {
+      console.error("Error fetching visit count:", err);
+      alert("Error fetching visit count");
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -171,8 +182,8 @@ function App() {
           <li><a href="#">About Us</a></li>
           <li><a href="#">Get Your Journey</a></li>
           <li><a href="#">Contact Us</a></li>
-          <li style={{ fontWeight: 'bold', color: '#ffd700' }}>
-            Visit Count: {visitCount}
+          <li style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }} onClick={handleVisitCountClick}>
+            Visit Count
           </li>
         </ul>
       </nav>
