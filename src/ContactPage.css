@@ -1,55 +1,36 @@
-/* Make sure body has no margin/padding */
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.contact-container {
-  position: relative;
-  width: 100%;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden;
-}
-
-.video-bg {
-  position: fixed; /* Stays fixed on screen */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Crops to fill without distortion */
-  z-index: -1; /* Behind content */
-}
-
 .contact-content {
-  position: relative;
-  z-index: 1;
-  color: #fff;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  background: rgba(255 255 255 / 0.85);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.7rem;
+  font-size: 1.1rem;
+}
+
+.contact-table td {
+  vertical-align: middle;
+  padding: 0.4rem 0.5rem;
+}
+
+.icon-cell {
+  width: 36px;
   text-align: center;
-  top: 50%;
-  transform: translateY(-50%); /* Vertically center */
-  font-family: 'Poppins', sans-serif;
+  /* icons aligned vertically middle by SVG style */
 }
 
-.contact-content h2 {
-  font-size: 2.8rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
-}
-
-.contact-content p {
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin: 0.4rem 0;
-}
-
-.contact-content a {
-  color: #ffd700;
+.contact-table a {
+  color: #1a73e8;
   text-decoration: none;
 }
 
-.contact-content a:hover {
+.contact-table a:hover {
   text-decoration: underline;
 }
