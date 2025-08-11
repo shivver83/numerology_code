@@ -276,6 +276,11 @@ body {
   font-size: 1.2rem;
 }
 
+.loshu-grid-container {
+  min-height: 100vh; /* Allow content to expand */
+  overflow: visible; /* Let scrolling happen naturally */
+}
+
 .grid-note {
   color: #ccc;
   text-align: center;
