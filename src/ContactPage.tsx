@@ -73,7 +73,7 @@ function ContactPage() {
               <td className="icon-cell">{emailIcon}</td>
               <td>Email:</td>
               <td>
-                <a href="mailto:nventer@gmail.com">nventer@gmail.com</a>
+                <a href="mailto:9amitgupta99@gmail.com">9amitgupta99@gmail.com</a>
               </td>
             </tr>
             <tr>
@@ -86,7 +86,7 @@ function ContactPage() {
             <tr>
               <td className="icon-cell">{locationIcon}</td>
               <td>Address:</td>
-              <td>Sector 51, Noida, near Metro station, Hoshiarpur</td>
+              <td>Sector 51, Noida</td>
             </tr>
             <tr>
               <td className="icon-cell">{instagramIcon}</td>
