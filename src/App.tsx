@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import ContactPage from './ContactPage';
 
 const chaldeanMap: Record<string, number> = {
@@ -30,6 +30,8 @@ const generateLoshuGrid = (dob: string) => {
 };
 
 function MainApp() {
+  const location = useLocation();
+
   const [formData, setFormData] = useState({
     name: '',
     dateOfBirth: '',
@@ -53,8 +55,16 @@ function MainApp() {
   const [loadingVisit, setLoadingVisit] = useState(false);
   const [visitError, setVisitError] = useState<string | null>(null);
 
+  // State to control Contact Us menu glowing
+  const [contactUsGlow, setContactUsGlow] = useState(false);
+
   // Ref for scrolling
   const formSectionRef = useRef<HTMLDivElement>(null);
+
+  // Stop glowing when user navigates away
+  useEffect(() => {
+    setContactUsGlow(false);
+  }, [location]);
 
   const handleVisitCountClick = async () => {
     setVisitError(null);
@@ -132,6 +142,7 @@ function MainApp() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage('');
+    setContactUsGlow(false); // reset glow before new calculation
 
     const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
     const driver = calculateDriverNumber(formData.dateOfBirth);
@@ -143,6 +154,9 @@ function MainApp() {
     setChaldeanData(letterValues);
     setNameTotal(total);
     setLoshuGrid(grid);
+
+    // Start Contact Us glow after grid appears
+    setContactUsGlow(true);
 
     // Scroll to form section after results are shown
     setTimeout(() => {
@@ -206,7 +220,15 @@ function MainApp() {
           <li><Link to="/">Home</Link></li>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Get Your Journey</a></li>
-          <li><Link to="/contact">Contact Us</Link></li>
+          <li>
+            <Link
+              to="/contact"
+              className={contactUsGlow ? "contact-us-glow" : undefined}
+              data-testid="contact-us-link"
+            >
+              Contact Us
+            </Link>
+          </li>
           <li
             style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }}
             onClick={handleVisitCountClick}
@@ -316,6 +338,13 @@ function MainApp() {
                 <div>{renderLoshuCell(6)}</div>
               </div>
               <p className="grid-note">(Numbers repeated = presence, "-" = missing)</p>
+            </div>
+          )}
+
+          {/* Stylish message after loshu grid */}
+          {loshuGrid && (
+            <div className="contact-us-message" style={{ marginTop: '20px', fontWeight: '600', fontSize: '1.3rem', color: '#ff9900', textAlign: 'center', fontFamily: "'Brush Script MT', cursive", userSelect: 'none' }}>
+              To get your detailed Life path report kindly <Link to="/contact" style={{ textDecoration: 'underline', color: '#ffd700', fontWeight: '700' }}>Contact Us</Link>
             </div>
           )}
         </div>
