@@ -1,5 +1,6 @@
+// src/App.tsx
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
@@ -45,24 +46,46 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
+  // Modal + visit count state
   const [visitCount, setVisitCount] = useState<number | null>(null);
-  const [page, setPage] = useState<'home' | 'visitcount'>('home');
+  const [showVisitModal, setShowVisitModal] = useState(false);
+  const [loadingVisit, setLoadingVisit] = useState(false);
+  const [visitError, setVisitError] = useState<string | null>(null);
 
+  // Fetch visit count and open modal
   const handleVisitCountClick = async () => {
+    setVisitError(null);
+    setLoadingVisit(true);
     try {
       const res = await fetch('/api/count');
-      const data = await res.json();
-      if (res.ok && typeof data.count === 'number') {
-        setVisitCount(data.count);
-        setPage('visitcount');
-      } else {
-        alert("Failed to fetch visit count");
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Server returned ${res.status}: ${text}`);
       }
-    } catch (err) {
-      console.error("Error fetching visit count:", err);
-      alert("Error fetching visit count");
+      const data = await res.json();
+      if (typeof data.count === 'number') {
+        setVisitCount(data.count);
+        setShowVisitModal(true);
+      } else {
+        throw new Error('Malformed response from server');
+      }
+    } catch (err: any) {
+      console.error('Error fetching visit count:', err);
+      setVisitError(err?.message || 'Error fetching visit count');
+      setShowVisitModal(true); // open modal to show the error
+    } finally {
+      setLoadingVisit(false);
     }
   };
+
+  // close modal when pressing ESC
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showVisitModal) setShowVisitModal(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [showVisitModal]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -138,7 +161,7 @@ function App() {
         setSubmitMessage(`✅ Thank you, ${formData.name}! Your information has been submitted.`);
         setFormData({ name: '', dateOfBirth: '', email: '', phone: '', gender: '' });
       } else {
-        setSubmitMessage(`❌ Error: ${result.message}`);
+        setSubmitMessage(`❌ Error: ${result.message || 'Submission failed'}`);
       }
     } catch (error) {
       console.error('Submission error:', error);
@@ -163,127 +186,153 @@ function App() {
 
   return (
     <div className="App">
-      <div className="video-background">
-        <video autoPlay loop muted playsInline>
-          <source src="/numerology.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <div className="video-background" />
       <nav className="navbar">
         <div className="navbar-logo">
           <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
           <span className="brand-name">Numerology</span>
         </div>
         <ul className="navbar-menu">
-          <li onClick={() => setPage('home')}>Home</li>
+          <li><a href="#" onClick={(e) => { e.preventDefault(); /* could scroll home */ }}>Home</a></li>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Get Your Journey</a></li>
           <li><a href="#">Contact Us</a></li>
-          <li style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }} onClick={handleVisitCountClick}>
+          <li
+            style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }}
+            onClick={handleVisitCountClick}
+            aria-haspopup="dialog"
+          >
             Visit Count
           </li>
         </ul>
       </nav>
 
-      {page === 'visitcount' && (
-        <div className="visit-count-container">
-          <h2>Total Visits</h2>
-          <p>{visitCount !== null ? visitCount : 'Loading...'}</p>
+      {/* Visit Count Modal */}
+      {showVisitModal && (
+        <div
+          className="modal-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Visit count dialog"
+          onClick={() => setShowVisitModal(false)} // clicking overlay closes
+        >
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()} // prevent overlay close when clicking in modal
+          >
+            <h2 style={{ color: '#000', marginBottom: '0.25rem' }}>Total Visits</h2>
+
+            {/* Loading / Error / Value */}
+            {loadingVisit ? (
+              <p style={{ color: '#000' }}>Loading...</p>
+            ) : visitError ? (
+              <p style={{ color: 'red' }}>{visitError}</p>
+            ) : (
+              <p style={{ color: '#000', fontSize: '1.8rem', fontWeight: 700, margin: '0.5rem 0' }}>
+                {visitCount ?? '0'}
+              </p>
+            )}
+
+            <button
+              className="close-btn"
+              onClick={() => setShowVisitModal(false)}
+              aria-label="Close visit count dialog"
+            >
+              Close
+            </button>
+          </div>
         </div>
       )}
 
-      {page === 'home' && (
-        <>
-          {/* FORM SECTION */}
-          <section className="user-form-section">
-            <div className="form-container mystic-form">
-              <h2>🔮 Get Your Personal Numerology Reading</h2>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <label>Full Name:</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleInputChange} required disabled={isSubmitting} />
-                </div>
-                <div>
-                  <label>Gender:</label>
-                  <select name="gender" value={formData.gender} onChange={handleInputChange} required disabled={isSubmitting}>
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label>Date of Birth:</label>
-                  <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} required disabled={isSubmitting} />
-                </div>
-                <div>
-                  <label>Email (optional):</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleInputChange} disabled={isSubmitting} />
-                </div>
-                <div>
-                  <label>Phone (optional):</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} disabled={isSubmitting} />
-                </div>
-                <button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? '✨ Calculating...' : 'Get My Reading'}
-                </button>
-              </form>
-              {submitMessage && <div>{submitMessage}</div>}
+      {/* FORM SECTION */}
+      <section className="user-form-section">
+        <div className="form-container mystic-form">
+          <h2>🔮 Get Your Personal Numerology Reading</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Full Name:</label>
+              <input type="text" name="name" value={formData.name} onChange={handleInputChange} required disabled={isSubmitting} />
             </div>
-          </section>
+            <div>
+              <label>Gender:</label>
+              <select name="gender" value={formData.gender} onChange={handleInputChange} required disabled={isSubmitting}>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label>Date of Birth:</label>
+              <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange} required disabled={isSubmitting} />
+            </div>
+            <div>
+              <label>Email (optional):</label>
+              <input type="email" name="email" value={formData.email} onChange={handleInputChange} disabled={isSubmitting} />
+            </div>
+            <div>
+              <label>Phone (optional):</label>
+              <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} disabled={isSubmitting} />
+            </div>
+            <button type="submit" disabled={isSubmitting} className="mystic-btn">
+              {isSubmitting ? '✨ Calculating...' : 'Get My Reading'}
+            </button>
+          </form>
+          {submitMessage && <div className="submit-message">{submitMessage}</div>}
+        </div>
+      </section>
 
-          {/* RESULTS */}
-          {driverNumber !== null && conductorNumber !== null && (
-            <div className="numerology-result-container">
-              <div className="result-card">
-                <h3>🌟 Your Core Numbers</h3>
-                <p>Driver Number: {driverNumber}</p>
-                <p>Conductor Number: {conductorNumber}</p>
+      {/* RESULTS */}
+      {driverNumber !== null && conductorNumber !== null && (
+        <div className="numerology-result-container">
+          <div className="result-card">
+            <h3>🌟 Your Core Numbers</h3>
+            <p>Driver Number: {driverNumber}</p>
+            <p>Conductor Number: {conductorNumber}</p>
+          </div>
+
+          <div className="result-card">
+            <h3>🔮 Chaldean Numerology Chart</h3>
+            <table className="styled-table">
+              <thead>
+                <tr>
+                  <th>Letter</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {chaldeanData.map((lv, i) => (
+                  <tr key={i}>
+                    <td>{lv.letter}</td>
+                    <td>{lv.value}</td>
+                  </tr>
+                ))}
+                <tr className="total-row">
+                  <td><strong>Total</strong></td>
+                  <td><strong>{nameTotal}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {loshuGrid && (
+            <div className="result-card">
+              <h3>🧮 Loshu Grid</h3>
+              <div className="loshu-grid">
+                <div>{renderLoshuCell(4)}</div>
+                <div>{renderLoshuCell(9)}</div>
+                <div>{renderLoshuCell(2)}</div>
+                <div>{renderLoshuCell(3)}</div>
+                <div>{renderLoshuCell(5)}</div>
+                <div>{renderLoshuCell(7)}</div>
+                <div>{renderLoshuCell(8)}</div>
+                <div>{renderLoshuCell(1)}</div>
+                <div>{renderLoshuCell(6)}</div>
               </div>
-
-              <div className="result-card">
-                <h3>🔮 Chaldean Numerology Chart</h3>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Letter</th>
-                      <th>Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {chaldeanData.map((lv, i) => (
-                      <tr key={i}>
-                        <td>{lv.letter}</td>
-                        <td>{lv.value}</td>
-                      </tr>
-                    ))}
-                    <tr>
-                      <td><strong>Total</strong></td>
-                      <td><strong>{nameTotal}</strong></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              {loshuGrid && (
-                <div className="result-card">
-                  <h3>🧮 Loshu Grid</h3>
-                  <div className="loshu-grid">
-                    <div>{renderLoshuCell(4)}</div>
-                    <div>{renderLoshuCell(9)}</div>
-                    <div>{renderLoshuCell(2)}</div>
-                    <div>{renderLoshuCell(3)}</div>
-                    <div>{renderLoshuCell(5)}</div>
-                    <div>{renderLoshuCell(7)}</div>
-                    <div>{renderLoshuCell(8)}</div>
-                    <div>{renderLoshuCell(1)}</div>
-                    <div>{renderLoshuCell(6)}</div>
-                  </div>
-                  <p>(Numbers repeated = presence, "-" = missing)</p>
-                </div>
-              )}
+              <p className="grid-note">(Numbers repeated = presence, "-" = missing)</p>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
