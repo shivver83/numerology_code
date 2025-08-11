@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ContactPage from './ContactPage';
 
@@ -52,6 +52,9 @@ function MainApp() {
   const [showVisitModal, setShowVisitModal] = useState(false);
   const [loadingVisit, setLoadingVisit] = useState(false);
   const [visitError, setVisitError] = useState<string | null>(null);
+
+  // Ref for scrolling
+  const formSectionRef = useRef<HTMLDivElement>(null);
 
   const handleVisitCountClick = async () => {
     setVisitError(null);
@@ -141,6 +144,11 @@ function MainApp() {
     setNameTotal(total);
     setLoshuGrid(grid);
 
+    // Scroll to form section after results are shown
+    setTimeout(() => {
+      formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
     try {
       const response = await fetch('/api/submit', {
         method: 'POST',
@@ -185,7 +193,6 @@ function MainApp() {
 
   return (
     <div className="App">
-      {/* Background Video */}
       <video autoPlay loop muted playsInline className="video-background">
         <source src="/numerology.mp4" type="video/mp4" />
       </video>
@@ -209,7 +216,6 @@ function MainApp() {
         </ul>
       </nav>
 
-      {/* Visit Count Modal */}
       {showVisitModal && (
         <div className="modal-overlay" onClick={() => setShowVisitModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -226,8 +232,7 @@ function MainApp() {
         </div>
       )}
 
-      {/* Form Section */}
-      <section className="user-form-section">
+      <section className="user-form-section" ref={formSectionRef}>
         <div className="form-container mystic-form">
           <h2>🔮 Get Your Personal Numerology Reading</h2>
           <form onSubmit={handleSubmit}>
@@ -264,7 +269,6 @@ function MainApp() {
         </div>
       </section>
 
-      {/* Results */}
       {driverNumber !== null && conductorNumber !== null && (
         <div className="numerology-result-container">
           <div className="result-card">
