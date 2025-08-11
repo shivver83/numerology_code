@@ -45,17 +45,18 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  // Visit Count Button Action
+  // State for visit count modal
+  const [visitCount, setVisitCount] = useState<number | null>(null);
+  const [showModal, setShowModal] = useState(false);
+
+  // Visit Count Button Action (opens modal instead of new page)
   const handleVisitCountClick = async () => {
     try {
       const res = await fetch('/api/count');
       const data = await res.json();
       if (res.ok && typeof data.count === 'number') {
-        const newWindow = window.open('', '_blank');
-        if (newWindow) {
-          newWindow.document.write(`<h1>Total Visits: ${data.count}</h1>`);
-          newWindow.document.title = "Visit Count";
-        }
+        setVisitCount(data.count);
+        setShowModal(true);
       } else {
         alert("Failed to fetch visit count");
       }
@@ -184,6 +185,17 @@ function App() {
           </li>
         </ul>
       </nav>
+
+      {/* Visit Count Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Total Visits</h2>
+            <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{visitCount}</p>
+            <button className="close-btn" onClick={() => setShowModal(false)}>Close</button>
+          </div>
+        </div>
+      )}
 
       {/* FORM SECTION */}
       <section className="user-form-section">
