@@ -277,7 +277,6 @@ body {
 }
 
 .loshu-grid-container {
-  min-height: 100vh; /* Allow content to expand */
   overflow: visible; /* Let scrolling happen naturally */
 }
 
@@ -400,7 +399,6 @@ body {
 .chat-container {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 80px); /* subtract navbar height */
   position: relative;
 }
 
