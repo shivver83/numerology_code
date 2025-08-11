@@ -467,6 +467,46 @@ body {
   font-size: 1.8rem;
 }
 
+/* Glow animation for Contact Us menu item */
+.contact-us-glow {
+  animation: contactGlow 1.5s ease-in-out infinite alternate;
+  color: #ffd700 !important;
+  font-weight: 700 !important;
+  text-shadow:
+    0 0 5px #ffd700,
+    0 0 10px #ffcc00,
+    0 0 15px #ffaa00,
+    0 0 20px #ff9900;
+}
+
+@keyframes contactGlow {
+  from {
+    text-shadow:
+      0 0 5px #ffd700,
+      0 0 10px #ffcc00,
+      0 0 15px #ffaa00,
+      0 0 20px #ff9900;
+  }
+  to {
+    text-shadow:
+      0 0 15px #fff,
+      0 0 30px #ffd700,
+      0 0 45px #ffaa00,
+      0 0 60px #ffcc00;
+  }
+}
+
+/* Styling for the contact-us-message text */
+.contact-us-message a {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.contact-us-message a:hover {
+  color: #fff200;
+  text-shadow: 0 0 10px #fff200;
+}
+
+
 .visit-count-container p {
   color: black;
   font-size: 1.5rem;
