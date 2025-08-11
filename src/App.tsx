@@ -1,4 +1,4 @@
-// App.tsx
+// src/App.tsx
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
@@ -220,7 +220,7 @@ function MainApp() {
         </div>
         <ul className="navbar-menu">
           <li><Link to="/">Home</Link></li>
-          <li><a href="#">About Us</a></li>
+          <li><Link to="/aboutus">About Us</Link></li>
           <li><a href="#">Get Your Journey</a></li>
           <li>
             <Link
@@ -423,6 +423,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainApp />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/aboutus" element={<AboutUs />} />
       </Routes>
     </Router>
   );
