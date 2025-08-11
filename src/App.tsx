@@ -1,4 +1,3 @@
-// src/App.tsx
 import './App.css';
 import { useState, useEffect } from 'react';
 
@@ -52,7 +51,6 @@ function App() {
   const [loadingVisit, setLoadingVisit] = useState(false);
   const [visitError, setVisitError] = useState<string | null>(null);
 
-  // Fetch visit count and open modal
   const handleVisitCountClick = async () => {
     setVisitError(null);
     setLoadingVisit(true);
@@ -72,13 +70,12 @@ function App() {
     } catch (err: any) {
       console.error('Error fetching visit count:', err);
       setVisitError(err?.message || 'Error fetching visit count');
-      setShowVisitModal(true); // open modal to show the error
+      setShowVisitModal(true);
     } finally {
       setLoadingVisit(false);
     }
   };
 
-  // close modal when pressing ESC
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && showVisitModal) setShowVisitModal(false);
@@ -186,25 +183,24 @@ function App() {
 
   return (
     <div className="App">
-      <div className="video-background" />
-      <video autoPlay loop muted playsInline>
-          <source src="/numerology.mp4" type="video/mp4" />
+      {/* Background Video */}
+      <video autoPlay loop muted playsInline className="video-background">
+        <source src="/numerology.mp4" type="video/mp4" />
       </video>
-      </div>
+
       <nav className="navbar">
         <div className="navbar-logo">
           <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
           <span className="brand-name">Numerology</span>
         </div>
         <ul className="navbar-menu">
-          <li><a href="#" onClick={(e) => { e.preventDefault(); /* could scroll home */ }}>Home</a></li>
+          <li><a href="#">Home</a></li>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Get Your Journey</a></li>
           <li><a href="#">Contact Us</a></li>
           <li
             style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }}
             onClick={handleVisitCountClick}
-            aria-haspopup="dialog"
           >
             Visit Count
           </li>
@@ -213,42 +209,22 @@ function App() {
 
       {/* Visit Count Modal */}
       {showVisitModal && (
-        <div
-          className="modal-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Visit count dialog"
-          onClick={() => setShowVisitModal(false)} // clicking overlay closes
-        >
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()} // prevent overlay close when clicking in modal
-          >
-            <h2 style={{ color: '#000', marginBottom: '0.25rem' }}>Total Visits</h2>
-
-            {/* Loading / Error / Value */}
+        <div className="modal-overlay" onClick={() => setShowVisitModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Total Visits</h2>
             {loadingVisit ? (
-              <p style={{ color: '#000' }}>Loading...</p>
+              <p>Loading...</p>
             ) : visitError ? (
               <p style={{ color: 'red' }}>{visitError}</p>
             ) : (
-              <p style={{ color: '#000', fontSize: '1.8rem', fontWeight: 700, margin: '0.5rem 0' }}>
-                {visitCount ?? '0'}
-              </p>
+              <p className="visit-number">{visitCount ?? '0'}</p>
             )}
-
-            <button
-              className="close-btn"
-              onClick={() => setShowVisitModal(false)}
-              aria-label="Close visit count dialog"
-            >
-              Close
-            </button>
+            <button onClick={() => setShowVisitModal(false)}>Close</button>
           </div>
         </div>
       )}
 
-      {/* FORM SECTION */}
+      {/* Form Section */}
       <section className="user-form-section">
         <div className="form-container mystic-form">
           <h2>🔮 Get Your Personal Numerology Reading</h2>
@@ -286,7 +262,7 @@ function App() {
         </div>
       </section>
 
-      {/* RESULTS */}
+      {/* Results */}
       {driverNumber !== null && conductorNumber !== null && (
         <div className="numerology-result-container">
           <div className="result-card">
