@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
@@ -45,15 +45,12 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  // Visit count from backend
-  const [visitCount, setVisitCount] = useState<number>(0);
-
+  // Visit Count Button Action
   const handleVisitCountClick = async () => {
     try {
       const res = await fetch('/api/count');
       const data = await res.json();
       if (res.ok && typeof data.count === 'number') {
-        // Open in new page
         const newWindow = window.open('', '_blank');
         if (newWindow) {
           newWindow.document.write(`<h1>Total Visits: ${data.count}</h1>`);
