@@ -1,10 +1,9 @@
-// src/ContactPage.tsx
 import "./ContactPage.css";
 
 function ContactPage() {
   return (
     <div className="contact-container">
-      <video autoPlay muted loop className="video-bg">
+      <video autoPlay muted loop playsInline className="video-bg">
         <source src="/numerology.mp4" type="video/mp4" />
       </video>
 
