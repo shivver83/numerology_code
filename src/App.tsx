@@ -145,7 +145,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* NAVIGATION HEADER */}
+      <div className="video-background">
+        <video autoPlay loop muted playsInline>
+          <source src="/numerology.mp4" type="video/mp4" />
+        </video>
+      </div>
       <nav className="navbar">
         <div className="navbar-logo">
           <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
@@ -158,12 +162,6 @@ function App() {
           <li><a href="#">Contact Us</a></li>
         </ul>
       </nav>
-
-      {/* HERO */}
-      <header className="App-header">
-        <h1>🔢 Discover Your Numerology</h1>
-        <video className="guide-video-full" src="/numerology.mp4" autoPlay loop muted playsInline />
-      </header>
 
       {/* FORM SECTION */}
       <section className="user-form-section">
