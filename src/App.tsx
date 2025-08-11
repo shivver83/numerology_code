@@ -1,4 +1,4 @@
-App.tsx
+// App.tsx
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
