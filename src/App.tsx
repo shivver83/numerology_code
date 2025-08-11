@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Chaldean mapping
 const chaldeanMap: Record<string, number> = {
@@ -45,6 +45,17 @@ function App() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+
+  // New: Visit count state
+  const [visitCount, setVisitCount] = useState(0);
+
+  // Track visits in localStorage
+  useEffect(() => {
+    const storedCount = localStorage.getItem("visitCount");
+    const newCount = storedCount ? parseInt(storedCount) + 1 : 1;
+    localStorage.setItem("visitCount", newCount.toString());
+    setVisitCount(newCount);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -160,6 +171,9 @@ function App() {
           <li><a href="#">About Us</a></li>
           <li><a href="#">Get Your Journey</a></li>
           <li><a href="#">Contact Us</a></li>
+          <li style={{ fontWeight: 'bold', color: '#ffd700' }}>
+            Visit Count: {visitCount}
+          </li>
         </ul>
       </nav>
 
