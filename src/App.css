@@ -88,12 +88,17 @@ body {
 }
 
 .modal-content {
-  background: #fff;
+  background: #fff;              /* white background so black text is readable */
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
-  max-width: 300px;
+  max-width: 320px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.modal-content h2,
+.modal-content p {
+  color: #000; /* ensure heading+count are black */
 }
 
 .close-btn {
@@ -104,10 +109,6 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
-}
-
-.close-btn:hover {
-  background: #cc0000;
 }
 
 .navbar a {
