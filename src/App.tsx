@@ -1,4 +1,3 @@
-// App.tsx
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
@@ -294,11 +293,20 @@ function MainApp() {
 
       {driverNumber !== null && conductorNumber !== null && (
         <div className="numerology-result-container">
-          <div className="result-card">
-            <p>Here is your initial analysis....</p>
-            <h3>🌟 Your Core Numbers</h3>
-            <p>Driver Number: {driverNumber}</p>
-            <p>Conductor Number: {conductorNumber}</p>
+          {/* UPDATED: Added explicit styling to ensure visibility */}
+          <div className="result-card" style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'rgba(255, 255, 255, 0.9)', color: '#333', borderRadius: '10px' }}>
+            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2c3e50', marginBottom: '1rem' }}>
+              Here is your initial analysis....
+            </p>
+            <h3 style={{ fontSize: '1.5rem', color: '#e74c3c', marginBottom: '1rem' }}>
+              🌟 Your Core Numbers
+            </h3>
+            <p style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>
+              <strong>Driver Number:</strong> {driverNumber}
+            </p>
+            <p style={{ fontSize: '1.1rem' }}>
+              <strong>Conductor Number:</strong> {conductorNumber}
+            </p>
           </div>
 
           <div className="result-card">
