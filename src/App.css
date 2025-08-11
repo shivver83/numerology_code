@@ -1,17 +1,18 @@
-/* Fixed Navbar */
-.fixed-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: rgba(34, 34, 34, 0.85);
-  backdrop-filter: blur(8px);
+/* Basic Navbar Styling */
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #222;
   color: white;
   padding: 1rem 2rem;
+}
+
+.guide-video-full {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .navbar-logo {
@@ -44,28 +45,16 @@
   text-decoration: underline;
 }
 
-/* Video Background */
-.video-background {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
+.numerology-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
-
-.video-background video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
+.numerology-result h3 {
+  margin-bottom: 0.5rem;
 }
-
-/* Push content down so it doesn't hide under navbar */
-.user-form-section {
-  padding-top: 100px;
-}
-
-/* Rest of your styles from before ... */
 .numerology-result-container {
   display: flex;
   flex-direction: column;
@@ -88,6 +77,42 @@
   margin-bottom: 1rem;
 }
 
+.core-numbers {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.core-number h2 {
+  font-size: 2.5rem;
+  color: gold;
+}
+
+.number-icon {
+  font-size: 2rem;
+  display: block;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th, .styled-table td {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px;
+  text-align: center;
+}
+
+.styled-table th {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.total-row td {
+  font-weight: bold;
+  background: rgba(255, 215, 0, 0.15);
+}
+
 .loshu-grid {
   display: grid;
   grid-template-columns: repeat(3, 60px);
@@ -105,6 +130,22 @@
   font-size: 1.2rem;
 }
 
+.grid-note {
+  color: #ccc;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.fade-in {
+  animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mystical Form Styling */
 .mystic-form {
   background: linear-gradient(145deg, rgba(25, 0, 40, 0.9), rgba(60, 0, 90, 0.8));
   padding: 2rem;
@@ -138,11 +179,65 @@
   outline: none;
 }
 
-button {
+.note {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-title {
+  animation: fadeIn 1s ease forwards;
+}
+
+.fade-in-subtitle {
+  animation: fadeIn 1.3s ease forwards;
+  color: #ddd;
+}
+
+.slide-up {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.mystic-btn {
   background: linear-gradient(90deg, #ff6ec4, #7873f5);
   border: none;
   color: white;
   padding: 0.8rem 2rem;
   border-radius: 30px;
   font-size: 1.2rem;
-  cu
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 0 12px rgba(255, 110, 196, 0.5);
+}
+
+.mystic-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(255, 110, 196, 0.8);
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 110, 196, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(255, 110, 196, 0.9); }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Message styles */
+.submit-message.success {
+  margin-top: 1rem;
+  color: #00ff9f;
+}
+
+.submit-message.error {
+  margin-top: 1rem;
+  color: #ff6e6e;
+}
+
