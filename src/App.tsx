@@ -1,5 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import ContactPage from './ContactPage';
 
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
@@ -27,7 +29,7 @@ const generateLoshuGrid = (dob: string) => {
   return counts;
 };
 
-function App() {
+function MainApp() {
   const [formData, setFormData] = useState({
     name: '',
     dateOfBirth: '',
@@ -194,10 +196,10 @@ function App() {
           <span className="brand-name">Numerology</span>
         </div>
         <ul className="navbar-menu">
-          <li><a href="#">Home</a></li>
+          <li><Link to="/">Home</Link></li>
           <li><a href="#">About Us</a></li>
           <li><a href="#">Get Your Journey</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><Link to="/contact">Contact Us</Link></li>
           <li
             style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }}
             onClick={handleVisitCountClick}
@@ -318,4 +320,13 @@ function App() {
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </Router>
+  );
+}
