@@ -1,6 +1,7 @@
 /* Basic Navbar Styling */
 /* Fullscreen Background GIF */
 
+/* Fullscreen Background GIF */
 .video-background {
   position: fixed;
   top: 0;
@@ -22,17 +23,29 @@
   filter: brightness(0.5); /* Darken so text is readable */
 }
 
-
-body {
-  padding-top: 80px; /* to prevent content from hiding under navbar */
+/* Ensure body can scroll to top and bottom */
+html, body {
+  height: auto; /* allow full page height */
+  min-height: 100%;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
 }
 
-/* Make content readable */
+body {
+  padding-top: 80px; /* keep navbar from overlapping content */
+}
+
+/* Make main app scrollable */
 .App {
   position: relative;
   z-index: 1;
   color: white;
+  min-height: 100vh; /* ensure it covers at least full viewport height */
+  overflow-y: visible; /* allow natural scroll */
 }
+
+/* Navbar stays fixed on top */
 .navbar {
   position: fixed;
   top: 0;
@@ -42,12 +55,15 @@ body {
   color: white;
   padding: 0.75rem 1.5rem;
   display: flex;
-  justify-content: flex-start; /* keep items to the left */
+  justify-content: flex-start;
   align-items: center;
   z-index: 1000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  gap: 3rem; /* space between logo and menu */
+  gap: 3rem;
 }
+
+/* Rest of your existing styles remain unchanged... */
+
 
 .navbar-left {
   display: flex;
