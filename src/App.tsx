@@ -294,6 +294,7 @@ function MainApp() {
       {driverNumber !== null && conductorNumber !== null && (
         <div className="numerology-result-container">
           <div className="result-card">
+            <p>Here is your initial analysis....</p>
             <h3>🌟 Your Core Numbers</h3>
             <p>Driver Number: {driverNumber}</p>
             <p>Conductor Number: {conductorNumber}</p>
