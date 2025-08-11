@@ -213,7 +213,7 @@ function MainApp() {
       {showVisitModal && (
         <div className="modal-overlay" onClick={() => setShowVisitModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Users Count - </h2>
+            <h2>Users Visited so far - </h2>
             {loadingVisit ? (
               <p>Loading...</p>
             ) : visitError ? (
