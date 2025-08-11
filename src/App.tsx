@@ -31,6 +31,26 @@ const generateLoshuGrid = (dob: string) => {
   return counts;
 };
 
+// Calculate Kuan Number based on DOB and gender
+const calculateKuanNumber = (dob: string, gender: string): number | null => {
+  if (!dob || !gender) return null;
+  const year = new Date(dob).getFullYear();
+  let lastTwo = year % 100;
+  let sum = Math.floor(lastTwo / 10) + (lastTwo % 10);
+  if (sum > 9) sum = Math.floor(sum / 10) + (sum % 10);
+
+  let kuanNum: number;
+  if (gender.toLowerCase() === 'male') {
+    kuanNum = 10 - sum;
+  } else if (gender.toLowerCase() === 'female') {
+    kuanNum = sum + 5;
+  } else {
+    kuanNum = 10 - sum; // Default to male calculation if other
+  }
+  if (kuanNum > 9) kuanNum = Math.floor(kuanNum / 10) + (kuanNum % 10);
+  return kuanNum;
+};
+
 function MainApp() {
   const location = useLocation();
 
@@ -44,6 +64,7 @@ function MainApp() {
 
   const [driverNumber, setDriverNumber] = useState<number | null>(null);
   const [conductorNumber, setConductorNumber] = useState<number | null>(null);
+  const [kuanNumber, setKuanNumber] = useState<number | null>(null); // NEW
   const [chaldeanData, setChaldeanData] = useState<{ letter: string; value: number }[]>([]);
   const [nameTotal, setNameTotal] = useState<number | null>(null);
   const [loshuGrid, setLoshuGrid] = useState<Record<number, number> | null>(null);
@@ -144,23 +165,23 @@ function MainApp() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage('');
-    setContactUsGlow(false); // reset glow before new calculation
+    setContactUsGlow(false);
 
     const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
     const driver = calculateDriverNumber(formData.dateOfBirth);
+    const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender); // NEW
     const { letterValues, total } = calculateChaldeanChart(formData.name);
     const grid = generateLoshuGrid(formData.dateOfBirth);
 
     setConductorNumber(lifePathNumber);
     setDriverNumber(driver);
+    setKuanNumber(kuan); // NEW
     setChaldeanData(letterValues);
     setNameTotal(total);
     setLoshuGrid(grid);
 
-    // Start Contact Us glow after grid appears
     setContactUsGlow(true);
 
-    // Scroll to form section after results are shown
     setTimeout(() => {
       formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
@@ -194,15 +215,48 @@ function MainApp() {
     }
   };
 
+  // Updated renderLoshuCell to highlight Kuan number cell
   const renderLoshuCell = (num: number) => {
     if (!loshuGrid) return '-';
     const count = loshuGrid[num] || 0;
-    if (count <= 0) return <span style={{ color: '#999' }}>-</span>;
+    const isKuan = kuanNumber === num;
+
+    // Compose display elements: repeated numbers + kuan highlight
     return (
-      <div>
-        {Array.from({ length: count }, (_, i) => (
-          <span key={i} style={{ margin: '0 3px', fontWeight: 600 }}>{num}</span>
-        ))}
+      <div style={{ position: 'relative', padding: '5px' }}>
+        {count <= 0 ? (
+          <span style={{ color: '#999' }}>-</span>
+        ) : (
+          Array.from({ length: count }, (_, i) => (
+            <span key={i} style={{ margin: '0 3px', fontWeight: 600 }}>{num}</span>
+          ))
+        )}
+        {isKuan && (
+          <span
+            style={{
+              position: 'absolute',
+              top: '2px',
+              right: '2px',
+              backgroundColor: '#ff8c00',
+              color: 'white',
+              borderRadius: '50%',
+              width: '18px',
+              height: '18px',
+              fontSize: '0.8rem',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 5px #ff8c00',
+              userSelect: 'none',
+              cursor: 'default',
+              lineHeight: 1,
+            }}
+            title="Kuan Number"
+          >
+            K
+          </span>
+        )}
       </div>
     );
   };
@@ -336,6 +390,16 @@ function MainApp() {
             }}>
               Conductor Number: {conductorNumber}
             </p>
+            {kuanNumber !== null && (
+              <p style={{
+                fontSize: '1.3rem',
+                fontWeight: 'bold',
+                color: '#ffffff',
+                marginBottom: '0.5rem'
+              }}>
+                Kuan Number: {kuanNumber}
+              </p>
+            )}
           </div>
 
           <div className="result-card">
@@ -366,6 +430,7 @@ function MainApp() {
             <div className="result-card">
               <h3>🧮 Loshu Grid</h3>
               <div className="loshu-grid">
+                {/* Pass kuanNumber to highlight the block */}
                 <div>{renderLoshuCell(4)}</div>
                 <div>{renderLoshuCell(9)}</div>
                 <div>{renderLoshuCell(2)}</div>
