@@ -67,7 +67,7 @@ function ContactPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            @yourinstagramhandle
+            @happinessccreattions
           </a>
         </p>
       </div>
