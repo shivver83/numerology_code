@@ -1,17 +1,25 @@
+/* Make sure body has no margin/padding */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .contact-container {
   position: relative;
-  height: 100vh;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
   overflow: hidden;
 }
 
 .video-bg {
-  position: absolute;
+  position: fixed; /* Stays fixed on screen */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -1;
+  object-fit: cover; /* Crops to fill without distortion */
+  z-index: -1; /* Behind content */
 }
 
 .contact-content {
@@ -19,7 +27,8 @@
   z-index: 1;
   color: #fff;
   text-align: center;
-  padding-top: 20%;
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center */
   font-family: 'Poppins', sans-serif;
 }
 
