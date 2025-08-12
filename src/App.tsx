@@ -228,67 +228,65 @@ function MainApp() {
 
   // Render each Loshu grid cell with count and highlight for Kuan number,
   // plus show Kuan number digit as a badge next to the count digits
-  const renderLoshuCell = (number: number) => {
-  if (!loshuGrid) return null; // prevent null access
-
-  const count = loshuGrid[number] || 0;
-  let extraLabel = "";
-
-  if (number === conductorNumber) {
-    extraLabel = `Conductor: ${conductorNumber}`;
-  }
-  if (number === driverNumber) {
-    extraLabel = `Driver: ${driverNumber}`;
-  }
-  if (number === kuanNumber) {
-    extraLabel = `Kuan: ${kuanNumber}`;
-  }
-
-  return (
-    <div
-      className="loshu-cell"
-      style={{
-        border: "1px solid black",
-        padding: "10px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: number === kuanNumber ? "#ffe6b3" : "white",
-      }}
-    >
-      <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{number}</div>
-      <div style={{ fontSize: "0.9rem" }}>
-        {count > 0 ? `${number}`.repeat(count) : "-"}
-      </div>
-      {extraLabel && (
-        <div
-          style={{
-            marginTop: "4px",
-            fontSize: "0.8rem",
-            color: "#333",
-            fontWeight: "500",
-          }}
-        >
-          {extraLabel}
+  const renderLoshuCell = (num: number) => {
+    if (!loshuGrid) return '-';
+    const count = loshuGrid[num] || 0;
+    const isKuan = kuanNumber === num;
+    const isDriver = driverNumber === num;
+    const isConductor = conductorNumber === num;
+    
+    return (
+      <div style={{ position: 'relative', padding: '5px', minHeight: '32px', fontWeight: '600', fontSize: '1.2rem', color: isKuan ? '#ff8c00' : '#000' }}>
+        {count <= 0 ? (
+          <span style={{ color: '#999' }}>-</span>
+        ) : (
+          <>
+            {Array.from({ length: count }, (_, i) => (
+              <span key={i} style={{ margin: '0 3px' }}>{num}</span>
+            ))}
+          </>
+        )}
+        {isKuan && (
+          <span
+            style={{
+              position: 'absolute',
+              top: '2px',
+              right: '2px',
+              backgroundColor: '#ff8c00',
+              color: 'white',
+              borderRadius: '50%',
+              width: '22px',
+              height: '22px',
+              fontSize: '0.9rem',
+              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 5px #ff8c00',
+              userSelect: 'none',
+              cursor: 'default',
+              lineHeight: 1,
+            }}
+            title="Kuan Number"
+          >
+            {kuanNumber}
+          </span>
+        )}
+        {/* Driver / Conductor icons */}
+      <div style={{
+        position: 'absolute',
+        bottom: '2px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        fontSize: '0.75rem',
+        whiteSpace: 'nowrap'
+      }}>
+        {isDriver && '🏎'}
+        {isConductor && '🎼'}
         </div>
-      )}
-    </div>
-  );
-};
-
-
-// Rendering grid in correct Loshu order
-const loshuOrder = [
-  [4, 9, 2],
-  [3, 5, 7],
-  [8, 1, 6],
-];
-
-<div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "5px" }}>
-  {loshuOrder.flat().map((num) => renderLoshuCell(num))}
-</div>
-
+      </div>
+    );
+  };
 
   return (
     <div className="App">
