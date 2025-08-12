@@ -228,28 +228,23 @@ function MainApp() {
 
   // Render each Loshu grid cell with count and highlight for Kuan number,
   // plus show Kuan number digit as a badge next to the count digits
- // Lo Shu positions in correct order for grid display
-const loshuOrder = [
-  4, 9, 2,
-  3, 5, 7,
-  8, 1, 6
-];
-
-const renderLoshuCell = (number: number) => {
+  const renderLoshuCell = (number: number) => {
   const cellNumbers = loshuGrid[number] || [];
   let extraLabel = "";
 
-  if (number === 5) {
-    extraLabel = `Driver: ${driverNumber}`;
-  } else if (number === 2) {
+  // Assign labels to correct positions
+  if (number === conductorNumber) {
     extraLabel = `Conductor: ${conductorNumber}`;
-  } else if (number === 8) {
-    extraLabel = `Kua: ${kuaNumber}`;
+  }
+  if (number === driverNumber) {
+    extraLabel = `Driver: ${driverNumber}`;
+  }
+  if (number === kuanNumber) {
+    extraLabel = `Kuan: ${kuanNumber}`;
   }
 
   return (
     <div
-      key={number}
       className="loshu-cell"
       style={{
         border: "1px solid black",
@@ -258,8 +253,7 @@ const renderLoshuCell = (number: number) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "80px",
-        backgroundColor: "white"
+        backgroundColor: number === kuanNumber ? "#ffe6b3" : "white",
       }}
     >
       <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{number}</div>
@@ -269,7 +263,14 @@ const renderLoshuCell = (number: number) => {
         <div style={{ fontSize: "0.9rem" }}>-</div>
       )}
       {extraLabel && (
-        <div style={{ marginTop: "4px", fontSize: "0.8rem", fontWeight: "500" }}>
+        <div
+          style={{
+            marginTop: "4px",
+            fontSize: "0.8rem",
+            color: "#333",
+            fontWeight: "500",
+          }}
+        >
           {extraLabel}
         </div>
       )}
@@ -277,15 +278,16 @@ const renderLoshuCell = (number: number) => {
   );
 };
 
-// Rendering the Loshu grid in correct sequence
-<div className="loshu-grid" style={{
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gap: "5px"
-}}>
-  {loshuOrder.map(num => renderLoshuCell(num))}
-</div>
+// Rendering grid in correct Loshu order
+const loshuOrder = [
+  [4, 9, 2],
+  [3, 5, 7],
+  [8, 1, 6],
+];
 
+<div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "5px" }}>
+  {loshuOrder.flat().map((num) => renderLoshuCell(num))}
+</div>
 
 
   return (
@@ -307,7 +309,7 @@ const renderLoshuCell = (number: number) => {
     letterSpacing: '0.02em', // subtle spacing for better readability
   }}
 >
-  Happiness Ccreattions 
+  Happiness Ccreattions
 </span>
         </div>
         <ul className="navbar-menu">
@@ -514,7 +516,7 @@ const renderLoshuCell = (number: number) => {
                 lineHeight: 1.3
               }}
             >
-              To get your thorough consultation, {' '}
+              To get your detailed Life path report kindly{' '}
               <Link to="/contact" style={{ textDecoration: 'underline', color: '#ff4500', fontWeight: '900' }}>
                 Contact Us
               </Link>
