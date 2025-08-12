@@ -232,11 +232,12 @@ function MainApp() {
   const cellNumbers = loshuGrid[number] || [];
   let extraLabel = "";
 
-  if (number === 5) {
-    extraLabel = `Driver: ${driverNumber}`;
-  } else if (number === 9) {
+  // Place labels based on exact Loshu grid position
+  if (number === 2) { 
     extraLabel = `Conductor: ${conductorNumber}`;
-  } else if (number === 1 && kuanNumber !== null) {
+  } else if (number === 5) {
+    extraLabel = `Driver: ${driverNumber}`;
+  } else if (number === 8 && kuanNumber !== null) {
     extraLabel = `Kuan: ${kuanNumber}`;
   }
 
@@ -246,20 +247,36 @@ function MainApp() {
       style={{
         border: "1px solid black",
         padding: "10px",
-        backgroundColor: number === kuanNumber ? "orange" : "white",
-        textAlign: "center"
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor:
+          number === 8 && kuanNumber === number ? "orange" : "white",
       }}
     >
-      <div style={{ fontWeight: "bold" }}>{number}</div>
-      {cellNumbers.length > 0 ? cellNumbers.join(", ") : "-"}
+      <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{number}</div>
+      {cellNumbers.length > 0 ? (
+        <div style={{ fontSize: "0.9rem" }}>{cellNumbers.join(", ")}</div>
+      ) : (
+        <div style={{ fontSize: "0.9rem" }}>-</div>
+      )}
       {extraLabel && (
-        <div style={{ marginTop: "5px", fontSize: "0.85rem", color: "#333" }}>
+        <div
+          style={{
+            marginTop: "4px",
+            fontSize: "0.8rem",
+            color: "#333",
+            fontWeight: "500",
+          }}
+        >
           {extraLabel}
         </div>
       )}
     </div>
   );
 };
+
 
 
   return (
