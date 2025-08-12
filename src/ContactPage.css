@@ -96,16 +96,24 @@
 }
 
 @media (max-width: 480px) {
-  .contact-content {
-    margin: 1.5rem 1rem; /* reduce side margin on small screens */
-    max-width: 100%;     /* allow full width */
-    padding: 1rem 1rem;
-    box-sizing: border-box;
+  .contact-container {
+    height: 100vh;
+    overflow-x: hidden; /* no horizontal scroll */
+    overflow-y: auto;   /* allow vertical scroll */
+    padding: 0 0.5rem;  /* small side padding */
   }
+
   .contact-content {
-    margin: 1.5rem 1rem;
+    margin: 1.5rem auto;
     max-width: 100%;
-    padding: 1rem 1rem;
-    box-sizing: border-box;
+    padding: 1rem;
+  }
+
+  .contact-table {
+    font-size: 1rem;
+  }
+
+  .contact-table td {
+    padding: 0.3rem 0.4rem;
   }
 }
