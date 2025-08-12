@@ -228,51 +228,39 @@ function MainApp() {
 
   // Render each Loshu grid cell with count and highlight for Kuan number,
   // plus show Kuan number digit as a badge next to the count digits
-  const renderLoshuCell = (num: number) => {
-    if (!loshuGrid) return '-';
-    const count = loshuGrid[num] || 0;
-    const isKuan = kuanNumber === num;
+  const renderLoshuCell = (number: number) => {
+  const cellNumbers = loshuGrid[number] || [];
+  let extraLabel = "";
 
-    return (
-      <div style={{ position: 'relative', padding: '5px', minHeight: '32px', fontWeight: '600', fontSize: '1.2rem', color: isKuan ? '#ff8c00' : '#000' }}>
-        {count <= 0 ? (
-          <span style={{ color: '#999' }}>-</span>
-        ) : (
-          <>
-            {Array.from({ length: count }, (_, i) => (
-              <span key={i} style={{ margin: '0 3px' }}>{num}</span>
-            ))}
-          </>
-        )}
-        {isKuan && (
-          <span
-            style={{
-              position: 'absolute',
-              top: '2px',
-              right: '2px',
-              backgroundColor: '#ff8c00',
-              color: 'white',
-              borderRadius: '50%',
-              width: '22px',
-              height: '22px',
-              fontSize: '0.9rem',
-              fontWeight: 'bold',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 5px #ff8c00',
-              userSelect: 'none',
-              cursor: 'default',
-              lineHeight: 1,
-            }}
-            title="Kuan Number"
-          >
-            {kuanNumber}
-          </span>
-        )}
-      </div>
-    );
-  };
+  if (number === 5) {
+    extraLabel = `Driver: ${driverNumber}`;
+  } else if (number === 9) {
+    extraLabel = `Conductor: ${conductorNumber}`;
+  } else if (number === 1 && kuanNumber !== null) {
+    extraLabel = `Kuan: ${kuanNumber}`;
+  }
+
+  return (
+    <div
+      className="loshu-cell"
+      style={{
+        border: "1px solid black",
+        padding: "10px",
+        backgroundColor: number === kuanNumber ? "orange" : "white",
+        textAlign: "center"
+      }}
+    >
+      <div style={{ fontWeight: "bold" }}>{number}</div>
+      {cellNumbers.length > 0 ? cellNumbers.join(", ") : "-"}
+      {extraLabel && (
+        <div style={{ marginTop: "5px", fontSize: "0.85rem", color: "#333" }}>
+          {extraLabel}
+        </div>
+      )}
+    </div>
+  );
+};
+
 
   return (
     <div className="App">
@@ -500,7 +488,7 @@ function MainApp() {
                 lineHeight: 1.3
               }}
             >
-              To get your detailed Life path report kindly{' '}
+              To get your thorough consultation, {' '}
               <Link to="/contact" style={{ textDecoration: 'underline', color: '#ff4500', fontWeight: '900' }}>
                 Contact Us
               </Link>
