@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Header from './Header';  // Import your existing header component
 import "./ContactPage.css";
 
 const emailIcon = (
@@ -59,52 +62,57 @@ const instagramIcon = (
 
 function ContactPage() {
   return (
-    <div className="contact-container">
-      <video autoPlay muted loop playsInline className="video-bg">
-        <source src="/numerology.mp4" type="video/mp4" />
-      </video>
+    <>
+      {/* Insert the header component here */}
+      <Header />
 
-      <div className="contact-content">
-        <h2>Contact Us</h2>
+      <div className="contact-container">
+        <video autoPlay muted loop playsInline className="video-bg">
+          <source src="/numerology.mp4" type="video/mp4" />
+        </video>
 
-        <table className="contact-table">
-          <tbody>
-            <tr>
-              <td className="icon-cell">{emailIcon}</td>
-              <td>Email:</td>
-              <td>
-                <a href="mailto:9amitgupta99@gmail.com">9amitgupta99@gmail.com</a>
-              </td>
-            </tr>
-            <tr>
-              <td className="icon-cell">{phoneIcon}</td>
-              <td>Phone:</td>
-              <td>
-                <a href="tel:+917428552116">+91-7428552116</a>
-              </td>
-            </tr>
-            <tr>
-              <td className="icon-cell">{locationIcon}</td>
-              <td>Address:</td>
-              <td>Sector 51, Noida</td>
-            </tr>
-            <tr>
-              <td className="icon-cell">{instagramIcon}</td>
-              <td>Instagram:</td>
-              <td>
-                <a
-                  href="https://instagram.com/happinessccreattions"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  @happinessccreattions
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="contact-content">
+          <h2>Contact Us</h2>
+
+          <table className="contact-table">
+            <tbody>
+              <tr>
+                <td className="icon-cell">{emailIcon}</td>
+                <td>Email:</td>
+                <td>
+                  <a href="mailto:9amitgupta99@gmail.com">9amitgupta99@gmail.com</a>
+                </td>
+              </tr>
+              <tr>
+                <td className="icon-cell">{phoneIcon}</td>
+                <td>Phone:</td>
+                <td>
+                  <a href="tel:+917428552116">+91-7428552116</a>
+                </td>
+              </tr>
+              <tr>
+                <td className="icon-cell">{locationIcon}</td>
+                <td>Address:</td>
+                <td>Sector 51, Noida</td>
+              </tr>
+              <tr>
+                <td className="icon-cell">{instagramIcon}</td>
+                <td>Instagram:</td>
+                <td>
+                  <a
+                    href="https://instagram.com/happinessccreattions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    @happinessccreattions
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
