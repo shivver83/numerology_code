@@ -209,8 +209,9 @@ function MainApp() {
     setContactUsGlow(true);
 
     setTimeout(() => {
-      formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
+
 
     try {
       const response = await fetch('/api/submit', {
