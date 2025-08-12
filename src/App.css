@@ -34,6 +34,13 @@ body {
   color: white;
 }
 
+.brand-name {
+  font-size: 1.1rem; /* smaller than before, adjust as you like */
+  font-weight: bold;
+  color: white;
+}
+
+
 .navbar-gradient-bg {
   background: linear-gradient(
     270deg,
