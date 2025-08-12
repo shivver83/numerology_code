@@ -508,7 +508,7 @@ function MainApp() {
               </p>
             )}
           </div>
-// Inside MainApp function, near the top (after your useState calls)
+
 
   
        {/* Added wrapper for analysis */}
