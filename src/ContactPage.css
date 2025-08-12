@@ -102,4 +102,10 @@
     padding: 1rem 1rem;
     box-sizing: border-box;
   }
+  .contact-content {
+    margin: 1.5rem 1rem;
+    max-width: 100%;
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+  }
 }
