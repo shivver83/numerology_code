@@ -45,6 +45,16 @@ body {
   padding: 0.5rem 1rem;
 }
 
+.navbar-gradient-bg .navbar-menu li a,
+.navbar-gradient-bg .navbar-menu li {
+  color: white;
+  font-weight: 600;
+}
+
+.navbar-gradient-bg .navbar-menu li a:hover {
+  text-decoration: underline;
+}
+
 .navbar {
   position: fixed;
   top: 0;
