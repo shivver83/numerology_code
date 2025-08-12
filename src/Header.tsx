@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ contactUsGlow, onVisitCountClick }) => 
   const location = useLocation();
 
   return (
-    <nav className="navbar">
+    <nav className="navbar navbar-gradient-bg">
       <div className="navbar-logo">
         <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
         <span className="brand-name">Happiness Ccreattions</span>
