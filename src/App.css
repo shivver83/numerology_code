@@ -609,6 +609,22 @@ body {
   text-shadow: 0 0 10px #fff200;
 }
 
+/* Make sure .contact-us-message is below the loshu grid on mobile */
+@media (max-width: 768px) {
+  .contact-us-message {
+    display: block;        /* Ensure it's block-level */
+    clear: both;           /* Clear any floats if used */
+    margin-top: 1.5rem;    /* Add some spacing from above content */
+    position: static !important; /* Remove any absolute/fixed positioning */
+    z-index: auto !important;    /* Remove any z-index overlap */
+  }
+
+  /* Optional: add bottom padding/margin to loshu grid to avoid overlap */
+  .loshu-grid {
+    margin-bottom: 3rem;
+  }
+}
+
 
 .visit-count-container p {
   color: black;
