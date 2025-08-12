@@ -218,6 +218,10 @@ function MainApp() {
     // Calculate Chaldean for first and last names separately
   const { letterValues: firstLetters, total: firstTotal } = calculateChaldeanChart(firstName);
   const { letterValues: lastLetters, total: lastTotal } = calculateChaldeanChart(lastName);
+  setFirstNameData(firstLetters);
+  setFirstNameTotal(firstTotal);
+  setLastNameData(lastLetters);
+  setLastNameTotal(lastTotal);
   setContactUsGlow(true);
 
     setTimeout(() => {
@@ -253,11 +257,7 @@ function MainApp() {
       setIsSubmitting(false);
     }
   };
-   setFirstNameData(firstLetters);
-setFirstNameTotal(firstTotal);
-setLastNameData(lastLetters);
-setLastNameTotal(lastTotal);
-
+   
   // Render each Loshu grid cell with count and highlight for Driver/Conductor/Kuan numbers
   const renderLoshuCell = (num: number) => {
     if (!loshuGrid) return '-';
