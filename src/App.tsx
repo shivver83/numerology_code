@@ -226,64 +226,68 @@ function MainApp() {
     }
   };
 
-  // Render each Loshu grid cell with count and highlight for Kuan number,
-  // plus show Kuan number digit as a badge next to the count digits
+  // Render each Loshu grid cell with count and highlight for Driver/Conductor/Kuan numbers
   const renderLoshuCell = (num: number) => {
     if (!loshuGrid) return '-';
     const count = loshuGrid[num] || 0;
-    const isKuan = kuanNumber === num;
+
     const isDriver = driverNumber === num;
     const isConductor = conductorNumber === num;
-    
+    const isKuan = kuanNumber === num;
+
+    // pastel colors
+    const driverColor = '#fff9c4';   // pastel yellow
+    const conductorColor = '#bbdefb';// pastel blue
+    const kuanColor = '#c8e6c9';     // pastel green
+
+    let background = 'transparent';
+    if (isDriver && isConductor && isKuan) {
+      background = `linear-gradient(135deg, ${driverColor}, ${conductorColor}, ${kuanColor})`;
+    } else if ((isDriver && isConductor) || (isDriver && isKuan) || (isConductor && isKuan)) {
+      // two-color gradients (choose the two that matched)
+      if (isDriver && isConductor) background = `linear-gradient(135deg, ${driverColor}, ${conductorColor})`;
+      else if (isDriver && isKuan) background = `linear-gradient(135deg, ${driverColor}, ${kuanColor})`;
+      else if (isConductor && isKuan) background = `linear-gradient(135deg, ${conductorColor}, ${kuanColor})`;
+    } else if (isDriver) {
+      background = driverColor;
+    } else if (isConductor) {
+      background = conductorColor;
+    } else if (isKuan) {
+      background = kuanColor;
+    } else {
+      background = 'white';
+    }
+
     return (
-      <div style={{ position: 'relative', padding: '5px', minHeight: '32px', fontWeight: '600', fontSize: '1.2rem', color: isKuan ? '#ff8c00' : '#000' }}>
+      <div
+        style={{
+          position: 'relative',
+          padding: '8px',
+          minHeight: '48px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: 600,
+          fontSize: '1.15rem',
+          color: '#000',
+          borderRadius: '8px',
+          border: '1px solid rgba(0,0,0,0.08)',
+          background,
+          boxShadow: (isDriver || isConductor || isKuan) ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
+          transition: 'transform 120ms ease, box-shadow 120ms ease'
+        }}
+        aria-label={`loshu-cell-${num}`}
+        title={count <= 0 ? 'Missing' : `${count} occurrence${count > 1 ? 's' : ''}`}
+      >
         {count <= 0 ? (
           <span style={{ color: '#999' }}>-</span>
         ) : (
           <>
             {Array.from({ length: count }, (_, i) => (
-              <span key={i} style={{ margin: '0 3px' }}>{num}</span>
+              <span key={i} style={{ margin: '0 4px' }}>{num}</span>
             ))}
           </>
         )}
-        {isKuan && (
-          <span
-            style={{
-              position: 'absolute',
-              top: '2px',
-              right: '2px',
-              backgroundColor: '#ff8c00',
-              color: 'white',
-              borderRadius: '50%',
-              width: '22px',
-              height: '22px',
-              fontSize: '0.9rem',
-              fontWeight: 'bold',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 5px #ff8c00',
-              userSelect: 'none',
-              cursor: 'default',
-              lineHeight: 1,
-            }}
-            title="Kuan Number"
-          >
-            {kuanNumber}
-          </span>
-        )}
-        {/* Driver / Conductor icons */}
-      <div style={{
-        position: 'absolute',
-        bottom: '2px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        fontSize: '0.75rem',
-        whiteSpace: 'nowrap'
-      }}>
-        {isDriver && '🏎'}
-        {isConductor && '🎼'}
-        </div>
       </div>
     );
   };
@@ -475,7 +479,13 @@ function MainApp() {
           {loshuGrid && (
             <div className="result-card">
               <h3>🧮 Loshu Grid</h3>
-              <div className="loshu-grid">
+              <div className="loshu-grid" style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '10px',
+                maxWidth: '420px',
+                margin: '0 auto'
+              }}>
                 <div>{renderLoshuCell(4)}</div>
                 <div>{renderLoshuCell(9)}</div>
                 <div>{renderLoshuCell(2)}</div>
