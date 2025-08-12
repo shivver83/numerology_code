@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ contactUsGlow, onVisitCountClick }) => 
           <Link to="/contact">Contact Us</Link>
         </li>
         <li
-          style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }}
+          style={{ color: '#ffffff', cursor: 'pointer' }}
           onClick={onVisitCountClick}
         >
           Visit Count
