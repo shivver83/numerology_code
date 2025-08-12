@@ -510,14 +510,14 @@ function MainApp() {
           </div>
 // Inside MainApp function, near the top (after your useState calls)
 
-
-
+  
+       {/* Added wrapper for analysis */}
     <div className="numerology-analysis">
-        {getAnalysis(driverNumber, conductorNumber).map((line, idx) => (
-          <p key={idx}>{line}</p>
-        ))}
-      </div>
-    </div>  
+      {getAnalysis(driverNumber, conductorNumber).map((line, idx) => (
+        <p key={idx}>{line}</p>
+      ))}
+    </div>
+
           <div className="result-card">
   <h3>🔮 Chaldean Numerology Chart - First Name</h3>
   {firstNameData.length === 0 ? (
@@ -565,8 +565,6 @@ function MainApp() {
     </table>
   )}
 </div>
-
-
           {loshuGrid && (
             <div className="result-card">
               <h3>🧮 Loshu Grid</h3>
