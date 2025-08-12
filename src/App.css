@@ -33,6 +33,18 @@ body {
   z-index: 1;
   color: white;
 }
+
+.navbar-gradient-bg {
+  background: linear-gradient(270deg, #ff4b6e, #a34ee0, #ff4b6e);
+  background-size: 600% 600%;
+  animation: mysticGradient 8s ease infinite;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 0 20px rgba(163, 78, 224, 0.6);
+  transition: box-shadow 0.3s ease;
+  /* padding if needed */
+  padding: 0.5rem 1rem;
+}
+
 .navbar {
   position: fixed;
   top: 0;
