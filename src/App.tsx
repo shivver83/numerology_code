@@ -107,7 +107,7 @@ function MainApp() {
   useEffect(() => {
     setContactUsGlow(false);
   }, [location]);
-
+  
   const handleVisitCountClick = async () => {
     setVisitError(null);
     setLoadingVisit(true);
@@ -482,8 +482,42 @@ function MainApp() {
               </p>
             )}
           </div>
+// Inside MainApp function, near the top (after your useState calls)
 
-      
+const getAnalysis = (driverNum: number | null, conductorNum: number | null): string[] => {
+  if (driverNum === null || conductorNum === null) return [];
+
+  const analysis: string[] = [];
+
+  if (driverNum === conductorNum) {
+    analysis.push("Your driver and conductor numbers are the same, showing strong internal alignment.");
+  } else {
+    analysis.push("Your driver and conductor numbers differ, indicating dynamic energies at play.");
+  }
+
+  if (driverNum % 2 === 0) {
+    analysis.push("An even driver number suggests balance and harmony in your approach.");
+  } else {
+    analysis.push("An odd driver number shows a passionate and assertive nature.");
+  }
+
+  if (conductorNum > 5) {
+    analysis.push("High conductor number reflects strong influence over your surroundings.");
+  } else {
+    analysis.push("A lower conductor number indicates thoughtful introspection.");
+  }
+
+  analysis.push("Together, these numbers paint a unique picture of your personality and life path.");
+
+  return analysis;
+};
+
+    <div className="numerology-analysis">
+        {getAnalysis(driverNumber, conductorNumber).map((line, idx) => (
+          <p key={idx}>{line}</p>
+        ))}
+      </div>
+    </div>  
           <div className="result-card">
   <h3>🔮 Chaldean Numerology Chart - First Name</h3>
   {firstNameData.length === 0 ? (
