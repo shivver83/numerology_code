@@ -539,9 +539,9 @@ function MainApp() {
                 lineHeight: 1.3
               }}
             >
-              To get your detailed Life path report kindly{' '}
+              To get your thorough numerological analysis {' '}
               <Link to="/contact" style={{ textDecoration: 'underline', color: '#ff4500', fontWeight: '900' }}>
-                Contact Us
+                Get an appointment now!
               </Link>
             </div>
           )}
