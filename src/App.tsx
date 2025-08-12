@@ -201,7 +201,7 @@ function MainApp() {
     const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
     const driver = calculateDriverNumber(formData.dateOfBirth);
     const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender);
-    const { letterValues, total } = calculateChaldeanChart(formData.name);
+    
     const grid = generateLoshuGrid(formData.dateOfBirth, driver, lifePathNumber, kuan);
 
 
@@ -223,7 +223,6 @@ function MainApp() {
   setLastNameData(lastLetters);
   setLastNameTotal(lastTotal);
   setContactUsGlow(true);
-
     setTimeout(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
