@@ -35,15 +35,25 @@ body {
 }
 
 .navbar-gradient-bg {
-  background: linear-gradient(270deg, #ff4b6e, #a34ee0, #ff4b6e);
+  background: linear-gradient(
+    270deg,
+    #f6d1e7,   /* light pastel pink */
+    #cbb3e8,   /* soft lavender purple */
+    #f6d1e7
+  );
   background-size: 600% 600%;
   animation: mysticGradient 8s ease infinite;
   border-radius: 0 0 20px 20px;
-  box-shadow: 0 0 20px rgba(163, 78, 224, 0.6);
+  box-shadow: 0 0 15px rgba(203, 179, 232, 0.5); /* lighter purple glow */
   transition: box-shadow 0.3s ease;
-  /* padding if needed */
   padding: 0.5rem 1rem;
 }
+@keyframes mysticGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
 .navbar-gradient-bg .navbar-menu li a,
 .navbar-gradient-bg .navbar-menu li {
