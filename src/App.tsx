@@ -80,6 +80,12 @@ function MainApp() {
   const [conductorNumber, setConductorNumber] = useState<number | null>(null);
   const [kuanNumber, setKuanNumber] = useState<number | null>(null);
   const [chaldeanData, setChaldeanData] = useState<{ letter: string; value: number }[]>([]);
+  const [firstNameData, setFirstNameData] = useState<{ letter: string; value: number }[]>([]);
+  const [firstNameTotal, setFirstNameTotal] = useState<number | null>(null);
+
+  const [lastNameData, setLastNameData] = useState<{ letter: string; value: number }[]>([]);
+  const [lastNameTotal, setLastNameTotal] = useState<number | null>(null);
+
   const [nameTotal, setNameTotal] = useState<number | null>(null);
   const [loshuGrid, setLoshuGrid] = useState<Record<number, number> | null>(null);
 
@@ -205,6 +211,17 @@ function MainApp() {
     setChaldeanData(letterValues);
     setNameTotal(total);
     setLoshuGrid(grid);
+    const names = formData.name.trim().split(/\s+/);
+    const firstName = names[0] || '';
+    const lastName = names.length > 1 ? names.slice(1).join(' ') : '';
+
+    // Calculate Chaldean for first and last names separately
+  const { letterValues: firstLetters, total: firstTotal } = calculateChaldeanChart(firstName);
+  const { letterValues: lastLetters, total: lastTotal } = calculateChaldeanChart(lastName);
+
+  const grid = generateLoshuGrid(formData.dateOfBirth, driver, lifePathNumber, kuan);
+
+    
 
     setContactUsGlow(true);
 
@@ -468,29 +485,78 @@ function MainApp() {
             )}
           </div>
 
+      //   <div className="result-card">
+       //     <h3>🔮 Chaldean Numerology Chart</h3>
+       //     <table className="styled-table">
+        //      <thead>
+        //        <tr>
+        //          <th>Letter</th>
+        //          <th>Value</th>
+        //        </tr>
+        //      </thead>
+       //       <tbody>
+        //        {chaldeanData.map((lv, i) => (
+         //         <tr key={i}>
+          //          <td>{lv.letter}</td>
+           //         <td>{lv.value}</td>
+         //         </tr>
+          //      ))}
+    //            <tr className="total-row">
+   //               <td><strong>Total</strong></td>
+  //                <td><strong>{nameTotal}</strong></td>
+ //               </tr>
+ //             </tbody>
+ //           </table>
+ //         </div> 
+
           <div className="result-card">
-            <h3>🔮 Chaldean Numerology Chart</h3>
-            <table className="styled-table">
-              <thead>
-                <tr>
-                  <th>Letter</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {chaldeanData.map((lv, i) => (
-                  <tr key={i}>
-                    <td>{lv.letter}</td>
-                    <td>{lv.value}</td>
-                  </tr>
-                ))}
-                <tr className="total-row">
-                  <td><strong>Total</strong></td>
-                  <td><strong>{nameTotal}</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+  <h3>🔮 Chaldean Numerology Chart - First Name</h3>
+  {firstNameData.length === 0 ? (
+    <p>No first name entered.</p>
+  ) : (
+    <table className="styled-table">
+      <thead>
+        <tr><th>Letter</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        {firstNameData.map((lv, i) => (
+          <tr key={i}>
+            <td>{lv.letter}</td>
+            <td>{lv.value}</td>
+          </tr>
+        ))}
+        <tr className="total-row">
+          <td><strong>Total</strong></td>
+          <td><strong>{firstNameTotal}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  )}
+
+  <h3>🔮 Chaldean Numerology Chart - Last Name</h3>
+  {lastNameData.length === 0 ? (
+    <p>No last name entered.</p>
+  ) : (
+    <table className="styled-table">
+      <thead>
+        <tr><th>Letter</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        {lastNameData.map((lv, i) => (
+          <tr key={i}>
+            <td>{lv.letter}</td>
+            <td>{lv.value}</td>
+          </tr>
+        ))}
+        <tr className="total-row">
+          <td><strong>Total</strong></td>
+          <td><strong>{lastNameTotal}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  )}
+</div>
+
 
           {loshuGrid && (
             <div className="result-card">
