@@ -60,12 +60,11 @@ const instagramIcon = (
   </svg>
 );
 
+// Remove unused imports React and Link completely if you are on React 17+ with new JSX transform.
 function ContactPage() {
   return (
     <>
-      {/* Insert the header component here */}
       <Header />
-
       <div className="contact-container">
         <video autoPlay muted loop playsInline className="video-bg">
           <source src="/numerology.mp4" type="video/mp4" />
@@ -73,7 +72,6 @@ function ContactPage() {
 
         <div className="contact-content">
           <h2>Contact Us</h2>
-
           <table className="contact-table">
             <tbody>
               <tr>
