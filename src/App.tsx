@@ -271,7 +271,7 @@ function MainApp() {
       <nav className="navbar navbar-gradient-bg">
         <div className="navbar-logo">
           <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
-          <span className="brand-name" style={{ fontSize: '.5rem' }}>Happiness Ccreattions</span>
+          <span className="brand-name" style={{ fontSize: '.9rem' }}>Happiness Ccreattions</span>
         </div>
         <ul className="navbar-menu">
           <li><Link to="/">Home</Link></li>
