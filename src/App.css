@@ -485,7 +485,8 @@ body {
   .navbar a {
     margin: 0 0.4rem;
   }
-  .brand-name {
+  .brand-name,
+  .navbar-logo {
     display: none !important;
   }
 }
