@@ -268,7 +268,7 @@ function MainApp() {
         <source src="/numerology.mp4" type="video/mp4" />
       </video>
 
-      <nav className="navbar">
+      <nav className="navbar navbar-gradient-bg">
         <div className="navbar-logo">
           <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
           <span className="brand-name">Happiness Ccreattions</span>
