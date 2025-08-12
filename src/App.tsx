@@ -79,14 +79,14 @@ function MainApp() {
   const [driverNumber, setDriverNumber] = useState<number | null>(null);
   const [conductorNumber, setConductorNumber] = useState<number | null>(null);
   const [kuanNumber, setKuanNumber] = useState<number | null>(null);
-  const [chaldeanData, setChaldeanData] = useState<{ letter: string; value: number }[]>([]);
+ 
   const [firstNameData, setFirstNameData] = useState<{ letter: string; value: number }[]>([]);
   const [firstNameTotal, setFirstNameTotal] = useState<number | null>(null);
 
   const [lastNameData, setLastNameData] = useState<{ letter: string; value: number }[]>([]);
   const [lastNameTotal, setLastNameTotal] = useState<number | null>(null);
 
-  const [nameTotal, setNameTotal] = useState<number | null>(null);
+  
   const [loshuGrid, setLoshuGrid] = useState<Record<number, number> | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -208,8 +208,8 @@ function MainApp() {
     setConductorNumber(lifePathNumber);
     setDriverNumber(driver);
     setKuanNumber(kuan);
-    setChaldeanData(letterValues);
-    setNameTotal(total);
+    
+    
     setLoshuGrid(grid);
     const names = formData.name.trim().split(/\s+/);
     const firstName = names[0] || '';
@@ -253,6 +253,10 @@ function MainApp() {
       setIsSubmitting(false);
     }
   };
+   setFirstNameData(firstLetters);
+setFirstNameTotal(firstTotal);
+setLastNameData(lastLetters);
+setLastNameTotal(lastTotal);
 
   // Render each Loshu grid cell with count and highlight for Driver/Conductor/Kuan numbers
   const renderLoshuCell = (num: number) => {
