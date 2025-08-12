@@ -1,6 +1,6 @@
 .contact-container {
   position: relative;
-  width: 100vw;        /* use viewport width */
+  width: 100%;        /* use viewport width */
   height: 100vh;       /* full viewport height */
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,7 +13,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;       /* full viewport width */
+  width: 100%;       /* full viewport width */
   height: 100vh;      /* full viewport height */
   object-fit: cover;  /* covers entire area, cropping if needed */
   z-index: 0;
@@ -93,4 +93,13 @@
   font-weight: 600;
   cursor: pointer;
   user-select: none;
+}
+
+@media (max-width: 480px) {
+  .contact-content {
+    margin: 1.5rem 1rem; /* reduce side margin on small screens */
+    max-width: 100%;     /* allow full width */
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+  }
 }
