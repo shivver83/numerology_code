@@ -14,7 +14,18 @@ const Header: React.FC<HeaderProps> = ({ contactUsGlow, onVisitCountClick }) => 
     <nav className="navbar navbar-gradient-bg">
       <div className="navbar-logo">
         <img src="/Logo.png" alt="Numerology Logo" className="logo-img" />
-        <span className="brand-name">Happiness Ccreattions</span>
+         <span
+  className="brand-name"
+  style={{
+    fontSize: '0.9rem',
+    fontStyle: 'italic',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    fontWeight: '600',   // semi-bold for style and clarity
+    letterSpacing: '0.02em', // subtle spacing for better readability
+  }}
+>
+  Happiness Ccreattions
+</span>
       </div>
       <ul className="navbar-menu">
         <li className={location.pathname === '/' ? 'active' : undefined}>
