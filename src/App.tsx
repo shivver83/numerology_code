@@ -127,28 +127,40 @@ function MainApp() {
   };
 
   const calculateLifePathNumber = (dob: string): number => {
-    const digits = dob.replace(/\D/g, '').split('').map(Number);
-    let sum = digits.reduce((a, b) => a + b, 0);
-    while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
-      sum = sum.toString().split('').reduce((a, b) => a + Number(b), 0);
-    }
-    return sum;
-  };
+  const digits = dob.replace(/\D/g, '').split('').map(Number);
+  let sum = digits.reduce((a, b) => a + b, 0);
+
+  // Keep reducing until single digit
+  while (sum > 9) {
+    sum = sum
+      .toString()
+      .split('')
+      .reduce((a, b) => a + Number(b), 0);
+  }
+
+  return sum;
+};
+
 
   const calculateDriverNumber = (dob: string): number => {
-    const digits = dob.replace(/\D/g, '');
-    if (digits.length >= 8) {
-      const dayStr = digits.slice(-2);
-      let day = parseInt(dayStr, 10);
-      if (isNaN(day)) day = 0;
-      if ([11, 22, 33].includes(day)) return day;
-      while (day > 9) {
-        day = day.toString().split('').reduce((a, b) => a + Number(b), 0);
-      }
-      return day;
+  const digits = dob.replace(/\D/g, '');
+  if (digits.length >= 8) {
+    const dayStr = digits.slice(-2); // last 2 digits = day
+    let day = parseInt(dayStr, 10);
+    if (isNaN(day)) day = 0;
+
+    // Keep reducing until single digit
+    while (day > 9) {
+      day = day
+        .toString()
+        .split('')
+        .reduce((a, b) => a + Number(b), 0);
     }
-    return 0;
-  };
+    return day;
+  }
+  return 0;
+};
+
 
   const calculateChaldeanChart = (name: string) => {
     const cleanName = name.toUpperCase().replace(/[^A-Z]/g, '');
