@@ -76,7 +76,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 70%;
+  width: 100%;
   background: #222;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -440,69 +440,32 @@ body {
   color: #ff6e6e;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .navbar {
-    width: 100%;           /* full width */
-    padding: 0.5rem 1rem;  /* reduce padding */
-    gap: 1rem;             /* reduce gap */
-    justify-content: space-between; /* spread logo and menu */
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .navbar-left {
-    flex: 0 0 auto;        /* don't grow/shrink */
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    margin-bottom: 0.5rem;
   }
 
   .navbar-menu {
-    display: flex;
-    gap: 1rem;             /* smaller gap */
-    margin: 0;
-    padding: 0;
-    overflow-x: auto;      /* allow horizontal scroll if needed */
-    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-    white-space: nowrap;   /* no wrapping */
-    flex: 1 1 auto;        /* allow menu to grow and shrink */
-  }
-
-  .navbar-menu::-webkit-scrollbar {
-    display: none;         /* hide scrollbar on WebKit browsers */
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .navbar-menu li {
-    flex: 0 0 auto;        /* don't shrink or wrap items */
-    text-align: center;
+    min-width: auto;
+    width: 100%;
   }
 
   .navbar-menu li a {
-    font-size: 0.9rem;     /* smaller font */
-    padding: 0.3rem 0.5rem;
-    display: inline-block;
-    white-space: nowrap;   /* keep link text on one line */
+    font-size: 1rem;
+    padding: 0.5rem 0;
   }
 }
-
-@media (max-width: 480px) {
-  .navbar {
-    padding: 0.5rem 0.75rem;
-    gap: 0.8rem;
-  }
-
-  .navbar-left {
-    gap: 8px;
-  }
-
-  .navbar-menu {
-    gap: 0.8rem;
-  }
-
-  .navbar-menu li a {
-    font-size: 0.85rem;
-    padding: 0.25rem 0.4rem;
-  }
-}
-
 
 @media (max-width: 480px) {
   .navbar {
