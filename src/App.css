@@ -442,14 +442,64 @@ body {
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
+    width: 100%;          /* Full width on tablets and below */
+    padding: 0.5rem 1rem; /* slightly smaller padding */
+    gap: 1.5rem;          /* reduce gap between logo and menu */
+    flex-wrap: wrap;      /* allow wrapping */
   }
 
-  .navbar a {
-    margin: 0.5rem 0;
+  .navbar-left {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar-menu {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;       /* allow items to wrap */
+    gap: 0.75rem;
+  }
+
+  .navbar-menu li {
+    flex: 1 1 auto;
+    min-width: 100px;      /* prevent items from shrinking too small */
+    text-align: center;
+  }
+
+  .navbar-menu li a {
+    font-size: 0.9rem;     /* slightly smaller font */
+    padding: 0.25rem 0;
   }
 }
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navbar-left {
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .navbar-menu li {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .navbar-menu li a {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+}
+
 
 /* === Chat input bar styles === */
 .chat-container {
