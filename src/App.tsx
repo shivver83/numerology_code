@@ -281,7 +281,7 @@ function MainApp() {
     letterSpacing: '0.02em', // subtle spacing for better readability
   }}
 >
-  Happiness Ccreattions
+  Happiness Ccreattions - HI
 </span>
         </div>
         <ul className="navbar-menu">
