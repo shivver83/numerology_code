@@ -418,6 +418,18 @@ body {
 }
 
 /* Message styles */
+.submit-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #e0ffe0;
+  border: 1px solid #00aa00;
+  color: #006600;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 8px;
+}
+
+
 .submit-message.success {
   margin-top: 1rem;
   color: #00ff9f;
