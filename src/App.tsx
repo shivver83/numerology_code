@@ -229,10 +229,11 @@ function MainApp() {
   // Render each Loshu grid cell with count and highlight for Kuan number,
   // plus show Kuan number digit as a badge next to the count digits
   const renderLoshuCell = (number: number) => {
-  const cellNumbers = loshuGrid[number] || [];
+  if (!loshuGrid) return null; // prevent null access
+
+  const count = loshuGrid[number] || 0;
   let extraLabel = "";
 
-  // Assign labels to correct positions
   if (number === conductorNumber) {
     extraLabel = `Conductor: ${conductorNumber}`;
   }
@@ -257,11 +258,9 @@ function MainApp() {
       }}
     >
       <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{number}</div>
-      {cellNumbers.length > 0 ? (
-        <div style={{ fontSize: "0.9rem" }}>{cellNumbers.join(", ")}</div>
-      ) : (
-        <div style={{ fontSize: "0.9rem" }}>-</div>
-      )}
+      <div style={{ fontSize: "0.9rem" }}>
+        {count > 0 ? `${number}`.repeat(count) : "-"}
+      </div>
       {extraLabel && (
         <div
           style={{
@@ -277,6 +276,7 @@ function MainApp() {
     </div>
   );
 };
+
 
 // Rendering grid in correct Loshu order
 const loshuOrder = [
