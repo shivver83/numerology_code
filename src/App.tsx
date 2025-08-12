@@ -218,12 +218,7 @@ function MainApp() {
     // Calculate Chaldean for first and last names separately
   const { letterValues: firstLetters, total: firstTotal } = calculateChaldeanChart(firstName);
   const { letterValues: lastLetters, total: lastTotal } = calculateChaldeanChart(lastName);
-
-  const grid = generateLoshuGrid(formData.dateOfBirth, driver, lifePathNumber, kuan);
-
-    
-
-    setContactUsGlow(true);
+  setContactUsGlow(true);
 
     setTimeout(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -485,30 +480,7 @@ function MainApp() {
             )}
           </div>
 
-      //   <div className="result-card">
-       //     <h3>🔮 Chaldean Numerology Chart</h3>
-       //     <table className="styled-table">
-        //      <thead>
-        //        <tr>
-        //          <th>Letter</th>
-        //          <th>Value</th>
-        //        </tr>
-        //      </thead>
-       //       <tbody>
-        //        {chaldeanData.map((lv, i) => (
-         //         <tr key={i}>
-          //          <td>{lv.letter}</td>
-           //         <td>{lv.value}</td>
-         //         </tr>
-          //      ))}
-    //            <tr className="total-row">
-   //               <td><strong>Total</strong></td>
-  //                <td><strong>{nameTotal}</strong></td>
- //               </tr>
- //             </tbody>
- //           </table>
- //         </div> 
-
+      
           <div className="result-card">
   <h3>🔮 Chaldean Numerology Chart - First Name</h3>
   {firstNameData.length === 0 ? (
