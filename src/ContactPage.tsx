@@ -1,5 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from './Header';  // Import your existing header component
 import "./ContactPage.css";
 
