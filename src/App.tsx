@@ -287,8 +287,16 @@ function MainApp() {
             </Link>
           </li>
           <li
-            style={{ fontWeight: 'bold', color: '#ffd700', cursor: 'pointer' }}
+            role="button"
+            tabIndex={0}
+            style={{ fontWeight: 'bold', color: '#ffffff', cursor: 'pointer', padding: '0.5rem 1rem', userSelect: 'none', outline: 'none', }}
             onClick={handleVisitCountClick}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleVisitCountClick();
+    }
+  }}
           >
             Visit Count
           </li>
