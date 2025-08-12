@@ -23,13 +23,27 @@ const reduceToSingleDigit = (num: number) => {
   return num;
 };
 
-const generateLoshuGrid = (dob: string) => {
+const generateLoshuGrid = (
+  dob: string, 
+  driverNum?: number | null, 
+  conductorNum?: number | null, 
+  kuanNum?: number | null
+) => {
   if (!dob) return null;
   const digits = dob.replace(/\D/g, '').split('').map(Number).filter(n => n >= 1 && n <= 9);
   const counts: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
   digits.forEach(n => { counts[n] += 1; });
+
+  // Ensure driver, conductor, kuan are shown at least once if defined and valid
+  [driverNum, conductorNum, kuanNum].forEach(num => {
+    if (num && num >= 1 && num <= 9 && counts[num] === 0) {
+      counts[num] = 1;
+    }
+  });
+
   return counts;
 };
+
 
 // Calculate Kuan Number based on DOB and gender
 const calculateKuanNumber = (dob: string, gender: string): number | null => {
@@ -182,7 +196,8 @@ function MainApp() {
     const driver = calculateDriverNumber(formData.dateOfBirth);
     const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender);
     const { letterValues, total } = calculateChaldeanChart(formData.name);
-    const grid = generateLoshuGrid(formData.dateOfBirth);
+    const grid = generateLoshuGrid(formData.dateOfBirth, driver, lifePathNumber, kuan);
+
 
     setConductorNumber(lifePathNumber);
     setDriverNumber(driver);
