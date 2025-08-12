@@ -485,6 +485,9 @@ body {
   .navbar a {
     margin: 0 0.4rem;
   }
+  .brand-name {
+    display: none !important;
+  }
 }
 
 
