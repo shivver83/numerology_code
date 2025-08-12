@@ -228,21 +228,28 @@ function MainApp() {
 
   // Render each Loshu grid cell with count and highlight for Kuan number,
   // plus show Kuan number digit as a badge next to the count digits
-  const renderLoshuCell = (number: number) => {
+ // Lo Shu positions in correct order for grid display
+const loshuOrder = [
+  4, 9, 2,
+  3, 5, 7,
+  8, 1, 6
+];
+
+const renderLoshuCell = (number: number) => {
   const cellNumbers = loshuGrid[number] || [];
   let extraLabel = "";
 
-  // Place labels based on exact Loshu grid position
-  if (number === 2) { 
-    extraLabel = `Conductor: ${conductorNumber}`;
-  } else if (number === 5) {
+  if (number === 5) {
     extraLabel = `Driver: ${driverNumber}`;
-  } else if (number === 8 && kuanNumber !== null) {
-    extraLabel = `Kuan: ${kuanNumber}`;
+  } else if (number === 2) {
+    extraLabel = `Conductor: ${conductorNumber}`;
+  } else if (number === 8) {
+    extraLabel = `Kua: ${kuaNumber}`;
   }
 
   return (
     <div
+      key={number}
       className="loshu-cell"
       style={{
         border: "1px solid black",
@@ -251,8 +258,8 @@ function MainApp() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor:
-          number === 8 && kuanNumber === number ? "orange" : "white",
+        minHeight: "80px",
+        backgroundColor: "white"
       }}
     >
       <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{number}</div>
@@ -262,20 +269,22 @@ function MainApp() {
         <div style={{ fontSize: "0.9rem" }}>-</div>
       )}
       {extraLabel && (
-        <div
-          style={{
-            marginTop: "4px",
-            fontSize: "0.8rem",
-            color: "#333",
-            fontWeight: "500",
-          }}
-        >
+        <div style={{ marginTop: "4px", fontSize: "0.8rem", fontWeight: "500" }}>
           {extraLabel}
         </div>
       )}
     </div>
   );
 };
+
+// Rendering the Loshu grid in correct sequence
+<div className="loshu-grid" style={{
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "5px"
+}}>
+  {loshuOrder.map(num => renderLoshuCell(num))}
+</div>
 
 
 
