@@ -1,6 +1,6 @@
 .contact-container {
   position: relative;
-  width: 100%;        /* use viewport width */
+  width: 100vw;        /* use viewport width */
   height: 100vh;       /* full viewport height */
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,7 +13,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;       /* full viewport width */
+  width: 100vw;       /* full viewport width */
   height: 100vh;      /* full viewport height */
   object-fit: cover;  /* covers entire area, cropping if needed */
   z-index: 0;
