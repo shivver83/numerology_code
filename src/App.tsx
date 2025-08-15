@@ -58,6 +58,7 @@ digits.forEach(n => {
   counts[n] += 1;
 });
 return counts;
+}
 
 // Calculate Kuan Number based on DOB and gender
 const calculateKuanNumber = (dob: string, gender: string): number | null => {
