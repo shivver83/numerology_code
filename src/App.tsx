@@ -49,21 +49,15 @@ const generateLoshuGrid = (
   });
 
   // Step 3: Build Loshu grid where each key is an array of its occurrences
-  const counts: Record<number, number[]> = {
-    1: [], 2: [], 3: [],
-    4: [], 5: [], 6: [],
-    7: [], 8: [], 9: []
-  };
-
-  digits.forEach(n => {
-    counts[n].push(n);
-  });
-
-  return counts;
+  const counts: Record<number, number> = {
+  1: 0, 2: 0, 3: 0,
+  4: 0, 5: 0, 6: 0,
+  7: 0, 8: 0, 9: 0
 };
-
-
-
+digits.forEach(n => {
+  counts[n] += 1;
+});
+return counts;
 
 // Calculate Kuan Number based on DOB and gender
 const calculateKuanNumber = (dob: string, gender: string): number | null => {
