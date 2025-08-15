@@ -17,8 +17,11 @@ const chaldeanMap: Record<string, number> = {
 };
 
 const reduceToSingleDigit = (num: number) => {
-  while (num > 9 && num !== 11 && num !== 22) {
-    num = num.toString().split("").reduce((sum, digit) => sum + parseInt(digit), 0);
+  while (num > 9) {
+    num = num
+      .toString()
+      .split("")
+      .reduce((sum, digit) => sum + parseInt(digit), 0);
   }
   return num;
 };
