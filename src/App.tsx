@@ -34,33 +34,34 @@ const generateLoshuGrid = (
 ) => {
   if (!dob) return null;
 
-  // Step 1: Extract digits from DOB (ignore zeros for Loshu grid)
+  // Step 1: Extract digits from DOB (ignore 0 for Loshu grid)
   const digits = dob
     .replace(/\D/g, '')
     .split('')
     .map(Number)
     .filter(n => n >= 1 && n <= 9);
 
-  // Step 2: Add driver, conductor, and kuan numbers to the digits array if valid
+  // Step 2: Add driver, conductor, and kuan numbers (as many times as they occur)
   [driverNum, conductorNum, kuanNum].forEach(num => {
     if (num && num >= 1 && num <= 9) {
-      digits.push(num); // add directly so it increases the count
+      digits.push(num);
     }
   });
 
-  // Step 3: Count occurrences
-  const counts: Record<number, number> = {
-    1: 0, 2: 0, 3: 0,
-    4: 0, 5: 0, 6: 0,
-    7: 0, 8: 0, 9: 0
+  // Step 3: Build Loshu grid where each key is an array of its occurrences
+  const counts: Record<number, number[]> = {
+    1: [], 2: [], 3: [],
+    4: [], 5: [], 6: [],
+    7: [], 8: [], 9: []
   };
 
   digits.forEach(n => {
-    counts[n] += 1;
+    counts[n].push(n);
   });
 
   return counts;
 };
+
 
 
 
