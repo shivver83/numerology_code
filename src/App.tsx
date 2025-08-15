@@ -524,7 +524,7 @@ function MainApp() {
               color: '#ffffff',
               marginBottom: '0.5rem'
             }}>
-              Driver Number (Birth Number): {driverNumber}
+              Driver Number (Birth Number) : {driverNumber}
             </p>
             <p style={{
               fontSize: '1.3rem',
@@ -532,7 +532,7 @@ function MainApp() {
               color: '#ffffff',
               marginBottom: '0.5rem'
             }}>
-              Conductor Number(Destiny Number): {conductorNumber}
+              Conductor Number (Destiny Number) : {conductorNumber}
             </p>
             {kuanNumber !== null && (
               <p style={{
