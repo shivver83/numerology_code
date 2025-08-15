@@ -51,22 +51,44 @@ const generateLoshuGrid = (
 // Calculate Kuan Number based on DOB and gender
 const calculateKuanNumber = (dob: string, gender: string): number | null => {
   if (!dob || !gender) return null;
+
   const year = new Date(dob).getFullYear();
-  let lastTwo = year % 100;
-  let sum = Math.floor(lastTwo / 10) + (lastTwo % 10);
-  if (sum > 9) sum = Math.floor(sum / 10) + (sum % 10);
+
+  // Step 1: Sum all digits of the birth year
+  let sum = year
+    .toString()
+    .split("")
+    .reduce((acc, digit) => acc + parseInt(digit), 0);
+
+  // Reduce sum to a single digit if needed
+  while (sum > 9) {
+    sum = sum
+      .toString()
+      .split("")
+      .reduce((acc, digit) => acc + parseInt(digit), 0);
+  }
 
   let kuanNum: number;
-  if (gender.toLowerCase() === 'male') {
-    kuanNum = 10 - sum;
-  } else if (gender.toLowerCase() === 'female') {
-    kuanNum = sum + 5;
+
+  if (gender.toLowerCase() === "male" || gender.toLowerCase() === "boy") {
+    kuanNum = 11 - sum;
+  } else if (gender.toLowerCase() === "female" || gender.toLowerCase() === "girl" || gender.toLowerCase() === "lady") {
+    kuanNum = sum + 4;
   } else {
-    kuanNum = 10 - sum; // Default to male calculation if other
+    kuanNum = 11 - sum; // default to male rule if unknown
   }
-  if (kuanNum > 9) kuanNum = Math.floor(kuanNum / 10) + (kuanNum % 10);
+
+  // Reduce kuanNum to single digit if needed
+  while (kuanNum > 9) {
+    kuanNum = kuanNum
+      .toString()
+      .split("")
+      .reduce((acc, digit) => acc + parseInt(digit), 0);
+  }
+
   return kuanNum;
 };
+
 
 function MainApp() {
   const location = useLocation();
