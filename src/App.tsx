@@ -27,25 +27,41 @@ const reduceToSingleDigit = (num: number) => {
 };
 
 const generateLoshuGrid = (
-  dob: string, 
-  driverNum?: number | null, 
-  conductorNum?: number | null, 
+  dob: string,
+  driverNum?: number | null,
+  conductorNum?: number | null,
   kuanNum?: number | null
 ) => {
   if (!dob) return null;
-  const digits = dob.replace(/\D/g, '').split('').map(Number).filter(n => n >= 1 && n <= 9);
-  const counts: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 };
-  digits.forEach(n => { counts[n] += 1; });
 
-  // Ensure driver, conductor, kuan are shown at least once if defined and valid
+  // Step 1: Extract digits from DOB (ignore zeros for Loshu grid)
+  const digits = dob
+    .replace(/\D/g, '')
+    .split('')
+    .map(Number)
+    .filter(n => n >= 1 && n <= 9);
+
+  // Step 2: Add driver, conductor, and kuan numbers to the digits array if valid
   [driverNum, conductorNum, kuanNum].forEach(num => {
-    if (num && num >= 1 && num <= 9 && counts[num] === 0) {
-      counts[num] = 1;
+    if (num && num >= 1 && num <= 9) {
+      digits.push(num); // add directly so it increases the count
     }
+  });
+
+  // Step 3: Count occurrences
+  const counts: Record<number, number> = {
+    1: 0, 2: 0, 3: 0,
+    4: 0, 5: 0, 6: 0,
+    7: 0, 8: 0, 9: 0
+  };
+
+  digits.forEach(n => {
+    counts[n] += 1;
   });
 
   return counts;
 };
+
 
 
 // Calculate Kuan Number based on DOB and gender
