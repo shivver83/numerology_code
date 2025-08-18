@@ -49,7 +49,7 @@ export default function Journey() {
       </div>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-0"></div>
+      <div className="absolute inset-0 bg-white/60 z-0"></div>
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-start text-white px-6 pt-32">
@@ -61,7 +61,7 @@ export default function Journey() {
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-black/80 rounded-xl border border-white/20 shadow-lg"
+              className="bg-white/80 rounded-xl border border-white/20 shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -88,8 +88,8 @@ export default function Journey() {
                     <div
                       className={
                         index === 0
-                          ? "w-full p-4 text-lg font-semibold text-white drop-shadow-lg bg-black rounded-b-xl" // match question style
-                          : "p-4 text-base leading-relaxed text-black font-bold bg-white rounded-b-xl drop-shadow-lg"
+                          ? "w-full p-4 text-lg font-semibold text-white drop-shadow-lg bg-white rounded-b-xl" // match question style
+                          : "p-4 text-base leading-relaxed text-white font-bold bg-white rounded-b-xl drop-shadow-lg"
                       }
                     >
                       {item.a}
