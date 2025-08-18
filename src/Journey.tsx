@@ -39,12 +39,12 @@ export default function Journey() {
           Your Numerology Journey
         </h1>
 
-        {/* Solid container blocking out video */}
+        {/* White dropdown container */}
         <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 space-y-6 z-20">
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="rounded-xl border border-gray-200 shadow-md"
+              className="rounded-xl border border-gray-200 shadow-md overflow-hidden"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -57,7 +57,7 @@ export default function Journey() {
                 <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
               </button>
 
-              {/* Answer */}
+              {/* Answer inside same white dropdown */}
               <AnimatePresence initial={false}>
                 {openIndex === index && (
                   <motion.div
@@ -66,11 +66,10 @@ export default function Journey() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="overflow-hidden px-4 pb-4"
                   >
-                    <div className="p-6 text-base font-normal text-black rounded-xl bg-gray-100 shadow-inner">
+                    <p className="px-4 pb-4 font-bold text-black text-base">
                       {item.a}
-                    </div>
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>
