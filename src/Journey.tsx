@@ -37,12 +37,6 @@ export default function Journey() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Define a color mapping for each answer
-  const answerColors: Record<number, string> = {
-    0: "text-yellow-400", // first answer vibrant yellow
-    1: "text-cyan-400",   // second answer vibrant cyan
-  };
-
   return (
     <>
       <Header />
@@ -92,9 +86,11 @@ export default function Journey() {
                     className="overflow-hidden"
                   >
                     <div
-                      className={`p-4 text-base leading-relaxed font-bold bg-white rounded-b-xl drop-shadow-lg ${
-                        answerColors[index] || "text-black"
-                      }`}
+                      className={
+                        index === 0
+                          ? "w-full p-4 text-lg font-semibold text-white drop-shadow-lg bg-black rounded-b-xl" // match question style
+                          : "p-4 text-base leading-relaxed text-black font-bold bg-white rounded-b-xl drop-shadow-lg"
+                      }
                     >
                       {item.a}
                     </div>
