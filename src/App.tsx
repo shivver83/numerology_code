@@ -175,21 +175,21 @@ function MainApp() {
   setVisitError(null);
   setLoadingVisit(true);
   try {
-    const res = await fetch('/api/count'); // 👈 still just read
+    const res = await fetch("/api/count"); // GET just returns current count
     if (!res.ok) {
       const text = await res.text();
       throw new Error(`Server returned ${res.status}: ${text}`);
     }
     const data = await res.json();
-    if (typeof data.count === 'number') {
+    if (typeof data.count === "number") {
       setVisitCount(data.count);
       setShowVisitModal(true);
     } else {
-      throw new Error('Malformed response from server');
+      throw new Error("Malformed response from server");
     }
   } catch (err: any) {
-    console.error('Error fetching visit count:', err);
-    setVisitError(err?.message || 'Error fetching visit count');
+    console.error("Error fetching visit count:", err);
+    setVisitError(err?.message || "Error fetching visit count");
     setShowVisitModal(true);
   } finally {
     setLoadingVisit(false);
@@ -198,18 +198,19 @@ function MainApp() {
 
 // 👇 New useEffect: increments visit count once on first site load
 useEffect(() => {
-  const incrementVisit = async () => {
+  const incrementVisitCount = async () => {
     try {
-      await fetch('/api/count', {
-        method: 'POST', // 👈 POST increases the count
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const res = await fetch("/api/count", { method: "POST" });
+      if (res.ok) {
+        const data = await res.json();
+        setVisitCount(data.count);
+      }
     } catch (err) {
-      console.error('Error incrementing visit count:', err);
+      console.error("Error incrementing visit count:", err);
     }
   };
 
-  incrementVisit();
+  incrementVisitCount();
 }, []);
 
 // Existing modal close listener
