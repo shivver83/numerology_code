@@ -35,7 +35,8 @@ export default function Journey() {
 
       {/* Content on top of video */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-start text-white px-6 pt-32">
-        <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center drop-shadow-lg text-green-400">
+        {/* Heading in white */}
+        <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center drop-shadow-lg text-white">
           Your Numerology Journey
         </h1>
 
@@ -65,7 +66,7 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    {/* Answer with white font */}
+                    {/* Answer in white font */}
                     <div className="p-4 text-base leading-relaxed text-white">
                       {item.a}
                     </div>
