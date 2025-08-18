@@ -24,7 +24,7 @@ export default function Journey() {
       <Header />
 
       {/* Fullscreen section with video background */}
-      <section className="relative min-h-screen flex flex-col items-center justify-start text-white overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-start justify-start text-white overflow-hidden">
         {/* Background video */}
         <video
           autoPlay
@@ -39,15 +39,15 @@ export default function Journey() {
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-black/60 -z-10"></div>
 
-        {/* Transparent Q&A container on top of video */}
-        <div className="relative z-10 w-full max-w-3xl px-6 pt-24 pb-12 text-center">
+        {/* Transparent Q&A container right below header */}
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 mt-8">
           {/* Heading */}
-          <h1 className="text-xl md:text-2xl font-bold mb-10 drop-shadow-lg tracking-wide">
+          <h1 className="text-xl md:text-2xl font-bold mb-6 drop-shadow-lg tracking-wide text-center">
             Your Numerology Journey
           </h1>
 
           {/* Questions */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {questions.map((item, index) => (
               <motion.div
                 key={index}
