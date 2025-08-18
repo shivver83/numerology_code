@@ -412,7 +412,7 @@ function MainApp() {
         <ul className="navbar-menu">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/aboutus">About Us</Link></li>
-          <li><a href="/journey">Get Your Journey</a></li>
+          <li><Link to="/journey">Get Your Journey</Link></li>
           <li>
             <Link
               to="/contact"
