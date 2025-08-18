@@ -67,7 +67,7 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden px-4 pb-4"
                   >
-                    <div className="p-4 text-base font-bold text-black rounded-xl bg-white">
+                    <div className="p-4 text-base font-bold text-white rounded-xl bg-blue-600">
                       {item.a}
                     </div>
                   </motion.div>
