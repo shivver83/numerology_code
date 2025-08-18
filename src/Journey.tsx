@@ -40,24 +40,24 @@ export default function Journey() {
         </h1>
 
         {/* White dropdown container with extra spacing */}
-        <div className="w-full max-w-4xl space-y-6 z-20"> {/* increased space-y from 4 to 6 */}
+        <div className="w-full max-w-4xl space-y-8 z-20"> {/* Increased space-y for more gap */}
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="rounded-2xl border border-gray-200 shadow-md overflow-hidden bg-white mb-4" // added mb-4 for extra separation
+              className="rounded-2xl border border-gray-200 shadow-md overflow-hidden mb-6" // mb-6 adds more vertical spacing
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Question */}
+              {/* Question with light pink background */}
               <button
                 onClick={() => toggle(index)}
-                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-black"
+                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-black bg-pink-100"
               >
                 {item.q}
                 <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
               </button>
 
-              {/* Answer inside same white dropdown with jet bold black */}
+              {/* Answer inside same dropdown with jet bold black */}
               <AnimatePresence initial={false}>
                 {openIndex === index && (
                   <motion.div
