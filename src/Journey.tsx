@@ -15,28 +15,26 @@ const questions = [
 export default function Journey() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const toggle = (index: number) => setOpenIndex(openIndex === index ? null : index);
 
   return (
     <>
       <Header />
 
-      {/* Video Background Container */}
+      {/* Video Background */}
       <div className="video-background">
         <video autoPlay muted loop playsInline>
           <source src="/numerology.mp4" type="video/mp4" />
         </video>
       </div>
 
-      {/* Overlay to darken video */}
-      <div className="absolute inset-0 bg-black/60 z-0"></div>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/70 z-0"></div>
 
-      {/* Content on top of video */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start text-white px-6 pt-32">
-        {/* Heading in white */}
-        <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center drop-shadow-lg text-white">
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start px-6 pt-32 text-white">
+        {/* Heading */}
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white drop-shadow-lg">
           Your Numerology Journey
         </h1>
 
@@ -44,7 +42,7 @@ export default function Journey() {
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 shadow-lg"
+              className="bg-black/40 backdrop-blur-md rounded-xl border border-white/20 shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -66,8 +64,8 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    {/* Answer in white font */}
-                    <div className="p-4 text-base leading-relaxed text-white">
+                    {/* Answer */}
+                    <div className="p-4 text-base leading-relaxed text-white drop-shadow-lg">
                       {item.a}
                     </div>
                   </motion.div>
