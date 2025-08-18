@@ -23,8 +23,8 @@ export default function Journey() {
     <>
       <Header />
 
-      {/* Fullscreen section with video background */}
-      <section className="relative min-h-screen flex flex-col items-start justify-start text-white overflow-hidden">
+      {/* Fullscreen video background */}
+      <div className="relative min-h-screen flex flex-col text-white overflow-hidden">
         {/* Background video */}
         <video
           autoPlay
@@ -36,28 +36,26 @@ export default function Journey() {
           <source src="/numerology.mp4" type="video/mp4" />
         </video>
 
-        {/* Dark overlay for readability */}
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/60 -z-10"></div>
 
-        {/* Transparent Q&A container right below header */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 mt-8">
-          {/* Heading */}
-          <h1 className="text-xl md:text-2xl font-bold mb-6 drop-shadow-lg tracking-wide text-center">
+        {/* Q&A content on top of video */}
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 mt-24">
+          <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center drop-shadow-lg">
             Your Numerology Journey
           </h1>
 
-          {/* Questions */}
           <div className="space-y-6">
             {questions.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-xl"
+                className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold drop-shadow-lg"
+                  className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold"
                 >
                   {item.q}
                   <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
@@ -70,10 +68,10 @@ export default function Journey() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="p-4 text-base leading-relaxed text-left drop-shadow-md">
+                      <div className="p-4 text-base leading-relaxed">
                         {item.a}
                       </div>
                     </motion.div>
@@ -83,7 +81,7 @@ export default function Journey() {
             ))}
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }
