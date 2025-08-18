@@ -1,90 +1,78 @@
 // src/Journey.tsx
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const faqs = [
+const questions = [
   {
-    question: "What is Numerology?",
-    answer:
-      "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny.",
+    q: "What is Numerology?",
+    a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny.",
   },
   {
-    question: "How will this provide remedies?",
-    answer:
-      "Numerology suggests personalized remedies through numbers, names, and vibrations to balance energies in life.",
+    q: "How will this provide remedies?",
+    a: "Numerology provides remedies by identifying imbalances in your name, date of birth, or life cycles, and suggesting corrections through numbers, mantras, colors, or gemstones.",
   },
   {
-    question: "What is correct 'Role & Goal' for me?",
-    answer:
-      "Numerology helps identify your life path number and guides you towards the most aligned role and goal in life.",
+    q: "What is the correct 'Role & Goal' for me?",
+    a: "Based on your numerology chart, we can align your natural strengths with the right role and life goals that bring you fulfillment and success.",
   },
   {
-    question: "What career is best for my children?",
-    answer:
-      "By analyzing their birth date and name numbers, Numerology can suggest career paths most suitable for their growth.",
+    q: "What career is best for my children?",
+    a: "Numerology can reveal your children’s talents and inclinations, helping you guide them toward a career path aligned with their destiny numbers.",
   },
   {
-    question: "How Numerology can improve my health?",
-    answer:
-      "Certain numbers are linked to energy imbalances. Remedies through name corrections and vibrations may help overall health.",
+    q: "How can Numerology improve my health?",
+    a: "By balancing vibrations in your name and environment, numerology can reduce stress, harmonize energies, and promote better physical and mental well-being.",
   },
   {
-    question: "How Numerology can help improve relationships?",
-    answer:
-      "Numerology identifies compatibility between partners and provides remedies to harmonize personal and professional relationships.",
+    q: "How can Numerology help improve relationships?",
+    a: "It reveals compatibility between partners, helps resolve conflicts by understanding personality traits, and guides timing for harmony in relationships.",
   },
 ];
 
 export default function Journey() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const toggleAccordion = (index: number) => {
+  const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div className="aboutus-container relative w-full h-screen text-white">
-      {/* Background Video */}
+    <div className="aboutus-container relative min-h-screen text-white">
+      {/* Background video */}
       <video autoPlay muted loop className="background-video absolute inset-0 w-full h-full object-cover -z-10">
         <source src="/numerology.mp4" type="video/mp4" />
       </video>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 -z-10" />
-
-      {/* Accordion Section */}
-      <div className="flex items-center justify-center h-full px-4">
-        <div className="w-full max-w-3xl space-y-4">
-          <h1 className="text-3xl font-bold text-center mb-6">Your Numerology Journey</h1>
-
-          {faqs.map((faq, index) => (
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen bg-black/50 p-6">
+        <h1 className="text-4xl font-bold mb-8 drop-shadow-lg">Your Numerology Journey</h1>
+        
+        <div className="w-full max-w-2xl space-y-4">
+          {questions.map((item, index) => (
             <div
               key={index}
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg overflow-hidden"
+              className="rounded-2xl overflow-hidden shadow-lg bg-white/10 backdrop-blur-md border border-white/20"
             >
-              {/* Question */}
               <button
-                onClick={() => toggleAccordion(index)}
-                className="w-full flex justify-between items-center px-6 py-4 text-lg font-medium text-left hover:bg-white/20 transition-all"
+                onClick={() => toggle(index)}
+                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold focus:outline-none hover:bg-white/20 transition"
               >
-                {faq.question}
-                <ChevronDown
-                  className={`w-5 h-5 transform transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                />
+                {item.q}
+                <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
               </button>
-
-              {/* Answer with smooth slide animation */}
-              <div
-                className={`grid transition-all duration-500 ease-in-out ${
-                  openIndex === index ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                }`}
-              >
-                <div className="overflow-hidden">
-                  <p className="px-6 pb-4 text-base leading-relaxed">{faq.answer}</p>
-                </div>
-              </div>
+              <AnimatePresence initial={false}>
+                {openIndex === index && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-4 text-base leading-relaxed">{item.a}</div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
