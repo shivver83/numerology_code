@@ -14,6 +14,7 @@ const questions = [
 
 export default function Journey() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -66,7 +67,7 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden px-4 pb-4"
                   >
-                    <div className="p-4 text-base font-bold text-white rounded-xl bg-black/50 backdrop-blur-sm glow">
+                    <div className="p-4 text-base font-bold text-black rounded-xl bg-white">
                       {item.a}
                     </div>
                   </motion.div>
@@ -77,37 +78,36 @@ export default function Journey() {
         </div>
       </div>
 
-      {/* Glow effect CSS */}
+      {/* Glow effect CSS for heading and questions */}
       <style>
-{`
-  .glow {
-    text-shadow:
-      0 0 5px #aaff00,
-      0 0 10px #ccff33,
-      0 0 20px #aaff00,
-      0 0 30px #ccff33;
-    animation: pulseGlow 2s infinite alternate;
-  }
+        {`
+          .glow {
+            text-shadow:
+              0 0 5px #aaff00,
+              0 0 10px #ccff33,
+              0 0 20px #aaff00,
+              0 0 30px #ccff33;
+            animation: pulseGlow 2s infinite alternate;
+          }
 
-  @keyframes pulseGlow {
-    0% {
-      text-shadow:
-        0 0 3px #aaff00,
-        0 0 6px #ccff33,
-        0 0 10px #aaff00,
-        0 0 15px #ccff33;
-    }
-    100% {
-      text-shadow:
-        0 0 5px #aaff00,
-        0 0 10px #ccff33,
-        0 0 20px #aaff00,
-        0 0 30px #ccff33;
-    }
-  }
-`}
-</style>
-
+          @keyframes pulseGlow {
+            0% {
+              text-shadow:
+                0 0 3px #aaff00,
+                0 0 6px #ccff33,
+                0 0 10px #aaff00,
+                0 0 15px #ccff33;
+            }
+            100% {
+              text-shadow:
+                0 0 5px #aaff00,
+                0 0 10px #ccff33,
+                0 0 20px #aaff00,
+                0 0 30px #ccff33;
+            }
+          }
+        `}
+      </style>
     </>
   );
 }
