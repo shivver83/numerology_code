@@ -61,7 +61,7 @@ export default function Journey() {
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-black/90 rounded-xl border border-white/20 shadow-lg"
+              className="rounded-xl border border-white/20 shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -84,19 +84,13 @@ export default function Journey() {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="overflow-hidden"
+                    className="overflow-hidden px-4 pb-4"
                   >
                     <div
-                      className="p-4 text-base font-bold text-white bg-black rounded-b-xl"
-                      style={{ textShadow: "0 0 5px #aaff00, 0 0 10px #ccff33" }}
+                      className="p-4 text-base font-bold text-white rounded-xl bg-black/50 backdrop-blur-sm"
+                      style={{ textShadow: "0 0 2px #aaff00, 0 0 4px #ccff33" }}
                     >
-                      {index === 0 ? (
-                        <span className="bg-black px-2 py-1 font-bold text-white">
-                          {item.a}
-                        </span>
-                      ) : (
-                        item.a
-                      )}
+                      {item.a}
                     </div>
                   </motion.div>
                 )}
