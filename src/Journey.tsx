@@ -23,17 +23,27 @@ export default function Journey() {
     <>
       <Header />
 
+      {/* Video Background */}
+      <div className="video-background fixed inset-0 z-0">
+        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+          <source src="/numerology.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      {/* Dark overlay to make text readable */}
+      <div className="absolute inset-0 bg-black/40 z-0"></div>
+
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-start px-6 pt-32">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">
           Your Numerology Journey
         </h1>
 
-        <ul className="w-full max-w-4xl">
+        <ul className="w-full max-w-4xl bg-white/90 rounded-2xl p-6 space-y-4">
           {questions.map((item, index) => (
-            <li key={index} className="mb-4">
+            <li key={index}>
               {/* Question */}
-              <div className="flex justify-between items-center cursor-pointer" onClick={() => toggle(index)}>
+              <div className="flex justify-between items-center cursor-pointer font-semibold text-black" onClick={() => toggle(index)}>
                 <span>{item.q}</span>
                 <span>{openIndex === index ? "−" : "+"}</span>
               </div>
