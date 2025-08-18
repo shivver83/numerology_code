@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "./Header";
 
 const questions = [
-  { q: "What is Numerology?", a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny." },
+  { q: "hihiWhat is Numerology?", a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny." },
   { q: "How will this provide remedies?", a: "Numerology provides remedies by identifying imbalances in your name, date of birth, or life cycles, and suggesting corrections through numbers, mantras, colors, or gemstones." },
   { q: "What is the correct 'Role & Goal' for me?", a: "Based on your numerology chart, we can align your natural strengths with the right role and life goals that bring you fulfillment and success." },
   { q: "What career is best for my children?", a: "Numerology can reveal your children’s talents and inclinations, helping you guide them toward a career path aligned with their destiny numbers." },
@@ -30,12 +30,12 @@ export default function Journey() {
         </video>
       </div>
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
+      {/* Stronger overlay for readability */}
+      <div className="absolute inset-0 bg-black/70 z-0"></div>
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-start px-6 pt-32 text-white">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-12 text-center">
           Your Numerology Journey
         </h1>
 
@@ -44,11 +44,11 @@ export default function Journey() {
             <li key={index}>
               {/* Question */}
               <div
-                className="flex justify-between items-center cursor-pointer font-bold text-white text-lg"
+                className="flex justify-between items-center cursor-pointer font-bold text-white text-lg md:text-xl"
                 onClick={() => toggle(index)}
               >
                 <span>{item.q}</span>
-                <span>{openIndex === index ? "−" : "+"}</span>
+                <span className="ml-2">{openIndex === index ? "−" : "+"}</span>
               </div>
 
               {/* Answer */}
@@ -61,7 +61,7 @@ export default function Journey() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <p className="mt-2 font-bold text-white">
+                    <p className="mt-2 font-bold text-white text-lg md:text-lg">
                       {item.a}
                     </p>
                   </motion.div>
