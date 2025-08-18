@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "./Header";
-import './Journey.css'; // optional if you want to add custom styles
 
 const questions = [
   { q: "What is Numerology?", a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny." },
@@ -31,27 +30,32 @@ export default function Journey() {
         </video>
       </div>
 
-      {/* Dark overlay to improve readability */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60 z-0"></div>
 
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-start px-6 pt-32">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-white">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-green-400 glow">
           Your Numerology Journey
         </h1>
 
-        {/* Content container without transparency */}
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-8 space-y-6 z-20">
+        {/* Solid container blocking out video */}
+        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 space-y-6 z-20">
           {questions.map((item, index) => (
-            <div key={index}>
+            <motion.div
+              key={index}
+              className="rounded-xl border border-gray-200 shadow-md"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
               {/* Question */}
-              <div
-                className="flex justify-between items-center cursor-pointer font-bold text-black text-lg"
+              <button
                 onClick={() => toggle(index)}
+                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-black"
               >
-                <span>{item.q}</span>
-                <span>{openIndex === index ? "−" : "+"}</span>
-              </div>
+                {item.q}
+                <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
+              </button>
 
               {/* Answer */}
               <AnimatePresence initial={false}>
@@ -61,18 +65,48 @@ export default function Journey() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="overflow-hidden px-4 pb-4"
                   >
-                    <div className="mt-2 p-4 bg-gray-100 text-black rounded">
+                    <div className="p-6 text-base font-normal text-black rounded-xl bg-gray-100 shadow-inner">
                       {item.a}
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Glow effect CSS for heading */}
+      <style>{`
+        .glow {
+          text-shadow:
+            0 0 5px #aaff00,
+            0 0 10px #ccff33,
+            0 0 20px #aaff00,
+            0 0 30px #ccff33;
+          animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+          0% {
+            text-shadow:
+              0 0 3px #aaff00,
+              0 0 6px #ccff33,
+              0 0 10px #aaff00,
+              0 0 15px #ccff33;
+          }
+          100% {
+            text-shadow:
+              0 0 5px #aaff00,
+              0 0 10px #ccff33,
+              0 0 20px #aaff00,
+              0 0 30px #ccff33;
+          }
+        }
+      `}</style>
     </>
   );
 }
