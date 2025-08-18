@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "./Header";
 
 const questions = [
-  { q: "jhi What is Numerology?", a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny." },
+  { q: "What is Numerology?", a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny." },
   { q: "How will this provide remedies?", a: "Numerology provides remedies by identifying imbalances in your name, date of birth, or life cycles, and suggesting corrections through numbers, mantras, colors, or gemstones." },
   { q: "What is the correct 'Role & Goal' for me?", a: "Based on your numerology chart, we can align your natural strengths with the right role and life goals that bring you fulfillment and success." },
   { q: "What career is best for my children?", a: "Numerology can reveal your children’s talents and inclinations, helping you guide them toward a career path aligned with their destiny numbers." },
@@ -40,11 +40,11 @@ export default function Journey() {
         </h1>
 
         {/* White dropdown container */}
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 space-y-6 z-20">
+        <div className="w-full max-w-4xl space-y-4 z-20">
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="rounded-xl border border-gray-200 shadow-md overflow-hidden"
+              className="rounded-2xl border border-gray-200 shadow-md overflow-hidden bg-white"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -57,17 +57,18 @@ export default function Journey() {
                 <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
               </button>
 
-              {/* Answer inside same white dropdown */}
+              {/* Answer inside same white dropdown with highlight */}
               <AnimatePresence initial={false}>
                 {openIndex === index && (
                   <motion.div
                     key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="px-4 pb-4"
                   >
-                    <p className="px-4 pb-4 font-bold text-black text-base">
+                    <p className="font-bold text-black bg-yellow-100 rounded-md p-3">
                       {item.a}
                     </p>
                   </motion.div>
