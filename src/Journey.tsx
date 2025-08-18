@@ -39,8 +39,8 @@ export default function Journey() {
           Your Numerology Journey
         </h1>
 
-        {/* Solid Container for Q&A */}
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 space-y-6">
+        {/* Solid container blocking out video */}
+        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 space-y-6 z-20">
           {questions.map((item, index) => (
             <motion.div
               key={index}
