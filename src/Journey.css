@@ -1,0 +1,78 @@
+/* Basic Navbar Styling */
+/* Fullscreen Background GIF */
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Push behind everything */
+  background: black; /* fallback color */
+}
+
+.video-background video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fill and crop as needed */
+  filter: brightness(0.5); /* Darken so text is readable */
+}
+
+
+body {
+  padding-top: 80px; /* to prevent content from hiding under navbar */
+}
+
+/* Make content readable */
+.App {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.brand-name {
+  font-size: .5rem; /* smaller than before, adjust as you like */
+  font-weight: Italic;
+  color: white;
+}
+
+
+.navbar-gradient-bg {
+  background: linear-gradient(
+    270deg,
+    #f6d1e7,   /* light pastel pink */
+    #cbb3e8,   /* soft lavender purple */
+    #f6d1e7
+  );
+  background-size: 600% 600%;
+  animation: mysticGradient 8s ease infinite;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 0 15px rgba(203, 179, 232, 0.5); /* lighter purple glow */
+  transition: box-shadow 0.3s ease;
+  padding: 0.5rem 1rem;
+}
+@keyframes mysticGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.navbar-gradient-bg .navbar-menu li a,
+.navbar-gradient-bg .navbar-menu li {
+  color: white;
+  font-weight: 600;
+}
+
+.navbar-gradient-bg .navbar-menu li a:hover {
+  text-decoration: underline;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
