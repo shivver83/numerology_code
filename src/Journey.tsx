@@ -57,22 +57,24 @@ export default function Journey() {
               </button>
 
               {/* Answer */}
-              <AnimatePresence initial={false}>
-                {openIndex === index && (
-                  <motion.div
-                    key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="overflow-hidden px-4 pb-4"
-                  >
-                    <div className="p-6 text-base font-bold text-white rounded-xl bg-blue-600/100 shadow-lg">
-                      {item.a}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+             {/* Answer */}
+<AnimatePresence initial={false}>
+  {openIndex === index && (
+    <motion.div
+      key="content"
+      initial={{ height: 0, opacity: 0 }}
+      animate={{ height: "auto", opacity: 1 }}
+      exit={{ height: 0, opacity: 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="overflow-hidden px-4 pb-4"
+    >
+      <div className="p-6 text-base font-bold text-black rounded-xl bg-white shadow-lg">
+        {item.a}
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
             </motion.div>
           ))}
         </div>
