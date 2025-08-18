@@ -35,7 +35,7 @@ export default function Journey() {
 
       {/* Content on top of video */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-start text-white px-6 pt-32">
-        <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center drop-shadow-lg">
+        <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center drop-shadow-lg text-green-400">
           Your Numerology Journey
         </h1>
 
