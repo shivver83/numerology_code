@@ -23,32 +23,35 @@ export default function Journey() {
     <>
       <Header />
 
-      <div className="relative min-h-screen text-white">
+      {/* Fullscreen section with video background */}
+      <section className="relative min-h-screen flex items-center justify-center text-white overflow-hidden">
         {/* Background video */}
         <video
           autoPlay
           muted
           loop
-          className="absolute inset-0 w-full h-full object-cover -z-10"
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover -z-20"
         >
           <source src="/numerology.mp4" type="video/mp4" />
         </video>
 
-        {/* Overlay with slight dark tint */}
+        {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-black/60 -z-10"></div>
 
-        <div className="relative z-10 flex flex-col items-center p-6">
-          {/* Smaller heading with extra bottom spacing */}
-          <h1 className="text-2xl md:text-3xl font-bold mb-12 drop-shadow-lg tracking-wide text-center">
+        {/* Content */}
+        <div className="relative z-10 max-w-3xl px-6 py-12 text-center">
+          {/* Smaller heading with more breathing space */}
+          <h1 className="text-2xl md:text-3xl font-bold mb-10 drop-shadow-lg tracking-wide">
             Your Numerology Journey
           </h1>
 
           {/* Questions */}
-          <div className="w-full max-w-2xl space-y-8">
+          <div className="space-y-6">
             {questions.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-xl overflow-hidden shadow-xl 
+                className="rounded-xl shadow-lg 
                            bg-gradient-to-r from-purple-900/60 via-indigo-800/50 to-blue-900/60
                            backdrop-blur-md border border-white/20"
                 whileHover={{ scale: 1.02, boxShadow: "0px 0px 25px rgba(200,150,255,0.6)" }}
@@ -56,7 +59,7 @@ export default function Journey() {
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex justify-between items-center p-5 text-left text-lg font-semibold"
+                  className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold"
                 >
                   {item.q}
                   <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
@@ -72,7 +75,7 @@ export default function Journey() {
                       transition={{ duration: 0.5, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="p-5 text-base leading-relaxed">
+                      <div className="p-4 text-base leading-relaxed text-left">
                         {item.a}
                       </div>
                     </motion.div>
@@ -82,7 +85,7 @@ export default function Journey() {
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
