@@ -116,14 +116,14 @@ function MainApp() {
   const [driverNumber, setDriverNumber] = useState<number | null>(null);
   const [conductorNumber, setConductorNumber] = useState<number | null>(null);
   const [kuanNumber, setKuanNumber] = useState<number | null>(null);
- 
+
   const [firstNameData, setFirstNameData] = useState<{ letter: string; value: number }[]>([]);
   const [firstNameTotal, setFirstNameTotal] = useState<number | null>(null);
 
   const [lastNameData, setLastNameData] = useState<{ letter: string; value: number }[]>([]);
   const [lastNameTotal, setLastNameTotal] = useState<number | null>(null);
 
-  
+
   const [loshuGrid, setLoshuGrid] = useState<Record<number, number> | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -172,56 +172,37 @@ function MainApp() {
     return analysis;
   };
   const handleVisitCountClick = async () => {
-  setVisitError(null);
-  setLoadingVisit(true);
-  try {
-    const res = await fetch("/api/count"); // GET just returns current count
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(`Server returned ${res.status}: ${text}`);
-    }
-    const data = await res.json();
-    if (typeof data.count === "number") {
-      setVisitCount(data.count);
-      setShowVisitModal(true);
-    } else {
-      throw new Error("Malformed response from server");
-    }
-  } catch (err: any) {
-    console.error("Error fetching visit count:", err);
-    setVisitError(err?.message || "Error fetching visit count");
-    setShowVisitModal(true);
-  } finally {
-    setLoadingVisit(false);
-  }
-};
-
-// 👇 New useEffect: increments visit count once on first site load
-useEffect(() => {
-  const incrementVisitCount = async () => {
+    setVisitError(null);
+    setLoadingVisit(true);
     try {
-      const res = await fetch("/api/count", { method: "POST" });
-      if (res.ok) {
-        const data = await res.json();
-        setVisitCount(data.count);
+      const res = await fetch('/api/count');
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Server returned ${res.status}: ${text}`);
       }
-    } catch (err) {
-      console.error("Error incrementing visit count:", err);
+      const data = await res.json();
+      if (typeof data.count === 'number') {
+        setVisitCount(data.count);
+        setShowVisitModal(true);
+      } else {
+        throw new Error('Malformed response from server');
+      }
+    } catch (err: any) {
+      console.error('Error fetching visit count:', err);
+      setVisitError(err?.message || 'Error fetching visit count');
+      setShowVisitModal(true);
+    } finally {
+      setLoadingVisit(false);
     }
   };
 
-  incrementVisitCount();
-}, []);
-
-// Existing modal close listener
-useEffect(() => {
-  const onKey = (e: KeyboardEvent) => {
-    if (e.key === 'Escape' && showVisitModal) setShowVisitModal(false);
-  };
-  window.addEventListener('keydown', onKey);
-  return () => window.removeEventListener('keydown', onKey);
-}, [showVisitModal]);
-
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showVisitModal) setShowVisitModal(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [showVisitModal]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -283,15 +264,15 @@ useEffect(() => {
     const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
     const driver = calculateDriverNumber(formData.dateOfBirth);
     const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender);
-    
+
     const grid = generateLoshuGrid(formData.dateOfBirth, driver, lifePathNumber, kuan);
 
 
     setConductorNumber(lifePathNumber);
     setDriverNumber(driver);
     setKuanNumber(kuan);
-    
-    
+
+
     setLoshuGrid(grid);
     const names = formData.name.trim().split(/\s+/);
     const firstName = names[0] || '';
@@ -338,7 +319,7 @@ useEffect(() => {
       setIsSubmitting(false);
     }
   };
-   
+
   // Render each Loshu grid cell with count and highlight for Driver/Conductor/Kuan numbers
   const renderLoshuCell = (num: number) => {
     if (!loshuGrid) return '-';
@@ -566,7 +547,7 @@ useEffect(() => {
           </div>
 
 
-  
+
        {/* Added wrapper for analysis */}
     <div className="numerology-analysis">
       {getAnalysis(driverNumber, conductorNumber).map((line, idx) => (
