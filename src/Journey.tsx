@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "./Header";
+import './Journey.css'; // optional if you want to add custom styles
 
 const questions = [
   { q: "What is Numerology?", a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny." },
@@ -30,7 +31,7 @@ export default function Journey() {
         </video>
       </div>
 
-      {/* Dark overlay to make text readable */}
+      {/* Dark overlay to improve readability */}
       <div className="absolute inset-0 bg-black/40 z-0"></div>
 
       {/* Content */}
@@ -39,13 +40,13 @@ export default function Journey() {
           Your Numerology Journey
         </h1>
 
-        {/* Q&A container */}
-        <ul className="w-full max-w-4xl bg-black/70 rounded-2xl p-6 space-y-4">
+        {/* Content container without transparency */}
+        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-8 space-y-6 z-20">
           {questions.map((item, index) => (
-            <li key={index}>
+            <div key={index}>
               {/* Question */}
               <div
-                className="flex justify-between items-center cursor-pointer font-bold text-white"
+                className="flex justify-between items-center cursor-pointer font-bold text-black text-lg"
                 onClick={() => toggle(index)}
               >
                 <span>{item.q}</span>
@@ -62,15 +63,15 @@ export default function Journey() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <div className="mt-2 p-2 bg-black text-white font-bold rounded">
+                    <div className="mt-2 p-4 bg-gray-100 text-black rounded">
                       {item.a}
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </>
   );
