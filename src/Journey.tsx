@@ -39,11 +39,15 @@ export default function Journey() {
           Your Numerology Journey
         </h1>
 
-        <ul className="w-full max-w-4xl bg-white/90 rounded-2xl p-6 space-y-4">
+        {/* Q&A container */}
+        <ul className="w-full max-w-4xl bg-black/70 rounded-2xl p-6 space-y-4">
           {questions.map((item, index) => (
             <li key={index}>
               {/* Question */}
-              <div className="flex justify-between items-center cursor-pointer font-semibold text-black" onClick={() => toggle(index)}>
+              <div
+                className="flex justify-between items-center cursor-pointer font-bold text-white"
+                onClick={() => toggle(index)}
+              >
                 <span>{item.q}</span>
                 <span>{openIndex === index ? "−" : "+"}</span>
               </div>
@@ -58,7 +62,7 @@ export default function Journey() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <div className="mt-2 p-2 bg-gray-100 text-black rounded">
+                    <div className="mt-2 p-2 bg-black text-white font-bold rounded">
                       {item.a}
                     </div>
                   </motion.div>
