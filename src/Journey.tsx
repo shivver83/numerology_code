@@ -37,6 +37,12 @@ export default function Journey() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // Define a color mapping for each answer
+  const answerColors: Record<number, string> = {
+    0: "text-yellow-400", // first answer vibrant yellow
+    1: "text-cyan-400",   // second answer vibrant cyan
+  };
+
   return (
     <>
       <Header />
@@ -85,7 +91,11 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 text-base leading-relaxed text-black font-bold bg-white rounded-b-xl drop-shadow-lg">
+                    <div
+                      className={`p-4 text-base leading-relaxed font-bold bg-white rounded-b-xl drop-shadow-lg ${
+                        answerColors[index] || "text-black"
+                      }`}
+                    >
                       {item.a}
                     </div>
                   </motion.div>
