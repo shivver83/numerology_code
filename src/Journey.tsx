@@ -57,7 +57,7 @@ export default function Journey() {
                 <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
               </button>
 
-              {/* Answer inside same white dropdown with highlight */}
+              {/* Answer inside same white dropdown with same style as question */}
               <AnimatePresence initial={false}>
                 {openIndex === index && (
                   <motion.div
@@ -66,11 +66,13 @@ export default function Journey() {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="px-4 pb-4"
                   >
-                    <p className="font-bold text-black bg-yellow-100 rounded-md p-3">
+                    <button
+                      className="w-full flex justify-start items-center p-4 text-left text-lg font-semibold text-black"
+                      disabled
+                    >
                       {item.a}
-                    </p>
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
