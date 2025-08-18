@@ -78,33 +78,36 @@ export default function Journey() {
       </div>
 
       {/* Glow effect CSS */}
-      <style jsx>{`
-        .glow {
-          text-shadow:
-            0 0 5px #aaff00,
-            0 0 10px #ccff33,
-            0 0 20px #aaff00,
-            0 0 30px #ccff33;
-          animation: pulseGlow 2s infinite alternate;
-        }
+      <style>
+{`
+  .glow {
+    text-shadow:
+      0 0 5px #aaff00,
+      0 0 10px #ccff33,
+      0 0 20px #aaff00,
+      0 0 30px #ccff33;
+    animation: pulseGlow 2s infinite alternate;
+  }
 
-        @keyframes pulseGlow {
-          0% {
-            text-shadow:
-              0 0 3px #aaff00,
-              0 0 6px #ccff33,
-              0 0 10px #aaff00,
-              0 0 15px #ccff33;
-          }
-          100% {
-            text-shadow:
-              0 0 5px #aaff00,
-              0 0 10px #ccff33,
-              0 0 20px #aaff00,
-              0 0 30px #ccff33;
-          }
-        }
-      `}</style>
+  @keyframes pulseGlow {
+    0% {
+      text-shadow:
+        0 0 3px #aaff00,
+        0 0 6px #ccff33,
+        0 0 10px #aaff00,
+        0 0 15px #ccff33;
+    }
+    100% {
+      text-shadow:
+        0 0 5px #aaff00,
+        0 0 10px #ccff33,
+        0 0 20px #aaff00,
+        0 0 30px #ccff33;
+    }
+  }
+`}
+</style>
+
     </>
   );
 }
