@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import ContactPage from './ContactPage';
 import AboutUs from './AboutUs';
+import Journey from './Journey';
 
 const chaldeanMap: Record<string, number> = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
@@ -411,7 +412,7 @@ function MainApp() {
         <ul className="navbar-menu">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/aboutus">About Us</Link></li>
-          <li><a href="#">Get Your Journey</a></li>
+          <li><a href="/journey">Get Your Journey</a></li>
           <li>
             <Link
               to="/contact"
@@ -669,6 +670,7 @@ export default function App() {
         <Route path="/" element={<MainApp />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/journey" element={<Journey />} />
       </Routes>
     </Router>
   );
