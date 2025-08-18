@@ -22,6 +22,32 @@
   filter: brightness(0.5); /* Darken so text is readable */
 }
 
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;  /* vertically center all menu items */
+  gap: 1.5rem;          /* consistent horizontal spacing between items */
+}
+
+.navbar-menu li {
+  margin: 0;            /* remove any margin that could cause vertical misalignment */
+  padding: 0;
+  display: flex;
+  align-items: center;  /* vertically center contents inside each li */
+  height: 60px;         /* same height as navbar to keep uniformity */
+}
+
+.navbar-menu li a,
+.navbar-menu li {
+  line-height: 1;       /* reduce extra line height that can cause vertical offset */
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
 
 body {
   padding-top: 80px; /* to prevent content from hiding under navbar */
