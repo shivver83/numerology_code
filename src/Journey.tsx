@@ -54,19 +54,21 @@ export default function Journey() {
         </video>
 
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen bg-black/50 p-6">
-          <h1 className="text-4xl font-bold mb-8 drop-shadow-lg">
+          <h1 className="text-2xl md:text-3xl font-bold mb-8 drop-shadow-lg">
             Your Numerology Journey
           </h1>
 
-          <div className="w-full max-w-2xl space-y-4">
+          <div className="w-full max-w-2xl space-y-6">
             {questions.map((item, index) => (
               <div
                 key={index}
-                className="rounded-2xl overflow-hidden shadow-lg bg-white/10 backdrop-blur-md border border-white/20"
+                className="rounded-2xl overflow-hidden shadow-xl 
+                           bg-gradient-to-r from-purple-800/40 via-indigo-700/30 to-blue-800/40 
+                           backdrop-blur-md border border-white/20"
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold focus:outline-none hover:bg-white/20 transition"
+                  className="w-full flex justify-between items-center p-5 text-left text-lg font-semibold focus:outline-none hover:bg-white/10 transition"
                 >
                   {item.q}
                   <span className="ml-2 text-xl">
@@ -83,7 +85,7 @@ export default function Journey() {
                       transition={{ duration: 0.4, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="p-4 text-base leading-relaxed">
+                      <div className="p-5 text-base leading-relaxed">
                         {item.a}
                       </div>
                     </motion.div>
