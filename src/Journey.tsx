@@ -90,7 +90,13 @@ export default function Journey() {
                       className="p-4 text-base font-bold text-white bg-black rounded-b-xl"
                       style={{ textShadow: "0 0 5px #aaff00, 0 0 10px #ccff33" }}
                     >
-                      {item.a}
+                      {index === 0 ? (
+                        <span className="bg-black px-2 py-1 font-bold text-white">
+                          {item.a}
+                        </span>
+                      ) : (
+                        item.a
+                      )}
                     </div>
                   </motion.div>
                 )}
