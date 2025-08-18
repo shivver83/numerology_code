@@ -65,6 +65,7 @@ export default function Journey() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
+              {/* Question */}
               <button
                 onClick={() => toggle(index)}
                 className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-white drop-shadow-lg"
@@ -72,6 +73,8 @@ export default function Journey() {
                 {item.q}
                 <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
               </button>
+
+              {/* Answer */}
               <AnimatePresence initial={false}>
                 {openIndex === index && (
                   <motion.div
@@ -82,7 +85,7 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 text-base leading-relaxed text-white font-bold bg-black rounded-b-xl drop-shadow-lg">
+                    <div className="p-4 text-base leading-relaxed text-black font-bold bg-white rounded-b-xl drop-shadow-lg">
                       {item.a}
                     </div>
                   </motion.div>
