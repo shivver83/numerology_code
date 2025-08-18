@@ -49,7 +49,7 @@ export default function Journey() {
             >
               <button
                 onClick={() => toggle(index)}
-                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold"
+                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-white"
               >
                 {item.q}
                 <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
@@ -65,7 +65,8 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 text-base leading-relaxed">
+                    {/* Answer with white font */}
+                    <div className="p-4 text-base leading-relaxed text-white">
                       {item.a}
                     </div>
                   </motion.div>
