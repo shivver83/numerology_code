@@ -172,37 +172,55 @@ function MainApp() {
     return analysis;
   };
   const handleVisitCountClick = async () => {
-    setVisitError(null);
-    setLoadingVisit(true);
-    try {
-      const res = await fetch('/api/count');
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Server returned ${res.status}: ${text}`);
-      }
-      const data = await res.json();
-      if (typeof data.count === 'number') {
-        setVisitCount(data.count);
-        setShowVisitModal(true);
-      } else {
-        throw new Error('Malformed response from server');
-      }
-    } catch (err: any) {
-      console.error('Error fetching visit count:', err);
-      setVisitError(err?.message || 'Error fetching visit count');
+  setVisitError(null);
+  setLoadingVisit(true);
+  try {
+    const res = await fetch('/api/count'); // 👈 still just read
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Server returned ${res.status}: ${text}`);
+    }
+    const data = await res.json();
+    if (typeof data.count === 'number') {
+      setVisitCount(data.count);
       setShowVisitModal(true);
-    } finally {
-      setLoadingVisit(false);
+    } else {
+      throw new Error('Malformed response from server');
+    }
+  } catch (err: any) {
+    console.error('Error fetching visit count:', err);
+    setVisitError(err?.message || 'Error fetching visit count');
+    setShowVisitModal(true);
+  } finally {
+    setLoadingVisit(false);
+  }
+};
+
+// 👇 New useEffect: increments visit count once on first site load
+useEffect(() => {
+  const incrementVisit = async () => {
+    try {
+      await fetch('/api/count', {
+        method: 'POST', // 👈 POST increases the count
+        headers: { 'Content-Type': 'application/json' },
+      });
+    } catch (err) {
+      console.error('Error incrementing visit count:', err);
     }
   };
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && showVisitModal) setShowVisitModal(false);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [showVisitModal]);
+  incrementVisit();
+}, []);
+
+// Existing modal close listener
+useEffect(() => {
+  const onKey = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && showVisitModal) setShowVisitModal(false);
+  };
+  window.addEventListener('keydown', onKey);
+  return () => window.removeEventListener('keydown', onKey);
+}, [showVisitModal]);
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
