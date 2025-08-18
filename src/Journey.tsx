@@ -42,8 +42,8 @@ export default function Journey() {
       <Header />
 
       {/* Video Background */}
-      <div className="video-background">
-        <video autoPlay muted loop playsInline>
+      <div className="video-background fixed inset-0 z-0">
+        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
           <source src="/numerology.mp4" type="video/mp4" />
         </video>
       </div>
@@ -69,6 +69,7 @@ export default function Journey() {
               <button
                 onClick={() => toggle(index)}
                 className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-white drop-shadow-lg"
+                style={{ textShadow: "0 0 2px #aaff00, 0 0 4px #ccff33" }}
               >
                 {item.q}
                 <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
@@ -85,7 +86,10 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 text-base font-bold text-white bg-black rounded-b-xl drop-shadow-lg">
+                    <div
+                      className="p-4 text-base font-bold text-white bg-black rounded-b-xl"
+                      style={{ textShadow: "0 0 5px #aaff00, 0 0 10px #ccff33" }}
+                    >
                       {item.a}
                     </div>
                   </motion.div>
