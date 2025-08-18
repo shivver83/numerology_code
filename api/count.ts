@@ -19,37 +19,33 @@ export default async function handler(req: any, res: any) {
     const client = await pool.connect();
     console.log('Connected to database');
 
-    // Ensure visits table exists
+    // Ensure visit table exists
     await client.query(`
       CREATE TABLE IF NOT EXISTS visit (
         id SERIAL PRIMARY KEY,
-        count INTEGER DEFAULT 0
+        count INTEGER NOT NULL DEFAULT 0
       );
     `);
+    console.log('Ensured visit table exists');
 
-    // Ensure there is at least one row in visit table
+    // Ensure at least one row exists
     await client.query(`
-      INSERT INTO visit (count)
+      INSERT INTO visit (count) 
       SELECT 0
       WHERE NOT EXISTS (SELECT 1 FROM visit);
     `);
 
-    // Increment visit count
-    const updateResult = await client.query(`
-      UPDATE visit
-      SET count = count + 1
-      WHERE id = (SELECT id FROM visit LIMIT 1)
-      RETURNING count;
-    `);
+    // Increment count
+    await client.query(`UPDATE visit SET count = count + 1 WHERE id = 1;`);
 
-    const newCount = updateResult.rows[0].count;
-    console.log(`Updated visit count: ${newCount}`);
+    // Fetch updated count
+    const result = await client.query(`SELECT count FROM visit WHERE id = 1;`);
+    const count = parseInt(result.rows[0].count, 10);
 
     client.release();
-    console.log('Released DB client');
+    console.log(`Updated visit count: ${count}`);
 
-    return res.status(200).json({ count: newCount });
-
+    return res.status(200).json({ count });
   } catch (err) {
     console.error('Database operation failed:', err);
     return res.status(500).json({ error: 'Database error' });
