@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "./Header";
-
+import Journey from "./Journey";
 const questions = [
   {
     q: "What is Numerology?",
