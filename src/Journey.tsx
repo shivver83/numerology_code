@@ -39,27 +39,25 @@ export default function Journey() {
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-black/60 -z-10"></div>
 
-        {/* Content straight on top of video */}
+        {/* Transparent Q&A container on top of video */}
         <div className="relative z-10 w-full max-w-3xl px-6 pt-24 pb-12 text-center">
           {/* Heading */}
-          <h1 className="text-2xl md:text-3xl font-bold mb-10 drop-shadow-lg tracking-wide">
+          <h1 className="text-xl md:text-2xl font-bold mb-10 drop-shadow-lg tracking-wide">
             Your Numerology Journey
           </h1>
 
           {/* Questions */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             {questions.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-xl shadow-lg 
-                           bg-gradient-to-r from-purple-900/50 via-indigo-800/40 to-blue-900/50
-                           backdrop-blur-sm border border-white/20"
-                whileHover={{ scale: 1.02, boxShadow: "0px 0px 25px rgba(200,150,255,0.6)" }}
+                className="rounded-xl"
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold"
+                  className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold drop-shadow-lg"
                 >
                   {item.q}
                   <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
@@ -75,7 +73,7 @@ export default function Journey() {
                       transition={{ duration: 0.5, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="p-4 text-base leading-relaxed text-left">
+                      <div className="p-4 text-base leading-relaxed text-left drop-shadow-md">
                         {item.a}
                       </div>
                     </motion.div>
