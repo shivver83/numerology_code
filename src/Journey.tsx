@@ -23,63 +23,56 @@ export default function Journey() {
     <>
       <Header />
 
-      {/* Fullscreen video background */}
-      <div className="relative min-h-screen flex flex-col text-white overflow-hidden">
-        {/* Background video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover -z-20"
-        >
+      {/* Video Background Container */}
+      <div className="video-background">
+        <video autoPlay muted loop playsInline>
           <source src="/numerology.mp4" type="video/mp4" />
         </video>
+      </div>
 
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/60 -z-10"></div>
+      {/* Overlay to darken video */}
+      <div className="absolute inset-0 bg-black/60 z-0"></div>
 
-        {/* Q&A content on top of video */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-6 mt-24">
-          <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center drop-shadow-lg">
-            Your Numerology Journey
-          </h1>
+      {/* Content on top of video */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start text-white px-6 pt-32">
+        <h1 className="text-2xl md:text-3xl font-bold mb-8 text-center drop-shadow-lg">
+          Your Numerology Journey
+        </h1>
 
-          <div className="space-y-6">
-            {questions.map((item, index) => (
-              <motion.div
-                key={index}
-                className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+        <div className="w-full max-w-4xl space-y-6">
+          {questions.map((item, index) => (
+            <motion.div
+              key={index}
+              className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 shadow-lg"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                onClick={() => toggle(index)}
+                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold"
               >
-                <button
-                  onClick={() => toggle(index)}
-                  className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold"
-                >
-                  {item.q}
-                  <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
-                </button>
+                {item.q}
+                <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
+              </button>
 
-                <AnimatePresence initial={false}>
-                  {openIndex === index && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="p-4 text-base leading-relaxed">
-                        {item.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            ))}
-          </div>
+              <AnimatePresence initial={false}>
+                {openIndex === index && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="p-4 text-base leading-relaxed">
+                      {item.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
         </div>
       </div>
     </>
