@@ -61,7 +61,7 @@ export default function Journey() {
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-black/60 backdrop-blur-md rounded-xl border border-white/20 shadow-lg"
+              className="bg-black/80 rounded-xl border border-white/20 shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -82,7 +82,7 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div className="p-4 text-base leading-relaxed text-white drop-shadow-lg">
+                    <div className="p-4 text-base leading-relaxed text-white font-bold bg-black rounded-b-xl drop-shadow-lg">
                       {item.a}
                     </div>
                   </motion.div>
