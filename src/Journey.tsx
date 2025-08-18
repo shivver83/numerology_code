@@ -34,9 +34,12 @@ export default function Journey() {
           <source src="/numerology.mp4" type="video/mp4" />
         </video>
 
-        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen bg-black/60 p-6">
-          {/* Smaller heading */}
-          <h1 className="text-xl md:text-2xl font-bold mb-8 drop-shadow-lg tracking-wide">
+        {/* Overlay with slight dark tint */}
+        <div className="absolute inset-0 bg-black/60 -z-10"></div>
+
+        <div className="relative z-10 flex flex-col items-center p-6">
+          {/* Smaller heading with extra bottom spacing */}
+          <h1 className="text-2xl md:text-3xl font-bold mb-12 drop-shadow-lg tracking-wide text-center">
             Your Numerology Journey
           </h1>
 
@@ -45,15 +48,15 @@ export default function Journey() {
             {questions.map((item, index) => (
               <motion.div
                 key={index}
-                className="rounded-2xl overflow-hidden shadow-2xl 
-                           bg-gradient-to-r from-purple-900/50 via-indigo-800/40 to-blue-900/50
-                           backdrop-blur-xl border border-white/20 relative"
-                whileHover={{ scale: 1.02, boxShadow: "0px 0px 25px rgba(180,130,255,0.6)" }}
-                transition={{ duration: 0.4 }}
+                className="rounded-xl overflow-hidden shadow-xl 
+                           bg-gradient-to-r from-purple-900/60 via-indigo-800/50 to-blue-900/60
+                           backdrop-blur-md border border-white/20"
+                whileHover={{ scale: 1.02, boxShadow: "0px 0px 25px rgba(200,150,255,0.6)" }}
+                transition={{ duration: 0.3 }}
               >
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex justify-between items-center p-5 text-left text-lg font-semibold focus:outline-none"
+                  className="w-full flex justify-between items-center p-5 text-left text-lg font-semibold"
                 >
                   {item.q}
                   <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
@@ -75,9 +78,6 @@ export default function Journey() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-
-                {/* Flowing glow effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-blue-500/10 blur-2xl animate-pulse -z-10"></div>
               </motion.div>
             ))}
           </div>
