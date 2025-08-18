@@ -5,7 +5,7 @@ import Header from "./Header";
 
 const questions = [
   {
-    q: "What is Numerology?",
+    q: "What is Numerologyyyyyyyyy?",
     a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny.",
   },
   {
