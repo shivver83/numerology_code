@@ -5,7 +5,7 @@ import Header from "./Header";
 
 const questions = [
   {
-    q: "What is Numerologyyyyyyyyy?",
+    q: "What is Numerology?",
     a: "Numerology is the mystical study of numbers and their influence on human life, personality, and destiny.",
   },
   {
@@ -49,10 +49,10 @@ export default function Journey() {
       </div>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-white/60 z-0"></div>
+      <div className="absolute inset-0 bg-black/60 z-0"></div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start text-white px-6 pt-32">
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start px-6 pt-32">
         <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-green-400 drop-shadow-lg">
           Your Numerology Journey
         </h1>
@@ -61,7 +61,7 @@ export default function Journey() {
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-white/80 rounded-xl border border-white/20 shadow-lg"
+              className="bg-black/90 rounded-xl border border-white/20 shadow-lg"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
@@ -85,13 +85,7 @@ export default function Journey() {
                     transition={{ duration: 0.4, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <div
-                      className={
-                        index === 0
-                          ? "w-full p-4 text-lg font-semibold text-white drop-shadow-lg bg-white rounded-b-xl" // match question style
-                          : "p-4 text-base leading-relaxed text-white font-bold bg-white rounded-b-xl drop-shadow-lg"
-                      }
-                    >
+                    <div className="p-4 text-base font-bold text-white bg-black rounded-b-xl drop-shadow-lg">
                       {item.a}
                     </div>
                   </motion.div>
