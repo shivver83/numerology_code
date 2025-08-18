@@ -19,7 +19,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover; /* Fill and crop as needed */
-  filter: brightness(0.5); /* Darken so text is readable */
+  filter: brightness(0.4); /* Darken so text is readable */
 }
 
 .navbar-menu {
@@ -102,3 +102,9 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.text-white {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
