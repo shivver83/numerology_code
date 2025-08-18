@@ -30,32 +30,26 @@ export default function Journey() {
         </video>
       </div>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60 z-0"></div>
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/40 z-0"></div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start px-6 pt-32">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-green-400 glow">
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start px-6 pt-32 text-white">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center">
           Your Numerology Journey
         </h1>
 
-        {/* Solid container blocking out video */}
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-6 space-y-6 z-20">
+        <ul className="w-full max-w-4xl space-y-6">
           {questions.map((item, index) => (
-            <motion.div
-              key={index}
-              className="rounded-xl border border-gray-200 shadow-md"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
+            <li key={index}>
               {/* Question */}
-              <button
+              <div
+                className="flex justify-between items-center cursor-pointer font-bold text-white text-lg"
                 onClick={() => toggle(index)}
-                className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-black"
               >
-                {item.q}
-                <span className="ml-2 text-xl">{openIndex === index ? "−" : "+"}</span>
-              </button>
+                <span>{item.q}</span>
+                <span>{openIndex === index ? "−" : "+"}</span>
+              </div>
 
               {/* Answer */}
               <AnimatePresence initial={false}>
@@ -65,48 +59,18 @@ export default function Journey() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="overflow-hidden px-4 pb-4"
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <div className="p-6 text-base font-normal text-black rounded-xl bg-gray-100 shadow-inner">
+                    <p className="mt-2 font-bold text-white">
                       {item.a}
-                    </div>
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-
-      {/* Glow effect CSS for heading */}
-      <style>{`
-        .glow {
-          text-shadow:
-            0 0 5px #aaff00,
-            0 0 10px #ccff33,
-            0 0 20px #aaff00,
-            0 0 30px #ccff33;
-          animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-          0% {
-            text-shadow:
-              0 0 3px #aaff00,
-              0 0 6px #ccff33,
-              0 0 10px #aaff00,
-              0 0 15px #ccff33;
-          }
-          100% {
-            text-shadow:
-              0 0 5px #aaff00,
-              0 0 10px #ccff33,
-              0 0 20px #aaff00,
-              0 0 30px #ccff33;
-          }
-        }
-      `}</style>
     </>
   );
 }
