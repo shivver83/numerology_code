@@ -39,12 +39,12 @@ export default function Journey() {
           Your Numerology Journey
         </h1>
 
-        {/* White dropdown container */}
-        <div className="w-full max-w-4xl space-y-4 z-20">
+        {/* White dropdown container with extra spacing */}
+        <div className="w-full max-w-4xl space-y-6 z-20"> {/* increased space-y from 4 to 6 */}
           {questions.map((item, index) => (
             <motion.div
               key={index}
-              className="rounded-2xl border border-gray-200 shadow-md overflow-hidden bg-white"
+              className="rounded-2xl border border-gray-200 shadow-md overflow-hidden bg-white mb-4" // added mb-4 for extra separation
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
