@@ -19,7 +19,7 @@ const Footer = () => {
       })
       .catch((err) => {
         console.error("Counter Error:", err);
-        setViews(1250); // Fallback agar koi dikkat aaye
+        setViews(1350); // Fallback agar koi dikkat aaye
       });
   }, []);
   // --- HIT COUNTER LOGIC END ---
