@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Youtube, Instagram, Facebook, MessageCircle, ChevronRight, Sparkles, Calculator } from 'lucide-react';
+import { Menu, X, Youtube, Instagram, Facebook, MessageCircle, ChevronRight, Calculator } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,20 +43,24 @@ const Navbar = () => {
       {/* --- DESKTOP NAVBAR --- */}
       <nav 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? 'bg-black/80 backdrop-blur-md py-4 border-b border-white/10' : 'bg-transparent py-6'
+          scrolled ? 'bg-black/80 backdrop-blur-md py-3 border-b border-white/10' : 'bg-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-             <div className="w-10 h-10 bg-gradient-to-tr from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center font-bold text-black shadow-[0_0_15px_rgba(234,179,8,0.5)] group-hover:rotate-12 transition-transform">
-               H
-             </div>
-             <span className="text-xl font-bold text-white tracking-wide">
-               Happiness <span className="text-yellow-400">Ccreattions</span>
-             </span>
+          {/* --- LOGO UPDATE START (Desktop) --- */}
+          <Link to="/" className="flex items-center gap-3 group">
+              <img 
+                 src="/images/logo.png" 
+                 alt="Happiness Ccreattions" 
+                 // Size thoda adjust kiya hai taaki navbar me fit aaye
+                 className="w-12 h-12 object-contain rounded-lg hover:scale-105 transition-transform"
+              />
+              <span className="text-xl font-bold text-white tracking-wide">
+                Happiness <span className="text-yellow-400">Ccreattions</span>
+              </span>
           </Link>
+          {/* --- LOGO UPDATE END --- */}
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
@@ -117,10 +121,17 @@ const Navbar = () => {
 
         {/* Menu Header (Inside Drawer) */}
         <div className="p-6 flex justify-between items-center border-b border-white/5 relative z-10">
-             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-tr from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center font-bold text-black text-sm">H</div>
+             {/* --- LOGO UPDATE START (Mobile Drawer) --- */}
+             <div className="flex items-center gap-3">
+                <img 
+                    src="/images/logo.png" 
+                    alt="Logo" 
+                    className="w-10 h-10 object-contain rounded-lg"
+                />
                 <span className="font-bold text-white text-lg">Menu</span>
              </div>
+             {/* --- LOGO UPDATE END --- */}
+
              <button 
                 onClick={() => setIsOpen(false)}
                 className="p-2 bg-white/5 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
