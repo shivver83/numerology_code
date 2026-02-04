@@ -33,7 +33,6 @@ const Contact = () => {
       mode: "no-cors" // CORS Error Fix
     })
     .then(() => {
-      // No-cors mode mein hume response check nahi karte, bas success maan lete hain
       alert('SUCCESS! Your details have been saved. We will contact you soon.');
       setIsSubmitting(false);
       setCaptchaToken(null);
@@ -75,10 +74,17 @@ const Contact = () => {
           {/* LEFT SIDE: INFO */}
           <div className="space-y-8 animate-fade-in-up">
             <div className="grid gap-6">
+              {/* ADDRESS UPDATE START */}
               <ContactCard 
-                icon={<MapPin className="text-red-400" />} title="Visit Us" value="Sector 51, Noida, Uttar Pradesh, India"
-                isLink={true} href="https://goo.gl/maps/b5g6h7j8k9" subValue="Click to view on Google Maps"
+                icon={<MapPin className="text-red-400" />} 
+                title="Visit Us" 
+                value="1022, Siddhi Block, Mahagunpuram, NH 24, Ghaziabad 201002"
+                isLink={true} 
+                href="https://www.google.com/maps/search/?api=1&query=1022+Siddhi+Block+Mahagunpuram+Ghaziabad" 
+                subValue="Click to view on Google Maps"
               />
+              {/* ADDRESS UPDATE END */}
+              
               <ContactCard 
                 icon={<Mail className="text-blue-400" />} title="Email Us" value="9amitgupta99@gmail.com" 
                 isLink={true} href="mailto:9amitgupta99@gmail.com"
@@ -100,16 +106,18 @@ const Contact = () => {
               </div>
             </div>
 
+            {/* MAP UPDATE START */}
             <div className="h-64 w-full rounded-3xl overflow-hidden border border-white/10 relative group">
               <div className="absolute inset-0 bg-indigo-900/20 mix-blend-overlay pointer-events-none z-10"></div>
               <iframe 
-    // Yahan maine ek valid Google Maps Embed link dala hai
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.097072590204!2d77.3716616!3d28.5718616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce59f13d80b4f%3A0x629553655325519f!2sSector%2051%2C%20Noida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-    width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} 
-    allowFullScreen="" loading="lazy" className="grayscale hover:grayscale-0 transition-all duration-700 w-full h-full"
-    title="Office Location"
-  ></iframe>
+                src="https://maps.google.com/maps?q=Mahagunpuram%20NH%2024%20Ghaziabad&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} 
+                allowFullScreen="" loading="lazy" className="grayscale hover:grayscale-0 transition-all duration-700 w-full h-full"
+                title="Office Location"
+              ></iframe>
             </div>
+            {/* MAP UPDATE END */}
+
           </div>
 
           {/* RIGHT SIDE: FORM */}
