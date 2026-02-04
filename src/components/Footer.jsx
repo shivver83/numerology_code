@@ -8,7 +8,7 @@ const Footer = () => {
   const [views, setViews] = useState(0);
   
   // Wahi URL jo Form ke liye use kiya tha
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzjMDGQE5y7QcIl8472ITg8VIJh7m4yMAbzhUKe_pQJEQrEVUicOAesa-bDW2Hel7LJ/exec"; 
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzir-aXNnbI_t-iK950WTOdQm7ddUei29u7tTxR6V2a4N1QNgHS58FX0dsHnJ7vSNw_6Q/exec"; 
 
   useEffect(() => {
     // Google Script ko call karega
