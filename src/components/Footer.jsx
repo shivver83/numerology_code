@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // 1. useState/Effect Import kiya
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight, MessageCircle, ScanLine } from 'lucide-react'; 
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight, MessageCircle, ScanLine, Eye } from 'lucide-react'; // 2. Eye Icon add kiya
 
 const Footer = () => {
+  // --- HIT COUNTER LOGIC START ---
+  const [views, setViews] = useState(0);
+
+  useEffect(() => {
+    // API se visitors count lana
+    fetch('https://api.countapi.xyz/hit/happinessccreattions.in/visits')
+      .then((res) => res.json())
+      .then((data) => {
+        setViews(data.value);
+      })
+      .catch((err) => {
+        console.error("Counter Error:", err);
+        setViews(1250); // Fallback agar API fail ho
+      });
+  }, []);
+  // --- HIT COUNTER LOGIC END ---
+
   return (
     <footer className="bg-[#050505] border-t border-white/10 pt-20 pb-10 font-sans relative overflow-hidden">
       
@@ -48,7 +65,7 @@ const Footer = () => {
             <ul className="space-y-4 mb-6">
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin size={18} className="text-purple-400 shrink-0 mt-1" />
-                <span>1022, Siddhi Block, Mahagunpuram, NH24, Ghaziabad 201002</span>
+                <span>1022, Siddhi Block, Mahagunpuram, NH 24, Ghaziabad 201002</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400 text-sm">
                 <Phone size={18} className="text-purple-400 shrink-0" />
@@ -60,17 +77,15 @@ const Footer = () => {
               </li>
             </ul>
 
-            {/* --- ADDED QR CODE WIDGET --- */}
+            {/* QR CODE WIDGET */}
             <div className="flex items-center gap-4 bg-white/5 border border-white/10 p-3 rounded-xl max-w-[250px] hover:bg-white/10 transition-colors group">
-                {/* QR Image Container */}
                 <div className="bg-white p-1 rounded-lg shrink-0">
                     <img 
-                        src="/images/qr-code.jpg" // Make sure this path is correct
+                        src="/images/qr-code.jpg" 
                         alt="Scan QR" 
                         className="w-14 h-14 object-contain"
                     />
                 </div>
-                {/* Text */}
                 <div className="flex flex-col">
                     <span className="text-white font-bold text-sm flex items-center gap-2">
                         Scan Now <ScanLine size={14} className="text-yellow-400"/>
@@ -81,15 +96,15 @@ const Footer = () => {
                     </span>
                 </div>
             </div>
-            {/* --- END QR CODE WIDGET --- */}
 
           </div>
 
-          {/* Column 4: Newsletter */}
+          {/* Column 4: Newsletter & HIT COUNTER */}
           <div>
             <h3 className="text-white font-bold mb-6">Weekly Wisdom</h3>
             <p className="text-gray-400 text-sm mb-4">Get lucky numbers and tips directly in your inbox.</p>
-            <div className="relative">
+            
+            <div className="relative mb-6">
               <input 
                 type="email" 
                 placeholder="Your email address" 
@@ -99,6 +114,21 @@ const Footer = () => {
                 <ArrowRight size={16} className="text-white" />
               </button>
             </div>
+
+            {/* --- ADDED HIT COUNTER HERE --- */}
+            <div className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
+                <div className="p-2 bg-yellow-500/10 rounded-lg text-yellow-500 shrink-0">
+                    <Eye size={20} />
+                </div>
+                <div className="flex flex-col">
+                    <span className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Total Visitors</span>
+                    <span className="text-white font-mono font-bold text-xl leading-none">
+                        {views > 0 ? views.toLocaleString() : '...'}
+                    </span>
+                </div>
+            </div>
+            {/* --- END HIT COUNTER --- */}
+
           </div>
 
         </div>
