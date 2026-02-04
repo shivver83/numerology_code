@@ -4,18 +4,28 @@ import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight, MessageC
 
 const Footer = () => {
   // --- HIT COUNTER LOGIC START ---
-  const [views, setViews] = useState(0);
+ const [views, setViews] = useState(0);
 
   useEffect(() => {
-    // API se visitors count lana
-    fetch('https://api.countapi.xyz/hit/happinessccreattions.in/visits')
+    // Nayi API: CounterAPI.dev
+    // Yahan hum 'happiness-counter' naam ka ek naya counter bana rahe hain.
+    // Agar ye pehli baar chal raha hai to ye khud create ho jayega.
+    const counterId = 'ut_qKfJADebWoaHv6eAXRKwqsFLnkUcn8eZKiYM449O'; // Unique ID for your site
+
+    fetch(`https://api.counterapi.dev/v1/${counterId}/up`)
       .then((res) => res.json())
       .then((data) => {
-        setViews(data.value);
+        // Agar API sahi chali to naya count set karein
+        if (data.count) {
+          setViews(data.count);
+        } else {
+           // Fallback agar data na mile
+           setViews(1350); 
+        }
       })
       .catch((err) => {
         console.error("Counter Error:", err);
-        setViews(1250); // Fallback agar API fail ho
+        setViews(1250); // Fallback: Agar API fail ho
       });
   }, []);
   // --- HIT COUNTER LOGIC END ---
