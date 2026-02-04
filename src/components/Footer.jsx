@@ -48,7 +48,7 @@ const Footer = () => {
             <ul className="space-y-4 mb-6">
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin size={18} className="text-purple-400 shrink-0 mt-1" />
-                <span>Sector 51, Noida,<br />Uttar Pradesh, India</span>
+                <span>1022, Siddhi Block, Mahagunpuram, NH24, Ghaziabad 201002</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400 text-sm">
                 <Phone size={18} className="text-purple-400 shrink-0" />
