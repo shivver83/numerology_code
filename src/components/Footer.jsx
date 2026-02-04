@@ -4,28 +4,22 @@ import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight, MessageC
 
 const Footer = () => {
   // --- HIT COUNTER LOGIC START ---
- const [views, setViews] = useState(0);
+ // --- HIT COUNTER LOGIC START ---
+  const [views, setViews] = useState(0);
+  
+  // Wahi URL jo Form ke liye use kiya tha
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzjMDGQE5y7QcIl8472ITg8VIJh7m4yMAbzhUKe_pQJEQrEVUicOAesa-bDW2Hel7LJ/exec"; 
 
   useEffect(() => {
-    // Nayi API: CounterAPI.dev
-    // Yahan hum 'happiness-counter' naam ka ek naya counter bana rahe hain.
-    // Agar ye pehli baar chal raha hai to ye khud create ho jayega.
-    const counterId = 'ut_qKfJADebWoaHv6eAXRKwqsFLnkUcn8eZKiYM449O'; // Unique ID for your site
-
-    fetch(`https://api.counterapi.dev/v1/${counterId}/up`)
+    // Google Script ko call karega
+    fetch(GOOGLE_SCRIPT_URL)
       .then((res) => res.json())
       .then((data) => {
-        // Agar API sahi chali to naya count set karein
-        if (data.count) {
-          setViews(data.count);
-        } else {
-           // Fallback agar data na mile
-           setViews(1350); 
-        }
+        setViews(data.count);
       })
       .catch((err) => {
         console.error("Counter Error:", err);
-        setViews(1250); // Fallback: Agar API fail ho
+        setViews(1250); // Fallback agar koi dikkat aaye
       });
   }, []);
   // --- HIT COUNTER LOGIC END ---
