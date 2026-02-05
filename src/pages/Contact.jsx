@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react';
-import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, Send, Calendar, Clock, Globe, MessageCircle, Car, Home, Smartphone, User } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, Send, Calendar, Clock, Globe, MessageCircle, Car, Home, Smartphone, User, CheckCircle, AlertCircle, X } from 'lucide-react';
 import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const formRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState(null);
+  
+  // Naya State: Notification ke liye
+  const [notification, setNotification] = useState(null);
 
   // Aapka Google Script URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzir-aXNnbI_t-iK950WTOdQm7ddUei29u7tTxR6V2a4N1QNgHS58FX0dsHnJ7vSNw_6Q/exec"; 
@@ -14,11 +17,20 @@ const Contact = () => {
     setCaptchaToken(val);
   };
 
+  // Helper function to show notification
+  const showNotification = (type, message) => {
+    setNotification({ type, message });
+    // 5 seconds baad automatic gayab ho jaye
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!captchaToken) {
-      alert("Please verify that you are not a robot!");
+      showNotification('error', "Please verify that you are not a robot!");
       return;
     }
 
@@ -33,7 +45,9 @@ const Contact = () => {
       mode: "no-cors" // CORS Error Fix
     })
     .then(() => {
-      alert('SUCCESS! Your details have been saved. We will contact you soon.');
+      // --- SUCCESS NOTIFICATION ---
+      showNotification('success', 'Thank you! Your details have been saved successfully. We will contact you shortly.');
+      
       setIsSubmitting(false);
       setCaptchaToken(null);
       formRef.current.reset();
@@ -41,7 +55,8 @@ const Contact = () => {
     })
     .catch((error) => {
       console.log(error);
-      alert('Network Error. Please try again.');
+      // --- ERROR NOTIFICATION ---
+      showNotification('error', 'Network Error. Please try again later.');
       setIsSubmitting(false);
     });
   };
@@ -49,6 +64,28 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans pt-32 pb-20 px-6 relative overflow-hidden">
       
+      {/* --- CUSTOM NOTIFICATION TOAST --- */}
+      {notification && (
+        <div className={`fixed top-24 right-6 z-50 max-w-sm w-full p-4 rounded-xl border backdrop-blur-md shadow-2xl flex items-start gap-3 transition-all animate-fade-in-left ${
+            notification.type === 'success' 
+            ? 'bg-green-900/90 border-green-500/30 text-green-100' 
+            : 'bg-red-900/90 border-red-500/30 text-red-100'
+        }`}>
+            <div className={`p-1 rounded-full shrink-0 ${notification.type === 'success' ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                {notification.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+            </div>
+            <div className="flex-1">
+                <h4 className="font-bold text-sm mb-1">{notification.type === 'success' ? 'Success' : 'Error'}</h4>
+                <p className="text-xs opacity-90 leading-relaxed">{notification.message}</p>
+            </div>
+            <button onClick={() => setNotification(null)} className="opacity-70 hover:opacity-100 transition-opacity">
+                <X size={18} />
+            </button>
+        </div>
+      )}
+      {/* -------------------------------- */}
+
+
       {/* Background Ambience */}
       <div className="fixed top-0 left-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
       <div className="fixed bottom-0 right-0 w-[600px] h-[600px] bg-yellow-900/10 rounded-full blur-[120px] pointer-events-none"></div>
