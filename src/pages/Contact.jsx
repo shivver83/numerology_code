@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, Send, Calendar, Clock, Globe, MessageCircle, Car, Home, Smartphone, User, CheckCircle, AlertCircle, X } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, Send, Calendar, Clock, Globe, MessageCircle, Car, Home, Smartphone, User, CheckCircle, AlertCircle, X, Sparkles } from 'lucide-react';
 import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
@@ -7,7 +7,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState(null);
   
-  // Naya State: Notification ke liye
+  // Notification State
   const [notification, setNotification] = useState(null);
 
   // Aapka Google Script URL
@@ -17,10 +17,8 @@ const Contact = () => {
     setCaptchaToken(val);
   };
 
-  // Helper function to show notification
   const showNotification = (type, message) => {
     setNotification({ type, message });
-    // 5 seconds baad automatic gayab ho jaye
     setTimeout(() => {
       setNotification(null);
     }, 5000);
@@ -36,18 +34,15 @@ const Contact = () => {
 
     setIsSubmitting(true);
     
-    // Form data collect karna
     const formData = new FormData(formRef.current);
 
     fetch(GOOGLE_SCRIPT_URL, {
       method: "POST",
       body: formData,
-      mode: "no-cors" // CORS Error Fix
+      mode: "no-cors"
     })
     .then(() => {
-      // --- SUCCESS NOTIFICATION ---
-      showNotification('success', 'Thank you! Your details have been saved successfully. We will contact you shortly.');
-      
+      showNotification('success', 'Success! Your details have been saved. We will contact you shortly.');
       setIsSubmitting(false);
       setCaptchaToken(null);
       formRef.current.reset();
@@ -55,7 +50,6 @@ const Contact = () => {
     })
     .catch((error) => {
       console.log(error);
-      // --- ERROR NOTIFICATION ---
       showNotification('error', 'Network Error. Please try again later.');
       setIsSubmitting(false);
     });
@@ -64,26 +58,36 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans pt-32 pb-20 px-6 relative overflow-hidden">
       
-      {/* --- CUSTOM NOTIFICATION TOAST --- */}
+      {/* --- PREMIUM BLACK & GOLD NOTIFICATION --- */}
       {notification && (
-        <div className={`fixed top-24 right-6 z-50 max-w-sm w-full p-4 rounded-xl border backdrop-blur-md shadow-2xl flex items-start gap-3 transition-all animate-fade-in-left ${
-            notification.type === 'success' 
-            ? 'bg-green-900/90 border-green-500/30 text-green-100' 
-            : 'bg-red-900/90 border-red-500/30 text-red-100'
-        }`}>
-            <div className={`p-1 rounded-full shrink-0 ${notification.type === 'success' ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
-                {notification.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+        <div className={`fixed top-24 right-6 z-[100] max-w-sm w-full p-5 rounded-2xl border backdrop-blur-xl shadow-2xl flex items-start gap-4 transition-all duration-500 animate-bounce-in
+            ${notification.type === 'success' 
+                ? 'bg-black/90 border-yellow-500/50 shadow-[0_0_30px_rgba(234,179,8,0.2)]' 
+                : 'bg-black/90 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)]'
+            }`}>
+            
+            {/* Icon Box */}
+            <div className={`p-2 rounded-full shrink-0 border ${notification.type === 'success' ? 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
+                {notification.type === 'success' ? <Sparkles size={24} /> : <AlertCircle size={24} />}
             </div>
-            <div className="flex-1">
-                <h4 className="font-bold text-sm mb-1">{notification.type === 'success' ? 'Success' : 'Error'}</h4>
-                <p className="text-xs opacity-90 leading-relaxed">{notification.message}</p>
+
+            {/* Content */}
+            <div className="flex-1 pt-1">
+                <h4 className={`font-bold text-base mb-1 tracking-wide uppercase ${notification.type === 'success' ? 'text-yellow-400' : 'text-red-400'}`}>
+                    {notification.type === 'success' ? 'Request Sent' : 'Error'}
+                </h4>
+                <p className="text-sm text-gray-300 leading-relaxed font-medium">
+                    {notification.message}
+                </p>
             </div>
-            <button onClick={() => setNotification(null)} className="opacity-70 hover:opacity-100 transition-opacity">
-                <X size={18} />
+
+            {/* Close Button */}
+            <button onClick={() => setNotification(null)} className="text-gray-500 hover:text-white transition-colors pt-1">
+                <X size={20} />
             </button>
         </div>
       )}
-      {/* -------------------------------- */}
+      {/* --------------------------------------- */}
 
 
       {/* Background Ambience */}
@@ -111,7 +115,6 @@ const Contact = () => {
           {/* LEFT SIDE: INFO */}
           <div className="space-y-8 animate-fade-in-up">
             <div className="grid gap-6">
-              {/* ADDRESS UPDATE START */}
               <ContactCard 
                 icon={<MapPin className="text-red-400" />} 
                 title="Visit Us" 
@@ -120,7 +123,6 @@ const Contact = () => {
                 href="https://www.google.com/maps/search/?api=1&query=1022+Siddhi+Block+Mahagunpuram+Ghaziabad" 
                 subValue="Click to view on Google Maps"
               />
-              {/* ADDRESS UPDATE END */}
               
               <ContactCard 
                 icon={<Mail className="text-blue-400" />} title="Email Us" value="9amitgupta99@gmail.com" 
@@ -143,7 +145,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* MAP UPDATE START */}
             <div className="h-64 w-full rounded-3xl overflow-hidden border border-white/10 relative group">
               <div className="absolute inset-0 bg-indigo-900/20 mix-blend-overlay pointer-events-none z-10"></div>
               <iframe 
@@ -153,7 +154,6 @@ const Contact = () => {
                 title="Office Location"
               ></iframe>
             </div>
-            {/* MAP UPDATE END */}
 
           </div>
 
@@ -165,13 +165,11 @@ const Contact = () => {
             
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5 relative z-10">
               
-              {/* 1. Name */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Enter Your Name</label>
                 <input type="text" name="Name" required placeholder="Full Name" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
               </div>
 
-              {/* 2. Gender & DOB */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><User size={12}/> Gender</label>
@@ -191,31 +189,26 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* 3. Vehicle Number */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Car size={12}/> Vehicle / Car Number</label>
                 <input type="text" name="Vehicle_Number" placeholder="Enter all your vehicle numbers" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
               </div>
 
-              {/* 4. Mobile Number */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Smartphone size={12}/> Mobile Number</label>
                 <input type="text" name="Mobile_Number" required placeholder="Enter all mobile numbers" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
               </div>
 
-               {/* 5. House Number */}
                <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Home size={12}/> House Number</label>
                 <input type="text" name="House_Number" placeholder="Enter all house numbers" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
               </div>
 
-              {/* 6. Message */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Your Message</label>
                 <textarea name="Message" rows="4" placeholder="How can we help you?" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all resize-none"></textarea>
               </div>
               
-              {/* CAPTCHA */}
               <div className="py-2">
                 <ReCAPTCHA
                   sitekey="6LcQBlosAAAAAC9T27Nx5E99JS8lqNnbNK0mKg2q" 
@@ -230,7 +223,6 @@ const Contact = () => {
 
             </form>
 
-            {/* --- PRICING DETAILS SECTION --- */}
             <div className="mt-8 pt-6 border-t border-white/10">
                 <h4 className="text-purple-400 font-bold uppercase tracking-widest text-xs mb-3">Consultation Charges</h4>
                 
