@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, Send, Calendar, Clock, Globe, MessageCircle, Car, Home, Smartphone, User, CheckCircle, AlertCircle, X, Sparkles } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, Send, Calendar, Clock, Globe, MessageCircle, Car, Home, Smartphone, User, CheckCircle, AlertCircle, X, Sparkles, Briefcase } from 'lucide-react';
 import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
@@ -66,12 +66,10 @@ const Contact = () => {
                 : 'bg-black/90 border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)]'
             }`}>
             
-            {/* Icon Box */}
             <div className={`p-2 rounded-full shrink-0 border ${notification.type === 'success' ? 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>
                 {notification.type === 'success' ? <Sparkles size={24} /> : <AlertCircle size={24} />}
             </div>
 
-            {/* Content */}
             <div className="flex-1 pt-1">
                 <h4 className={`font-bold text-base mb-1 tracking-wide uppercase ${notification.type === 'success' ? 'text-yellow-400' : 'text-red-400'}`}>
                     {notification.type === 'success' ? 'Request Sent' : 'Error'}
@@ -81,14 +79,11 @@ const Contact = () => {
                 </p>
             </div>
 
-            {/* Close Button */}
             <button onClick={() => setNotification(null)} className="text-gray-500 hover:text-white transition-colors pt-1">
                 <X size={20} />
             </button>
         </div>
       )}
-      {/* --------------------------------------- */}
-
 
       {/* Background Ambience */}
       <div className="fixed top-0 left-0 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
@@ -165,11 +160,25 @@ const Contact = () => {
             
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5 relative z-10">
               
+              {/* 1. Name */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Enter Your Name</label>
                 <input type="text" name="Name" required placeholder="Full Name" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
               </div>
 
+              {/* 2. Business Names (NEW) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Briefcase size={12}/> Business Name 1</label>
+                    <input type="text" name="businessname" placeholder="Primary Business" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Briefcase size={12}/> Business Name 2</label>
+                    <input type="text" name="businessname_1" placeholder="Secondary Business" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                  </div>
+              </div>
+
+              {/* 3. Gender & DOB */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><User size={12}/> Gender</label>
@@ -189,21 +198,37 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* 4. Vehicle Numbers (UPDATED - 3 Fields) */}
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Car size={12}/> Vehicle / Car Number</label>
-                <input type="text" name="Vehicle_Number" placeholder="Enter all your vehicle numbers" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Car size={12}/> Vehicle / Car Numbers</label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input type="text" name="Vehicle_Number" placeholder="Vehicle 1" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="Vehicle_Number_1" placeholder="Vehicle 2" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="Vehicle_Number_2" placeholder="Vehicle 3" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                </div>
               </div>
 
+              {/* 5. Mobile Numbers (UPDATED - 3 Fields) */}
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Smartphone size={12}/> Mobile Number</label>
-                <input type="text" name="Mobile_Number" required placeholder="Enter all mobile numbers" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Smartphone size={12}/> Mobile Numbers</label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input type="text" name="Mobile_Number" required placeholder="Mobile 1" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="Mobile_Number_1" placeholder="Mobile 2" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="Mobile_Number_2" placeholder="Mobile 3" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                </div>
               </div>
 
+               {/* 6. House Numbers (UPDATED - 3 Fields) */}
                <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Home size={12}/> House Number</label>
-                <input type="text" name="House_Number" placeholder="Enter all house numbers" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Home size={12}/> House Numbers</label>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <input type="text" name="House_Number" placeholder="House 1" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="House_Number_1" placeholder="House 2" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="House_Number_2" placeholder="House 3" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                </div>
               </div>
 
+              {/* 7. Message */}
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1">Your Message</label>
                 <textarea name="Message" rows="4" placeholder="How can we help you?" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all resize-none"></textarea>
