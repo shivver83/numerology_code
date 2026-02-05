@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
-  Calculator, Sparkles, RefreshCw, ChevronLeft, 
+  Calculator, Sparkles, RefreshCw, 
   User, Mail, Phone, Calendar, Users, Grid3X3 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-// --- HELPER LOGIC (From MainApp) ---
+// --- HELPER LOGIC ---
 const chaldeanMap = {
   A: 1, I: 1, J: 1, Q: 1, Y: 1,
   B: 2, K: 2, R: 2,
@@ -136,7 +136,7 @@ const FreeCalculator = () => {
       const firstNameChart = calculateChaldeanChart(firstName);
       const lastNameChart = calculateChaldeanChart(lastName);
 
-      // Save Data to API (Optional - kept from your logic)
+      // Save Data to API (Optional)
       try {
         await fetch('/api/submit', {
           method: 'POST',
@@ -199,13 +199,6 @@ const FreeCalculator = () => {
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans pt-10 pb-20 px-6">
       
-      {/* Back Button */}
-      <div className="max-w-4xl mx-auto mb-8">
-        <Link to="/" className="inline-flex items-center text-gray-400 hover:text-yellow-400 transition-colors">
-            <ChevronLeft size={20} /> Back to Home
-        </Link>
-      </div>
-
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <span className="text-purple-400 tracking-widest uppercase text-xs font-bold mb-2 block">Discover Your Destiny</span>
