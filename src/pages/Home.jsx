@@ -23,7 +23,7 @@ const Home = () => {
     <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
       
       {/* --- HERO SECTION --- */}
-      <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-0">
+      <div className="relative min-h-screen flex items-center overflow-hidden pt-32 md:pt-0"> {/* justify-center hataya taaki left align ho sake */}
         
         {/* Background Animation */}
         <div className="absolute inset-0">
@@ -46,27 +46,30 @@ const Home = () => {
           ))}
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto space-y-8">
-          <div className="inline-flex items-left gap-2 px-6 py-2 bg-white/10 border border-white/20 rounded-full text-yellow-400 text-sm font-medium backdrop-blur-md mb-4 animate-fade-in-down">
+        {/* Hero Content (UPDATED: Left Aligned) */}
+        <div className="relative z-10 flex flex-col items-start px-6 max-w-5xl mx-auto w-full space-y-8"> {/* text-center hataya, items-start lagaya */}
+          
+          {/* Pill Container */}
+          <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/10 border border-white/20 rounded-full text-yellow-400 text-sm font-medium backdrop-blur-md mb-4 animate-fade-in-down">
             <Sparkles size={16} className="animate-pulse" />
-            <span className="text-xs md:text-sm text-left">Professional Numerology</span>
+            <span className="text-xs md:text-sm">Professional Numerology</span>
           </div>
 
-          <h1 className="text-5xl md:text-8xl font-bold leading-tight tracking-tight animate-fade-in-up">
+          <h1 className="text-5xl md:text-8xl font-bold leading-tight tracking-tight animate-fade-in-up text-left">
             Align Your Numbers. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 drop-shadow-2xl">
               Transform Your Life.
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in-up delay-100">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl animate-fade-in-up delay-100 text-left"> {/* mx-auto hataya */}
             Professional Numerology by Amit Gupta. Unlock your true potential through the ancient science of numbers.
           </p>
 
           <div className="pt-8 animate-fade-in-up delay-200">
             <Link to="/journey">
-              <button className="px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_40px_rgba(168,85,247,0.5)] flex items-center gap-3 mx-auto">
+              {/* mx-auto hataya taaki button left me rahe */}
+              <button className="px-10 py-5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_40px_rgba(168,85,247,0.5)] flex items-center gap-3">
                 Get Your Personal Reading <ArrowRight />
               </button>
             </Link>
