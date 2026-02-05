@@ -197,7 +197,8 @@ const FreeCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans pt-10 pb-20 px-6">
+    // CHANGE HERE: Changed pt-10 to pt-32 to clear the fixed navbar
+    <div className="min-h-screen bg-[#050505] text-white font-sans pt-32 pb-20 px-6">
       
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
