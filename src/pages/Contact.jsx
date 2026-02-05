@@ -220,11 +220,11 @@ const Contact = () => {
 
                {/* 6. House Numbers (UPDATED - 3 Fields) */}
                <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Home size={12}/> House Numbers</label>
+                <label className="text-xs font-bold uppercase tracking-wider text-gray-500 ml-1 flex items-center gap-1"><Home size={12}/> House/Plot/Shop Numbers</label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <input type="text" name="House_Number" placeholder="House 1" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
-                    <input type="text" name="House_Number_1" placeholder="House 2" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
-                    <input type="text" name="House_Number_2" placeholder="House 3" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="House_Number" placeholder="House/Plot/Shop" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="House_Number_1" placeholder="House/Plot/Shop" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
+                    <input type="text" name="House_Number_2" placeholder="House/Plot/Shop" className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:border-purple-500 focus:bg-white/10 outline-none transition-all" />
                 </div>
               </div>
 
