@@ -48,7 +48,7 @@ const Home = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto space-y-8">
-          <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/10 border border-white/20 rounded-full text-yellow-400 text-sm font-medium backdrop-blur-md mb-4 animate-fade-in-down">
+          <div className="inline-flex items-left gap-2 px-6 py-2 bg-white/10 border border-white/20 rounded-full text-yellow-400 text-sm font-medium backdrop-blur-md mb-4 animate-fade-in-down">
             <Sparkles size={16} className="animate-pulse" />
             <span className="text-xs md:text-sm text-left">Professional Numerology</span>
           </div>
