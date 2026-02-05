@@ -64,9 +64,11 @@ const FreeCalculator = () => {
     gender: ''
   });
 
-  // Results State
   const [results, setResults] = useState(null); 
   const [loading, setLoading] = useState(false);
+
+  // --- GOOGLE SCRIPT URL ---
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzir-aXNnbI_t-iK950WTOdQm7ddUei29u7tTxR6V2a4N1QNgHS58FX0dsHnJ7vSNw_6Q/exec";
 
   // --- HANDLERS ---
   const handleInputChange = (e) => {
@@ -116,14 +118,44 @@ const FreeCalculator = () => {
     return analysis;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.dateOfBirth) return;
 
     setLoading(true);
 
-    // Simulate Calculation Delay for effect
-    setTimeout(async () => {
+    // 1. Prepare Data for Google Sheet
+    const dataToSend = new FormData();
+    
+    // Explicitly send to Sheet2
+    dataToSend.append('sheetName', 'Sheet2'); 
+
+    dataToSend.append('Name', formData.name);
+    dataToSend.append('Gender', formData.gender);
+    dataToSend.append('DOB', formData.dateOfBirth);
+    dataToSend.append('Email', formData.email);
+    dataToSend.append('Mobile_Number', formData.phone);
+    dataToSend.append('Message', 'Calculated Free Numerology');
+
+    // 2. Send Data to Google Sheet
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: dataToSend,
+        mode: "no-cors"
+    })
+    .then(() => {
+        // Data save hone ke baad calculation perform karein
+        performCalculation();
+    })
+    .catch((error) => {
+        console.error("Error saving data:", error);
+        // Agar error aaye tab bhi calculation dikha dein
+        performCalculation();
+    });
+  };
+
+  const performCalculation = () => {
+    setTimeout(() => {
       const lifePathNumber = calculateLifePathNumber(formData.dateOfBirth);
       const driver = calculateDriverNumber(formData.dateOfBirth);
       const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender);
@@ -136,24 +168,6 @@ const FreeCalculator = () => {
       const firstNameChart = calculateChaldeanChart(firstName);
       const lastNameChart = calculateChaldeanChart(lastName);
 
-      // Save Data to API (Optional)
-      try {
-        await fetch('/api/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.name,
-            date_of_birth: formData.dateOfBirth,
-            life_path_number: lifePathNumber,
-            email: formData.email,
-            phone: formData.phone,
-            gender: formData.gender
-          })
-        });
-      } catch (err) {
-        console.error("API Submission failed", err);
-      }
-
       setResults({
         driver,
         conductor: lifePathNumber,
@@ -165,7 +179,7 @@ const FreeCalculator = () => {
       });
       
       setLoading(false);
-    }, 1500);
+    }, 1000);
   };
 
   // Render Loshu Cell with Theme Colors
@@ -197,7 +211,7 @@ const FreeCalculator = () => {
   };
 
   return (
-    // CHANGE HERE: Changed pt-10 to pt-32 to clear the fixed navbar
+    // Top Padding 'pt-32' ensures content starts below the fixed navbar
     <div className="min-h-screen bg-[#050505] text-white font-sans pt-32 pb-20 px-6">
       
       <div className="max-w-4xl mx-auto">
