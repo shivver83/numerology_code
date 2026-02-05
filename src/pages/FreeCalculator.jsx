@@ -1,12 +1,14 @@
+// src/FreeCalculator.jsx
 import React, { useState } from 'react';
-import { Calculator, Sparkles, RefreshCw } from 'lucide-react';
+import { Calculator, Sparkles, RefreshCw, ChevronLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const FreeCalculator = () => {
   const [dob, setDob] = useState('');
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // --- GENERAL MEANINGS (Sample Data) ---
+  // --- GENERAL MEANINGS ---
   const interpretations = {
     1: { title: "The Leader (Sun)", desc: "You are independent, ambitious, and a born leader. You have the drive to succeed and prefer to pave your own path rather than follow others." },
     2: { title: "The Peacemaker (Moon)", desc: "You are sensitive, diplomatic, and cooperative. You thrive in partnerships and have a natural ability to understand others' emotions." },
@@ -31,7 +33,7 @@ const FreeCalculator = () => {
       const digits = dob.replace(/-/g, '').split('').map(Number);
       let sum = digits.reduce((a, b) => a + b, 0);
 
-      // Reduce to single digit (unless 11, 22, 33 - but for simple sample we do single)
+      // Reduce to single digit
       while (sum > 9) {
         const sumDigits = sum.toString().split('').map(Number);
         sum = sumDigits.reduce((a, b) => a + b, 0);
@@ -43,9 +45,16 @@ const FreeCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-[#050505] text-white font-sans pt-10 pb-20 px-6">
+      
+      {/* Back Button */}
+      <div className="max-w-3xl mx-auto mb-8">
+        <Link to="/" className="inline-flex items-center text-gray-400 hover:text-yellow-400 transition-colors">
+            <ChevronLeft size={20} /> Back to Home
+        </Link>
+      </div>
+
       <div className="max-w-3xl mx-auto">
-        
         {/* Header */}
         <div className="text-center mb-12">
           <span className="text-purple-400 tracking-widest uppercase text-xs font-bold mb-2 block">Discover Yourself</span>
@@ -118,7 +127,6 @@ const FreeCalculator = () => {
             </div>
           )}
         </div>
-
       </div>
     </div>
   );
