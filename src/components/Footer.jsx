@@ -20,11 +20,10 @@ const Footer = () => {
   }, []);
 
   return (
-    // CHANGE 1: Background updated to #000F05 (Blackish Green)
-    // border-t color made subtle green
-    <footer className="bg-[#000F05] border-t border-emerald-900/30 pt-20 pb-10 font-sans relative overflow-hidden">
+    // CHANGE 1: Main background set to Ultra-Dark Green (#001900)
+    <footer className="bg-[#001900] border-t border-emerald-900/30 pt-20 pb-10 font-sans relative overflow-hidden">
       
-      {/* Background Glow - made slightly more visible against black */}
+      {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -83,8 +82,8 @@ const Footer = () => {
             </ul>
 
             {/* QR CODE WIDGET */}
-            {/* CHANGE 2: Darker card background for contrast */}
-            <div className="flex items-center gap-4 bg-[#051F15] border border-emerald-900/30 p-3 rounded-xl max-w-[250px] hover:bg-[#08291b] transition-colors group">
+            {/* CHANGE 2: Updated inner card background to #07220d for slight contrast */}
+            <div className="flex items-center gap-4 bg-[#07220d] border border-emerald-900/30 p-3 rounded-xl max-w-[250px] hover:bg-[#092b1f] transition-colors group">
                 <div className="bg-white p-1 rounded-lg shrink-0">
                     <img 
                         src="/images/qr-code.jpg" 
@@ -114,8 +113,8 @@ const Footer = () => {
               <input 
                 type="email" 
                 placeholder="Your email address" 
-                // CHANGE 3: Darker Input Background
-                className="w-full bg-[#051F15] border border-emerald-900/40 rounded-xl py-3 px-4 text-white text-sm focus:border-emerald-500 outline-none transition-all placeholder-gray-600"
+                // CHANGE 3: Updated input background to #07220d
+                className="w-full bg-[#07220d] border border-emerald-900/40 rounded-xl py-3 px-4 text-white text-sm focus:border-emerald-500 outline-none transition-all placeholder-gray-600"
               />
               <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-emerald-600 rounded-lg hover:bg-emerald-500 transition-colors text-white">
                 <ArrowRight size={16} />
@@ -123,7 +122,8 @@ const Footer = () => {
             </div>
 
             {/* HIT COUNTER */}
-            <div className="flex items-center gap-3 p-3 bg-[#051F15] border border-emerald-900/30 rounded-xl hover:bg-[#08291b] transition-colors">
+            {/* CHANGE 4: Updated counter background to #07220d */}
+            <div className="flex items-center gap-3 p-3 bg-[#07220d] border border-emerald-900/30 rounded-xl hover:bg-[#092b1f] transition-colors">
                 <div className="p-2 bg-yellow-500/10 rounded-lg text-yellow-500 shrink-0">
                     <Eye size={20} />
                 </div>
@@ -165,8 +165,8 @@ const SocialIcon = ({ icon, href, color }) => (
     href={href} 
     target="_blank" 
     rel="noopener noreferrer"
-    // CHANGE 4: Darker background for icons
-    className={`w-10 h-10 rounded-full bg-[#051F15] border border-emerald-900/30 flex items-center justify-center text-gray-400 transition-all hover:-translate-y-1 ${color}`}
+    // CHANGE 5: Updated icon background to #07220d
+    className={`w-10 h-10 rounded-full bg-[#07220d] border border-emerald-900/30 flex items-center justify-center text-gray-400 transition-all hover:-translate-y-1 ${color}`}
   >
     {icon}
   </a>
