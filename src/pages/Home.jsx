@@ -20,7 +20,7 @@ const Home = () => {
   ];
 
   return (
-    // UPDATED: Main background changed to Deep Green (#022c22)
+    // Global Background: Deep Dark Green
     <div className="min-h-screen bg-[#022c22] text-white font-sans overflow-x-hidden">
       
       {/* --- HERO SECTION --- */}
@@ -50,15 +50,15 @@ const Home = () => {
         {/* Content Wrapper */}
         <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl mx-auto w-full space-y-8"> 
           
-          {/* UPDATED: Pill with Green/Gold styling */}
+          {/* Pill Tag */}
           <div className="self-start inline-flex items-center gap-2 px-6 py-2 bg-white/10 border border-white/20 rounded-full text-yellow-400 text-sm font-medium backdrop-blur-md mb-4 animate-fade-in-down">
             <Sparkles size={16} className="animate-pulse" />
             <span className="text-xs md:text-sm">Professional Numerology</span>
           </div>
 
+          {/* H1 Heading */}
           <h1 className="text-5xl md:text-8xl font-bold leading-tight tracking-tight animate-fade-in-up">
             Align Your Numbers. <br />
-            {/* UPDATED: Gradient text to Gold/Emerald */}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-green-400 to-emerald-500 drop-shadow-2xl">
               Transform Your Life.
             </span>
@@ -70,7 +70,6 @@ const Home = () => {
 
           <div className="pt-8 animate-fade-in-up delay-200">
             <Link to="/journey">
-              {/* UPDATED: Button gradient to Green/Emerald */}
               <button className="px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_40px_rgba(16,185,129,0.5)] flex items-center gap-3 mx-auto border border-green-500/30">
                 Get Your Personal Reading <ArrowRight />
               </button>
@@ -83,14 +82,12 @@ const Home = () => {
 
 
       {/* --- INTRODUCTION SECTION --- */}
-      {/* UPDATED: Background to Green variant */}
-      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden">
-        {/* UPDATED: Glow to Green */}
+      {/* Added border-t for separation */}
+      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden border-t border-white/10">
         <div className="absolute right-0 top-20 w-[300px] h-[300px] bg-green-600/10 rounded-full blur-[80px]"></div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div className="relative group z-10">
-            {/* UPDATED: Gradient glow behind text */}
             <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500/20 to-green-600/20 rounded-3xl blur-xl opacity-50"></div>
             <div className="relative">
               <h2 className="text-4xl font-bold mb-6">Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-yellow-400">Happiness Ccreattions</span></h2>
@@ -115,9 +112,8 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Right Side: The Cosmic Wheel */}
+          {/* Right Side: The Cosmic Wheel (Green Theme) */}
           <div className="flex justify-center items-center relative h-[400px]">
-             {/* UPDATED: Gradients to Green/Yellow */}
              <div className="absolute inset-0 bg-gradient-to-tr from-green-500/20 to-yellow-500/10 rounded-full blur-[60px] animate-pulse"></div>
              <div className="absolute w-[350px] h-[350px] border border-white/5 rounded-full animate-spin-slow flex justify-center items-center">
                 <div className="absolute top-0 w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_15px_#10b981]"></div>
@@ -127,11 +123,9 @@ const Home = () => {
                 <div className="absolute left-0 w-4 h-4 bg-yellow-400 rounded-full shadow-[0_0_20px_gold]"></div>
              </div>
              <div className="absolute w-[200px] h-[200px] border border-white/10 rounded-full flex justify-center items-center bg-[#064e3b]/50 backdrop-blur-sm">
-                {/* UPDATED: Inner squares to Green/Teal */}
                 <div className="absolute w-[140px] h-[140px] border border-green-400/30 rotate-45 transform"></div>
                 <div className="absolute w-[140px] h-[140px] border border-teal-400/30 rotate-12 transform"></div>
              </div>
-             {/* UPDATED: Center Circle to Deep Green */}
              <div className="relative z-10 w-24 h-24 bg-gradient-to-br from-[#064e3b] to-[#022c22] rounded-full border border-white/20 flex items-center justify-center shadow-2xl shadow-green-900/50">
                 <Sparkles size={40} className="text-yellow-400 animate-pulse" />
              </div>
@@ -145,15 +139,13 @@ const Home = () => {
 
 
       {/* --- WHY CHOOSE US --- */}
-      {/* UPDATED: Background to Deep Green */}
-      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden">
-        {/* UPDATED: Blob to Green */}
+      {/* Changed bg-black to Green + Border Separation */}
+      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden border-t border-white/10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-900/20 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose Us?</h2>
-            {/* UPDATED: Divider to Green/Emerald */}
             <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full"></div>
           </div>
 
@@ -178,29 +170,28 @@ const Home = () => {
       </section>
 
       {/* --- SCROLLING TESTIMONIALS --- */}
-      {/* Note: Ensure TestimonialScroll component is also theme-compatible if it has backgrounds */}
-      <TestimonialScroll />
+      {/* Wrapped in Green Section with Divider */}
+      <section className="bg-[#022c22] border-t border-white/10 py-10">
+        <TestimonialScroll />
+      </section>
 
-      {/* --- SERVICES OVERVIEW (CREATIVE) --- */}
-      {/* UPDATED: Background to Deep Green */}
-      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden">
+      {/* --- SERVICES OVERVIEW --- */}
+      {/* Changed bg-[#050b14] to Green + Border Separation */}
+      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden border-t border-white/10">
         
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            {/* UPDATED: Blobs to Green/Teal */}
             <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-green-900/20 rounded-full blur-[100px]"></div>
             <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-teal-900/20 rounded-full blur-[100px]"></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-20">
-            {/* UPDATED: Pill to Green */}
             <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-green-400 tracking-widest uppercase text-xs font-bold mb-4 backdrop-blur-md">
               Our Expertise
             </span>
             <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">
               Services We Offer
             </h2>
-            {/* UPDATED: Divider to Green/Emerald */}
             <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto rounded-full mt-6"></div>
           </div>
 
@@ -221,9 +212,9 @@ const Home = () => {
               icon={<Baby size={32} />}
               title="New Born Numerology"
               desc="The first gift you give your child is their name. Ensure it resonates perfectly with their birth chart (Kundli). A harmonized name establishes a strong foundation for health and success."
-              color="text-teal-400" // UPDATED
-              gradient="from-teal-500/20 to-emerald-500/5" // UPDATED
-              border="group-hover:border-teal-500/50" // UPDATED
+              color="text-teal-400"
+              gradient="from-teal-500/20 to-emerald-500/5"
+              border="group-hover:border-teal-500/50"
             />
 
             <ServiceCard 
@@ -231,9 +222,9 @@ const Home = () => {
               icon={<PenTool size={32} />}
               title="Name Correction"
               desc="Is your spelling hindering your growth? We scientifically analyze and adjust your name's vibration to remove blockages and attract career opportunities without changing documents."
-              color="text-green-400" // UPDATED
-              gradient="from-green-500/20 to-emerald-500/5" // UPDATED
-              border="group-hover:border-green-500/50" // UPDATED
+              color="text-green-400"
+              gradient="from-green-500/20 to-emerald-500/5"
+              border="group-hover:border-green-500/50"
             />
 
             <ServiceCard 
@@ -241,9 +232,9 @@ const Home = () => {
               icon={<Briefcase size={32} />}
               title="Business Numerology"
               desc="Your business name defines its market energy. We help you choose a lucky brand name, logo colors, and auspicious launch dates to ensure maximum profitability."
-              color="text-emerald-300" // UPDATED
-              gradient="from-emerald-500/20 to-teal-500/5" // UPDATED
-              border="group-hover:border-emerald-500/50" // UPDATED
+              color="text-emerald-300"
+              gradient="from-emerald-500/20 to-teal-500/5"
+              border="group-hover:border-emerald-500/50"
             />
 
             <ServiceCard 
@@ -251,9 +242,9 @@ const Home = () => {
               icon={<Heart size={32} />}
               title="Relationship Match"
               desc="Go beyond traditional matching. We analyze the vibration compatibility between partners' numbers to assess emotional, mental, and financial harmony."
-              color="text-yellow-500" // UPDATED to Gold/Yellow
-              gradient="from-yellow-500/20 to-amber-500/5" // UPDATED
-              border="group-hover:border-yellow-500/50" // UPDATED
+              color="text-yellow-500"
+              gradient="from-yellow-500/20 to-amber-500/5"
+              border="group-hover:border-yellow-500/50"
             />
 
           </div>
@@ -286,7 +277,7 @@ const Home = () => {
 // --- Reusable Components ---
 
 const FeatureCard = ({ icon, title, desc }) => (
-  // UPDATED: Card background to darker green tint
+  // Updated Card BG to Green tint
   <div className="bg-[#064e3b]/40 border border-white/10 p-8 rounded-2xl hover:bg-white/5 transition-all hover:-translate-y-2 group">
     <div className="mb-6 p-4 bg-white/5 rounded-xl inline-block group-hover:scale-110 transition-transform">{icon}</div>
     <h3 className="text-xl font-bold mb-3 text-white">{title}</h3>
@@ -299,7 +290,7 @@ const ServiceCard = ({ number, icon, title, desc, color, gradient, border }) => 
   <div className={`group relative h-full p-1 rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all duration-500 hover:-translate-y-2`}>
     
     {/* Inner Card Content */}
-    {/* UPDATED: Background to Deep Green */}
+    {/* Updated BG to Green tint */}
     <div className={`relative h-full bg-[#064e3b]/20 rounded-xl p-8 overflow-hidden border border-white/5 ${border} transition-colors duration-500 flex flex-col`}>
       
       {/* 1. Background Gradient Blob */}
