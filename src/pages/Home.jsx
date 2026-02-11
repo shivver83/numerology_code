@@ -20,8 +20,8 @@ const Home = () => {
   ];
 
   return (
-    // Global Background: Deep Dark Green
-    <div className="min-h-screen bg-[#022c22] text-white font-sans overflow-x-hidden">
+    // CHANGE 1: Global Background set to Ultra Dark Green (#001900)
+    <div className="min-h-screen bg-[#001900] text-white font-sans overflow-x-hidden">
       
       {/* --- HERO SECTION --- */}
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-0"> 
@@ -77,13 +77,14 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#022c22] to-transparent pointer-events-none"></div>
+        {/* CHANGE 2: Gradient fade updated to match #001900 */}
+        <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#001900] to-transparent pointer-events-none"></div>
       </div>
 
 
       {/* --- INTRODUCTION SECTION --- */}
-      {/* Added border-t for separation */}
-      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden border-t border-white/10">
+      {/* CHANGE 3: Background & Border Updated */}
+      <section className="py-24 px-6 bg-[#001900] relative overflow-hidden border-t border-emerald-900/30">
         <div className="absolute right-0 top-20 w-[300px] h-[300px] bg-green-600/10 rounded-full blur-[80px]"></div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
@@ -112,7 +113,7 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Right Side: The Cosmic Wheel (Green Theme) */}
+          {/* Right Side: The Cosmic Wheel */}
           <div className="flex justify-center items-center relative h-[400px]">
              <div className="absolute inset-0 bg-gradient-to-tr from-green-500/20 to-yellow-500/10 rounded-full blur-[60px] animate-pulse"></div>
              <div className="absolute w-[350px] h-[350px] border border-white/5 rounded-full animate-spin-slow flex justify-center items-center">
@@ -126,7 +127,8 @@ const Home = () => {
                 <div className="absolute w-[140px] h-[140px] border border-green-400/30 rotate-45 transform"></div>
                 <div className="absolute w-[140px] h-[140px] border border-teal-400/30 rotate-12 transform"></div>
              </div>
-             <div className="relative z-10 w-24 h-24 bg-gradient-to-br from-[#064e3b] to-[#022c22] rounded-full border border-white/20 flex items-center justify-center shadow-2xl shadow-green-900/50">
+             {/* CHANGE 4: Center circle gradient updated */}
+             <div className="relative z-10 w-24 h-24 bg-gradient-to-br from-[#064e3b] to-[#001900] rounded-full border border-white/20 flex items-center justify-center shadow-2xl shadow-green-900/50">
                 <Sparkles size={40} className="text-yellow-400 animate-pulse" />
              </div>
              {/* Floating Numbers */}
@@ -139,8 +141,8 @@ const Home = () => {
 
 
       {/* --- WHY CHOOSE US --- */}
-      {/* Changed bg-black to Green + Border Separation */}
-      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden border-t border-white/10">
+      {/* CHANGE 5: Background & Border Updated */}
+      <section className="py-24 px-6 bg-[#001900] relative overflow-hidden border-t border-emerald-900/30">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-900/20 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -170,14 +172,14 @@ const Home = () => {
       </section>
 
       {/* --- SCROLLING TESTIMONIALS --- */}
-      {/* Wrapped in Green Section with Divider */}
-      <section className="bg-[#022c22] border-t border-white/10 py-10">
+      {/* CHANGE 6: Background & Border Updated */}
+      <section className="bg-[#001900] border-t border-emerald-900/30 py-10">
         <TestimonialScroll />
       </section>
 
       {/* --- SERVICES OVERVIEW --- */}
-      {/* Changed bg-[#050b14] to Green + Border Separation */}
-      <section className="py-24 px-6 bg-[#022c22] relative overflow-hidden border-t border-white/10">
+      {/* CHANGE 7: Background & Border Updated */}
+      <section className="py-24 px-6 bg-[#001900] relative overflow-hidden border-t border-emerald-900/30">
         
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div className="absolute top-[10%] left-[5%] w-[500px] h-[500px] bg-green-900/20 rounded-full blur-[100px]"></div>
@@ -277,26 +279,25 @@ const Home = () => {
 // --- Reusable Components ---
 
 const FeatureCard = ({ icon, title, desc }) => (
-  // Updated Card BG to Green tint
-  <div className="bg-[#064e3b]/40 border border-white/10 p-8 rounded-2xl hover:bg-white/5 transition-all hover:-translate-y-2 group">
+  // CHANGE 8: Card BG updated to darker tint (#07220d)
+  <div className="bg-[#07220d] border border-emerald-900/30 p-8 rounded-2xl hover:bg-[#092b1f] transition-all hover:-translate-y-2 group">
     <div className="mb-6 p-4 bg-white/5 rounded-xl inline-block group-hover:scale-110 transition-transform">{icon}</div>
     <h3 className="text-xl font-bold mb-3 text-white">{title}</h3>
     <p className="text-gray-400 leading-relaxed">{desc}</p>
   </div>
 );
 
-// --- UPDATED SERVICE CARD (Top Right Gold Number) ---
 const ServiceCard = ({ number, icon, title, desc, color, gradient, border }) => (
   <div className={`group relative h-full p-1 rounded-2xl bg-gradient-to-b from-white/10 to-transparent transition-all duration-500 hover:-translate-y-2`}>
     
     {/* Inner Card Content */}
-    {/* Updated BG to Green tint */}
-    <div className={`relative h-full bg-[#064e3b]/20 rounded-xl p-8 overflow-hidden border border-white/5 ${border} transition-colors duration-500 flex flex-col`}>
+    {/* CHANGE 9: Inner BG updated to darker tint (#07220d) */}
+    <div className={`relative h-full bg-[#07220d] rounded-xl p-8 overflow-hidden border border-emerald-900/30 ${border} transition-colors duration-500 flex flex-col`}>
       
       {/* 1. Background Gradient Blob */}
       <div className={`absolute -right-20 -top-20 w-64 h-64 bg-gradient-to-br ${gradient} rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
 
-      {/* 2. NUMBER (Updated: Top Right, Smaller, Golden) */}
+      {/* 2. NUMBER */}
       <div className="absolute top-4 right-6 text-6xl font-serif font-bold text-yellow-500/10 group-hover:text-yellow-400/20 select-none z-0 transition-all duration-500">
         {number}
       </div>
