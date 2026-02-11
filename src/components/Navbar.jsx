@@ -43,7 +43,8 @@ const Navbar = () => {
       {/* --- DESKTOP NAVBAR --- */}
       <nav 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? 'bg-black/80 backdrop-blur-md py-3 border-b border-white/10' : 'bg-transparent py-5'
+          // UPDATED: Changed bg-black/80 to Green tint bg-[#022c22]/90
+          scrolled ? 'bg-[#022c22]/90 backdrop-blur-md py-3 border-b border-white/10' : 'bg-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -53,7 +54,6 @@ const Navbar = () => {
               <img 
                  src="/images/logo.png" 
                  alt="Happiness Ccreattions" 
-                 // Size thoda adjust kiya hai taaki navbar me fit aaye
                  className="w-12 h-12 object-contain rounded-lg hover:scale-105 transition-transform"
               />
               <span className="text-xl font-bold text-white tracking-wide">
@@ -69,7 +69,7 @@ const Navbar = () => {
                 key={link.name} 
                 to={link.path}
                 className={`text-sm font-medium tracking-widest uppercase hover:text-yellow-400 transition-colors relative group ${
-                    location.pathname === link.path ? 'text-yellow-400' : 'text-gray-300'
+                  location.pathname === link.path ? 'text-yellow-400' : 'text-gray-300'
                 }`}
               >
                 {link.name}
@@ -80,7 +80,8 @@ const Navbar = () => {
             {/* Desktop Calculator Link */}
             <Link 
                 to="/calculator" 
-                className="text-sm font-medium tracking-widest uppercase text-purple-400 hover:text-white transition-colors flex items-center gap-1"
+                // UPDATED: Changed text-purple-400 to text-green-400
+                className="text-sm font-medium tracking-widest uppercase text-green-400 hover:text-white transition-colors flex items-center gap-1"
             >
                 <Calculator size={16} /> Free Calc
             </Link>
@@ -110,13 +111,14 @@ const Navbar = () => {
       ></div>
 
       {/* 2. Floating Menu Drawer (Left Side) */}
+      {/* UPDATED: Changed bg-[#0f172a] to bg-[#022c22] (Dark Green) */}
       <div 
-        className={`fixed top-6 bottom-6 left-6 z-[70] w-[85%] max-w-[320px] bg-[#0f172a]/95 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden transition-transform duration-500 md:hidden ${
+        className={`fixed top-6 bottom-6 left-6 z-[70] w-[85%] max-w-[320px] bg-[#022c22]/95 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden transition-transform duration-500 md:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-[150%]'
         }`}
       >
-        {/* Decorative Internal Glow */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500/20 rounded-full blur-[60px] pointer-events-none"></div>
+        {/* Decorative Internal Glow - UPDATED Colors */}
+        <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/20 rounded-full blur-[60px] pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-40 h-40 bg-yellow-500/10 rounded-full blur-[60px] pointer-events-none"></div>
 
         {/* Menu Header (Inside Drawer) */}
@@ -164,9 +166,9 @@ const Navbar = () => {
             {/* ACTION BUTTONS (Highlighted Boxes) */}
             <div className="space-y-4 pt-4 border-t border-white/10">
                 
-                {/* 1. Free Calculator (New Addition) */}
-                <Link to="/calculator" className="flex items-center gap-3 p-4 bg-purple-900/20 border border-purple-500/30 rounded-2xl group hover:bg-purple-900/30 transition-all">
-                    <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+                {/* 1. Free Calculator - UPDATED: Changed Purple to Green Styles */}
+                <Link to="/calculator" className="flex items-center gap-3 p-4 bg-green-900/20 border border-green-500/30 rounded-2xl group hover:bg-green-900/30 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 transition-transform">
                         <Calculator size={20} />
                     </div>
                     <div>
