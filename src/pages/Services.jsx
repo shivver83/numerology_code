@@ -84,7 +84,6 @@ const Services = () => {
       iconBg: "bg-indigo-500",
       bulletColor: "text-indigo-400"
     },
-    // --- NEW SERVICE 06 ADDED HERE ---
     {
       id: "06",
       title: "One-to-One Consultation",
@@ -104,11 +103,12 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans pt-32 pb-20 px-6 relative overflow-hidden">
+    // CHANGE 1: Main Background set to Ultra Dark Green (#001900)
+    <div className="min-h-screen bg-[#001900] text-white font-sans pt-32 pb-20 px-6 relative overflow-hidden">
       
-      {/* Background Ambience */}
-      <div className="fixed top-0 left-0 w-[800px] h-[800px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
-      <div className="fixed bottom-0 right-0 w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* Background Ambience - Updated to Green/Emerald tones */}
+      <div className="fixed top-0 left-0 w-[800px] h-[800px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
+      <div className="fixed bottom-0 right-0 w-[800px] h-[800px] bg-green-900/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -116,12 +116,15 @@ const Services = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6">
           <div className="animate-fade-in-down">
             <div className="flex items-center gap-2 mb-4">
-              <span className="h-px w-8 bg-purple-500"></span>
-              <span className="text-purple-400 uppercase tracking-widest text-xs font-bold">Our Expertise</span>
+              {/* CHANGE 2: Header accent colors to Emerald */}
+              <span className="h-px w-8 bg-emerald-500"></span>
+              <span className="text-emerald-400 uppercase tracking-widest text-xs font-bold">Our Expertise</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               Crafting <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 drop-shadow-lg">
+
+              {/* CHANGE 3: Main Gradient to Gold/Green */}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-green-400 to-emerald-500 drop-shadow-lg">
                 Your Destiny.
               </span>
             </h1>
@@ -136,7 +139,8 @@ const Services = () => {
           {services.map((service, index) => (
             <div 
               key={service.id} 
-              className={`group relative p-8 rounded-[2rem] border border-white/5 bg-[#0f1014] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-white/20 ${service.color} flex flex-col h-full`}
+              // CHANGE 4: Card Base Background (#07220d) and Border
+              className={`group relative p-8 rounded-[2rem] border border-emerald-900/30 bg-[#07220d] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-white/20 ${service.color} flex flex-col h-full`}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${service.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl`}></div>
 
@@ -179,8 +183,9 @@ const Services = () => {
                 </div>
 
                 {/* Bottom CTA */}
-                <Link to="/contact" className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between group-hover:border-white/20 transition-colors shrink-0 cursor-pointer">
-                  <span className="text-xs font-bold uppercase tracking-widest text-purple-400 group-hover:text-white transition-colors">Book Consultation</span>
+                <Link to="/contact" className="mt-8 pt-6 border-t border-emerald-900/30 flex items-center justify-between group-hover:border-white/20 transition-colors shrink-0 cursor-pointer">
+                  {/* CHANGE 5: CTA Text to Emerald/Green theme */}
+                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 group-hover:text-white transition-colors">Book Consultation</span>
                   <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
                     <ArrowUpRight size={16} />
                   </div>
@@ -193,7 +198,8 @@ const Services = () => {
         {/* --- BOTTOM MAIN CTA --- */}
         <div className="mt-24 flex justify-center">
             <Link to="/journey" className="group relative px-10 py-5 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                {/* CHANGE 6: Hover gradient to Green/Emerald */}
+                <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
                 <span className="relative z-10 flex items-center gap-2">
                     Start Your Journey <Sparkles size={20} />
                 </span>
