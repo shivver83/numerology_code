@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight, MessageCircle, ScanLine, Eye } from 'lucide-react';
 
 const Footer = () => {
-  // --- HIT COUNTER LOGIC START ---
+  // --- HIT COUNTER LOGIC ---
   const [views, setViews] = useState(0);
-  
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzir-aXNnbI_t-iK950WTOdQm7ddUei29u7tTxR6V2a4N1QNgHS58FX0dsHnJ7vSNw_6Q/exec"; 
 
   useEffect(() => {
@@ -19,14 +18,14 @@ const Footer = () => {
         setViews(1350); 
       });
   }, []);
-  // --- HIT COUNTER LOGIC END ---
 
   return (
-    // UPDATED: Background changed to Deep Green + Top Border
-    <footer className="bg-[#022c22] border-t border-white/10 pt-20 pb-10 font-sans relative overflow-hidden">
+    // CHANGE 1: Background updated to #000F05 (Blackish Green)
+    // border-t color made subtle green
+    <footer className="bg-[#000F05] border-t border-emerald-900/30 pt-20 pb-10 font-sans relative overflow-hidden">
       
-      {/* UPDATED: Background Glow to Green */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-green-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* Background Glow - made slightly more visible against black */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -46,10 +45,10 @@ const Footer = () => {
               Transforming Lives Through Numerology. Unlock your true potential with Amit Gupta's expert guidance.
             </p>
             <div className="flex gap-4">
-              <SocialIcon icon={<Youtube size={20} />} href="https://www.youtube.com/@happinessccreattions9" color="hover:bg-red-600" />
-              <SocialIcon icon={<Instagram size={20} />} href="https://www.instagram.com/happinessccreattions/" color="hover:bg-pink-600" />
-              <SocialIcon icon={<Facebook size={20} />} href="https://www.facebook.com/9amitgupta" color="hover:bg-blue-600" />
-              <SocialIcon icon={<MessageCircle size={20} />} href="https://whatsapp.com/channel/0029VbBwGqG6LwHtOqjVnu3h" color="hover:bg-green-600" />
+              <SocialIcon icon={<Youtube size={20} />} href="https://www.youtube.com/@happinessccreattions9" color="hover:bg-red-600 hover:text-white" />
+              <SocialIcon icon={<Instagram size={20} />} href="https://www.instagram.com/happinessccreattions/" color="hover:bg-pink-600 hover:text-white" />
+              <SocialIcon icon={<Facebook size={20} />} href="https://www.facebook.com/9amitgupta" color="hover:bg-blue-600 hover:text-white" />
+              <SocialIcon icon={<MessageCircle size={20} />} href="https://whatsapp.com/channel/0029VbBwGqG6LwHtOqjVnu3h" color="hover:bg-green-600 hover:text-white" />
             </div>
           </div>
 
@@ -69,23 +68,23 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-bold mb-6">Contact Us</h3>
             <ul className="space-y-4 mb-6">
-              <li className="flex items-start gap-3 text-gray-400 text-sm">
-                {/* UPDATED: Icon Color to Green/Emerald */}
-                <MapPin size={18} className="text-emerald-400 shrink-0 mt-1" />
+              <li className="flex items-start gap-3 text-gray-400 text-sm hover:text-emerald-300 transition-colors">
+                <MapPin size={18} className="text-emerald-500 shrink-0 mt-1" />
                 <span>1022, Siddhi Block, Mahagunpuram, NH 24, Ghaziabad 201002</span>
               </li>
-              <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Phone size={18} className="text-emerald-400 shrink-0" />
+              <li className="flex items-center gap-3 text-gray-400 text-sm hover:text-emerald-300 transition-colors">
+                <Phone size={18} className="text-emerald-500 shrink-0" />
                 <span>+91-7428552116</span>
               </li>
-              <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Mail size={18} className="text-emerald-400 shrink-0" />
+              <li className="flex items-center gap-3 text-gray-400 text-sm hover:text-emerald-300 transition-colors">
+                <Mail size={18} className="text-emerald-500 shrink-0" />
                 <span>9amitgupta99@gmail.com</span>
               </li>
             </ul>
 
             {/* QR CODE WIDGET */}
-            <div className="flex items-center gap-4 bg-white/5 border border-white/10 p-3 rounded-xl max-w-[250px] hover:bg-white/10 transition-colors group">
+            {/* CHANGE 2: Darker card background for contrast */}
+            <div className="flex items-center gap-4 bg-[#051F15] border border-emerald-900/30 p-3 rounded-xl max-w-[250px] hover:bg-[#08291b] transition-colors group">
                 <div className="bg-white p-1 rounded-lg shrink-0">
                     <img 
                         src="/images/qr-code.jpg" 
@@ -97,9 +96,8 @@ const Footer = () => {
                     <span className="text-white font-bold text-sm flex items-center gap-2">
                         Scan Now <ScanLine size={14} className="text-yellow-400"/>
                     </span>
-                    <span className="text--[10px] text-gray-400 mb-1">For Digital Profile</span>
-                    {/* UPDATED: Badge color to Green/Emerald */}
-                    <span className="text-[10px] bg-emerald-600/20 text-emerald-300 px-2 py-0.5 rounded-full w-fit border border-emerald-500/30">
+                    <span className="text-[10px] text-gray-400 mb-1">For Digital Profile</span>
+                    <span className="text-[10px] bg-emerald-900/40 text-emerald-300 px-2 py-0.5 rounded-full w-fit border border-emerald-500/30">
                         TapOnn
                     </span>
                 </div>
@@ -116,17 +114,16 @@ const Footer = () => {
               <input 
                 type="email" 
                 placeholder="Your email address" 
-                // UPDATED: Focus border to Green
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white text-sm focus:border-emerald-500 outline-none transition-all"
+                // CHANGE 3: Darker Input Background
+                className="w-full bg-[#051F15] border border-emerald-900/40 rounded-xl py-3 px-4 text-white text-sm focus:border-emerald-500 outline-none transition-all placeholder-gray-600"
               />
-              {/* UPDATED: Button to Green */}
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-emerald-600 rounded-lg hover:bg-emerald-500 transition-colors">
-                <ArrowRight size={16} className="text-white" />
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-emerald-600 rounded-lg hover:bg-emerald-500 transition-colors text-white">
+                <ArrowRight size={16} />
               </button>
             </div>
 
             {/* HIT COUNTER */}
-            <div className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
+            <div className="flex items-center gap-3 p-3 bg-[#051F15] border border-emerald-900/30 rounded-xl hover:bg-[#08291b] transition-colors">
                 <div className="p-2 bg-yellow-500/10 rounded-lg text-yellow-500 shrink-0">
                     <Eye size={20} />
                 </div>
@@ -143,15 +140,15 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-500 text-sm">
+        <div className="border-t border-emerald-900/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-600 text-sm">
             © 2026 Happiness Ccreattions. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-gray-500">
-            <Link to="/privacy-policy" className="hover:text-white transition-colors">
+            <Link to="/privacy-policy" className="hover:text-emerald-400 transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms-of-service" className="hover:text-white transition-colors">
+            <Link to="/terms-of-service" className="hover:text-emerald-400 transition-colors">
               Terms of Service
             </Link>
           </div>
@@ -168,7 +165,8 @@ const SocialIcon = ({ icon, href, color }) => (
     href={href} 
     target="_blank" 
     rel="noopener noreferrer"
-    className={`w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 transition-all hover:text-white hover:-translate-y-1 ${color}`}
+    // CHANGE 4: Darker background for icons
+    className={`w-10 h-10 rounded-full bg-[#051F15] border border-emerald-900/30 flex items-center justify-center text-gray-400 transition-all hover:-translate-y-1 ${color}`}
   >
     {icon}
   </a>
@@ -176,9 +174,8 @@ const SocialIcon = ({ icon, href, color }) => (
 
 const FooterLink = ({ to, text }) => (
   <li>
-    {/* UPDATED: Hover text color and dot color to Emerald/Green */}
     <Link to={to} className="text-gray-400 text-sm hover:text-emerald-400 transition-colors flex items-center gap-2 group">
-      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
       {text}
     </Link>
   </li>
