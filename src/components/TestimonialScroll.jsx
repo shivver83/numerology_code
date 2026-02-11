@@ -42,9 +42,11 @@ const TestimonialScroll = () => {
   ];
 
   return (
-    <section className="py-24 px-0 bg-gradient-to-b from-black to-[#0f172a] relative overflow-hidden">
+    // UPDATED: Background changed to Deep Green + Top Border
+    <section className="py-24 px-0 bg-[#022c22] relative overflow-hidden border-t border-white/10">
       
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
+        {/* UPDATED: Subheading Color */}
         <span className="text-yellow-400 tracking-widest uppercase text-sm font-semibold">Success Stories</span>
         <h2 className="text-4xl font-bold mt-2 text-white">What Our Clients Say</h2>
       </div>
@@ -80,7 +82,7 @@ const TestimonialScroll = () => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        /* Fade edges */
+        /* Fade edges - Updated mask logic if needed, but standard usually works */
         .gradient-mask {
           mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
           -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -92,18 +94,20 @@ const TestimonialScroll = () => {
 
 // --- Single Card Component ---
 const TestimonialCard = ({ item }) => (
-  <div className="w-[350px] md:w-[400px] flex-shrink-0 bg-[#1e293b]/40 border border-white/10 p-8 rounded-3xl relative backdrop-blur-sm group hover:bg-white/5 transition-colors">
+  // UPDATED: Card BG to Green Tint & Border
+  <div className="w-[350px] md:w-[400px] flex-shrink-0 bg-[#064e3b]/40 border border-green-500/20 p-8 rounded-3xl relative backdrop-blur-sm group hover:bg-[#064e3b]/60 transition-colors">
     
-    {/* Background Quote Icon */}
-    <Quote className="absolute top-6 right-6 text-white/5 w-16 h-16 group-hover:text-purple-500/10 transition-colors" />
+    {/* UPDATED: Quote Icon Color to Emerald Tint */}
+    <Quote className="absolute top-6 right-6 text-white/5 w-16 h-16 group-hover:text-emerald-500/10 transition-colors" />
 
     {/* Header: Image & Name */}
     <div className="flex items-center gap-4 mb-6">
-      <div className="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-purple-500 to-pink-500">
+      {/* UPDATED: Image Border Gradient to Green/Emerald */}
+      <div className="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-green-500 to-emerald-400">
         <img 
           src={item.img} 
           alt={item.name} 
-          className="w-full h-full rounded-full object-cover border-2 border-black"
+          className="w-full h-full rounded-full object-cover border-2 border-[#022c22]"
         />
       </div>
       <div>
