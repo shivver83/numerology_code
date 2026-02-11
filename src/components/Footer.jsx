@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react'; // 1. useState/Effect Import kiya
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight, MessageCircle, ScanLine, Eye } from 'lucide-react'; // 2. Eye Icon add kiya
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ArrowRight, MessageCircle, ScanLine, Eye } from 'lucide-react';
 
 const Footer = () => {
   // --- HIT COUNTER LOGIC START ---
- // --- HIT COUNTER LOGIC START ---
   const [views, setViews] = useState(0);
   
-  // Wahi URL jo Form ke liye use kiya tha
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzir-aXNnbI_t-iK950WTOdQm7ddUei29u7tTxR6V2a4N1QNgHS58FX0dsHnJ7vSNw_6Q/exec"; 
 
   useEffect(() => {
-    // Google Script ko call karega
     fetch(GOOGLE_SCRIPT_URL)
       .then((res) => res.json())
       .then((data) => {
@@ -19,16 +16,17 @@ const Footer = () => {
       })
       .catch((err) => {
         console.error("Counter Error:", err);
-        setViews(1350); // Fallback agar koi dikkat aaye
+        setViews(1350); 
       });
   }, []);
   // --- HIT COUNTER LOGIC END ---
 
   return (
-    <footer className="bg-[#050505] border-t border-white/10 pt-20 pb-10 font-sans relative overflow-hidden">
+    // UPDATED: Background changed to Deep Green + Top Border
+    <footer className="bg-[#022c22] border-t border-white/10 pt-20 pb-10 font-sans relative overflow-hidden">
       
-      {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* UPDATED: Background Glow to Green */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-green-900/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -36,12 +34,14 @@ const Footer = () => {
           
           {/* Column 1: Brand Info */}
           <div className="space-y-6">
-          <Link to="/" className="flex items-center space-x-3"> {/* space thoda badhaya */}
-          <img src="/images/logo.png"  alt="Happiness Ccreattions Logo"  // w-14 h-14 se size bada kiya hai. object-contain se logo katega nahi.
-          className="w-14 h-14 object-contain rounded-lg hover:scale-105 transition-transform"  />
-          {/* Text size bhi thoda sa badhaya hai taaki logo ke sath match kare */}
-          <span className="text-2xl font-bold text-white italic">Happiness Ccreattions</span>
-         </Link>
+            <Link to="/" className="flex items-center space-x-3"> 
+              <img 
+                src="/images/logo.png"  
+                alt="Happiness Ccreattions Logo"  
+                className="w-14 h-14 object-contain rounded-lg hover:scale-105 transition-transform"  
+              />
+              <span className="text-2xl font-bold text-white italic">Happiness Ccreattions</span>
+            </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
               Transforming Lives Through Numerology. Unlock your true potential with Amit Gupta's expert guidance.
             </p>
@@ -70,15 +70,16 @@ const Footer = () => {
             <h3 className="text-white font-bold mb-6">Contact Us</h3>
             <ul className="space-y-4 mb-6">
               <li className="flex items-start gap-3 text-gray-400 text-sm">
-                <MapPin size={18} className="text-purple-400 shrink-0 mt-1" />
+                {/* UPDATED: Icon Color to Green/Emerald */}
+                <MapPin size={18} className="text-emerald-400 shrink-0 mt-1" />
                 <span>1022, Siddhi Block, Mahagunpuram, NH 24, Ghaziabad 201002</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Phone size={18} className="text-purple-400 shrink-0" />
+                <Phone size={18} className="text-emerald-400 shrink-0" />
                 <span>+91-7428552116</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Mail size={18} className="text-purple-400 shrink-0" />
+                <Mail size={18} className="text-emerald-400 shrink-0" />
                 <span>9amitgupta99@gmail.com</span>
               </li>
             </ul>
@@ -96,8 +97,9 @@ const Footer = () => {
                     <span className="text-white font-bold text-sm flex items-center gap-2">
                         Scan Now <ScanLine size={14} className="text-yellow-400"/>
                     </span>
-                    <span className="text-[10px] text-gray-400 mb-1">For Digital Profile</span>
-                    <span className="text-[10px] bg-purple-600/20 text-purple-300 px-2 py-0.5 rounded-full w-fit border border-purple-500/30">
+                    <span className="text--[10px] text-gray-400 mb-1">For Digital Profile</span>
+                    {/* UPDATED: Badge color to Green/Emerald */}
+                    <span className="text-[10px] bg-emerald-600/20 text-emerald-300 px-2 py-0.5 rounded-full w-fit border border-emerald-500/30">
                         TapOnn
                     </span>
                 </div>
@@ -114,14 +116,16 @@ const Footer = () => {
               <input 
                 type="email" 
                 placeholder="Your email address" 
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white text-sm focus:border-purple-500 outline-none transition-all"
+                // UPDATED: Focus border to Green
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white text-sm focus:border-emerald-500 outline-none transition-all"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-purple-600 rounded-lg hover:bg-purple-500 transition-colors">
+              {/* UPDATED: Button to Green */}
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-emerald-600 rounded-lg hover:bg-emerald-500 transition-colors">
                 <ArrowRight size={16} className="text-white" />
               </button>
             </div>
 
-            {/* --- ADDED HIT COUNTER HERE --- */}
+            {/* HIT COUNTER */}
             <div className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
                 <div className="p-2 bg-yellow-500/10 rounded-lg text-yellow-500 shrink-0">
                     <Eye size={20} />
@@ -133,7 +137,6 @@ const Footer = () => {
                     </span>
                 </div>
             </div>
-            {/* --- END HIT COUNTER --- */}
 
           </div>
 
@@ -173,8 +176,9 @@ const SocialIcon = ({ icon, href, color }) => (
 
 const FooterLink = ({ to, text }) => (
   <li>
-    <Link to={to} className="text-gray-400 text-sm hover:text-purple-400 transition-colors flex items-center gap-2 group">
-      <span className="w-1.5 h-1.5 rounded-full bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+    {/* UPDATED: Hover text color and dot color to Emerald/Green */}
+    <Link to={to} className="text-gray-400 text-sm hover:text-emerald-400 transition-colors flex items-center gap-2 group">
+      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
       {text}
     </Link>
   </li>
