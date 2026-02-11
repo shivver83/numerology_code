@@ -43,13 +43,13 @@ const Navbar = () => {
       {/* --- DESKTOP NAVBAR --- */}
       <nav 
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          // UPDATED: Changed bg-black/80 to Green tint bg-[#022c22]/90
-          scrolled ? 'bg-[#022c22]/90 backdrop-blur-md py-3 border-b border-white/10' : 'bg-transparent py-5'
+          // CHANGE 1: Scrolled Background set to #001900 (Ultra Dark Green)
+          scrolled ? 'bg-[#001900]/90 backdrop-blur-md py-3 border-b border-emerald-900/30' : 'bg-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           
-          {/* --- LOGO UPDATE START (Desktop) --- */}
+          {/* --- LOGO --- */}
           <Link to="/" className="flex items-center gap-3 group">
               <img 
                  src="/images/logo.png" 
@@ -60,7 +60,6 @@ const Navbar = () => {
                 Happiness <span className="text-yellow-400">Ccreattions</span>
               </span>
           </Link>
-          {/* --- LOGO UPDATE END --- */}
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
@@ -80,18 +79,15 @@ const Navbar = () => {
             {/* Desktop Calculator Link */}
             <Link 
                 to="/calculator" 
-                // UPDATED: Changed text-purple-400 to text-green-400
-                className="text-sm font-medium tracking-widest uppercase text-green-400 hover:text-white transition-colors flex items-center gap-1"
+                className="text-sm font-medium tracking-widest uppercase text-emerald-400 hover:text-white transition-colors flex items-center gap-1"
             >
                 <Calculator size={16} /> Free Calc
             </Link>
-
-                
           </div>
 
           {/* Mobile Menu Toggle Button */}
           <button 
-            className="md:hidden text-white p-2 rounded-full hover:bg-white/10 transition-colors z-50 relative"
+            className="md:hidden text-white p-2 rounded-full hover:bg-emerald-900/30 transition-colors z-50 relative"
             onClick={() => setIsOpen(true)}
           >
             <Menu size={28} className="text-yellow-400" />
@@ -102,7 +98,7 @@ const Navbar = () => {
 
       {/* --- MOBILE MENU OVERLAY & FLOATING DRAWER --- */}
       
-      {/* 1. Backdrop (Click to close) */}
+      {/* 1. Backdrop */}
       <div 
         className={`fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-opacity duration-500 md:hidden ${
             isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
@@ -110,20 +106,19 @@ const Navbar = () => {
         onClick={() => setIsOpen(false)}
       ></div>
 
-      {/* 2. Floating Menu Drawer (Left Side) */}
-      {/* UPDATED: Changed bg-[#0f172a] to bg-[#022c22] (Dark Green) */}
+      {/* 2. Floating Menu Drawer */}
+      {/* CHANGE 2: Background set to #001900 */}
       <div 
-        className={`fixed top-6 bottom-6 left-6 z-[70] w-[85%] max-w-[320px] bg-[#022c22]/95 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden transition-transform duration-500 md:hidden ${
+        className={`fixed top-6 bottom-6 left-6 z-[70] w-[85%] max-w-[320px] bg-[#001900]/95 backdrop-blur-xl border border-emerald-900/30 rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden transition-transform duration-500 md:hidden ${
             isOpen ? 'translate-x-0' : '-translate-x-[150%]'
         }`}
       >
-        {/* Decorative Internal Glow - UPDATED Colors */}
-        <div className="absolute top-0 right-0 w-40 h-40 bg-green-500/20 rounded-full blur-[60px] pointer-events-none"></div>
+        {/* Decorative Glow */}
+        <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-900/20 rounded-full blur-[60px] pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-40 h-40 bg-yellow-500/10 rounded-full blur-[60px] pointer-events-none"></div>
 
-        {/* Menu Header (Inside Drawer) */}
-        <div className="p-6 flex justify-between items-center border-b border-white/5 relative z-10">
-             {/* --- LOGO UPDATE START (Mobile Drawer) --- */}
+        {/* Menu Header */}
+        <div className="p-6 flex justify-between items-center border-b border-emerald-900/30 relative z-10">
              <div className="flex items-center gap-3">
                 <img 
                     src="/images/logo.png" 
@@ -132,11 +127,10 @@ const Navbar = () => {
                 />
                 <span className="font-bold text-white text-lg">Menu</span>
              </div>
-             {/* --- LOGO UPDATE END --- */}
 
              <button 
                 onClick={() => setIsOpen(false)}
-                className="p-2 bg-white/5 rounded-full hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+                className="p-2 bg-emerald-900/20 rounded-full hover:bg-emerald-900/40 text-gray-400 hover:text-white transition-colors"
              >
                 <X size={20} />
              </button>
@@ -153,8 +147,8 @@ const Navbar = () => {
                         to={link.path}
                         className={`flex items-center justify-between p-4 rounded-2xl transition-all ${
                             location.pathname === link.path 
-                            ? 'bg-white/10 text-yellow-400 border border-yellow-500/30' 
-                            : 'hover:bg-white/5 text-gray-300 hover:text-white border border-transparent'
+                            ? 'bg-emerald-900/30 text-yellow-400 border border-yellow-500/30' 
+                            : 'hover:bg-emerald-900/20 text-gray-300 hover:text-white border border-transparent'
                         }`}
                     >
                         <span className="font-medium text-lg tracking-wide">{link.name}</span>
@@ -163,12 +157,12 @@ const Navbar = () => {
                 ))}
             </div>
 
-            {/* ACTION BUTTONS (Highlighted Boxes) */}
-            <div className="space-y-4 pt-4 border-t border-white/10">
+            {/* ACTION BUTTONS */}
+            <div className="space-y-4 pt-4 border-t border-emerald-900/30">
                 
-                {/* 1. Free Calculator - UPDATED: Changed Purple to Green Styles */}
-                <Link to="/calculator" className="flex items-center gap-3 p-4 bg-green-900/20 border border-green-500/30 rounded-2xl group hover:bg-green-900/30 transition-all">
-                    <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400 group-hover:scale-110 transition-transform">
+                {/* 1. Free Calculator - CHANGE 3: Card BG matches Footer style (#07220d) */}
+                <Link to="/calculator" className="flex items-center gap-3 p-4 bg-[#07220d] border border-emerald-900/30 rounded-2xl group hover:bg-[#092b1f] transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-900/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
                         <Calculator size={20} />
                     </div>
                     <div>
@@ -177,13 +171,11 @@ const Navbar = () => {
                     </div>
                 </Link>
 
-                
-
             </div>
         </div>
 
         {/* Social Footer */}
-        <div className="p-6 border-t border-white/5 bg-black/20 flex justify-between items-center relative z-10">
+        <div className="p-6 border-t border-emerald-900/30 bg-[#001900] flex justify-between items-center relative z-10">
              <span className="text-xs text-gray-500 uppercase tracking-widest font-bold">Follow Us</span>
              <div className="flex gap-3">
                 <MobileSocialIcon href="https://wa.me/917428552116" icon={<MessageCircle size={18} />} color="text-green-400" />
@@ -204,7 +196,8 @@ const MobileSocialIcon = ({ href, icon, color }) => (
         href={href} 
         target="_blank" 
         rel="noopener noreferrer" 
-        className={`p-2 bg-white/5 rounded-full border border-white/5 ${color} hover:bg-white/10 hover:scale-110 transition-all`}
+        // CHANGE 4: Updated Icon BG
+        className={`p-2 bg-[#07220d] rounded-full border border-emerald-900/30 ${color} hover:bg-emerald-900/30 hover:scale-110 transition-all`}
     >
         {icon}
     </a>
