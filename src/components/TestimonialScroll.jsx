@@ -42,8 +42,8 @@ const TestimonialScroll = () => {
   ];
 
   return (
-    // UPDATED: Background changed to Deep Green + Top Border
-    <section className="py-24 px-0 bg-[#022c22] relative overflow-hidden border-t border-white/10">
+    // UPDATED: Background changed to Ultra Dark Green (#001900) + Top Border
+    <section className="py-24 px-0 bg-[#001900] relative overflow-hidden border-t border-emerald-900/30">
       
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
         {/* UPDATED: Subheading Color */}
@@ -82,10 +82,10 @@ const TestimonialScroll = () => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        /* Fade edges - Updated mask logic if needed, but standard usually works */
+        /* Fade edges - Updated mask to match new background */
         .gradient-mask {
-          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          mask-image: linear-gradient(to right, transparent, #001900 10%, #001900 90%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, #001900 10%, #001900 90%, transparent);
         }
       `}</style>
     </section>
@@ -94,11 +94,11 @@ const TestimonialScroll = () => {
 
 // --- Single Card Component ---
 const TestimonialCard = ({ item }) => (
-  // UPDATED: Card BG to Green Tint & Border
-  <div className="w-[350px] md:w-[400px] flex-shrink-0 bg-[#064e3b]/40 border border-green-500/20 p-8 rounded-3xl relative backdrop-blur-sm group hover:bg-[#064e3b]/60 transition-colors">
+  // UPDATED: Card BG to Dark Green Tint (#07220d) & Border
+  <div className="w-[350px] md:w-[400px] flex-shrink-0 bg-[#07220d] border border-emerald-900/30 p-8 rounded-3xl relative backdrop-blur-sm group hover:bg-[#092b1f] transition-colors">
     
     {/* UPDATED: Quote Icon Color to Emerald Tint */}
-    <Quote className="absolute top-6 right-6 text-white/5 w-16 h-16 group-hover:text-emerald-500/10 transition-colors" />
+    <Quote className="absolute top-6 right-6 text-emerald-900/40 w-16 h-16 group-hover:text-emerald-500/10 transition-colors" />
 
     {/* Header: Image & Name */}
     <div className="flex items-center gap-4 mb-6">
@@ -107,7 +107,7 @@ const TestimonialCard = ({ item }) => (
         <img 
           src={item.img} 
           alt={item.name} 
-          className="w-full h-full rounded-full object-cover border-2 border-[#022c22]"
+          className="w-full h-full rounded-full object-cover border-2 border-[#001900]"
         />
       </div>
       <div>
