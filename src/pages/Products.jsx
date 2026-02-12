@@ -30,32 +30,48 @@ const Products = () => {
             <Link 
               key={product.id} 
               to={`/product/${product.id}`}
-              className="group relative bg-[#07220d] border border-emerald-900/30 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] flex flex-col"
+              className="group relative bg-[#051a15] border border-emerald-900/30 rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)] flex flex-col"
             >
               
-              {/* Image Container - Showing 1st Image */}
-              <div className="relative h-64 overflow-hidden bg-[#001900] p-6 flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#07220d]/80 z-10"></div>
+              {/* --- IMAGE AREA with SPOTLIGHT EFFECT --- */}
+              <div className="relative h-72 p-6 flex items-center justify-center overflow-hidden">
+                
+                {/* 1. Deep Dark Base */}
+                <div className="absolute inset-0 bg-[#001005]"></div>
+
+                {/* 2. Spotlight Gradient (The Highlight Logic) */}
+                {/* This puts a glowing emerald light BEHIND the product */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-600/20 via-[#001005]/50 to-[#001005] opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
+                
+                {/* 3. Subtle Rotating Ring (Optional Visual Interest) */}
+                <div className="absolute w-[120%] h-[120%] border border-emerald-500/5 rounded-full animate-[spin_20s_linear_infinite] group-hover:border-emerald-500/20 transition-colors pointer-events-none"></div>
+
+                {/* Product Image */}
                 <img 
-                  // CHANGE: Use first image from array
                   src={product.images[0]} 
                   alt={product.name} 
-                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 relative z-0"
+                  // Drop shadow added to make the silver/metal pop against the glow
+                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:drop-shadow-[0_0_25px_rgba(16,185,129,0.4)] transition-all duration-700 relative z-10"
                 />
               </div>
 
-              {/* Content */}
-              <div className="p-6 pt-2 flex flex-col flex-grow relative z-20">
+              {/* --- CONTENT AREA --- */}
+              <div className="p-6 bg-gradient-to-b from-[#051a15] to-[#020f0c] border-t border-emerald-900/30 flex flex-col flex-grow relative z-20">
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
                   {product.name}
                 </h3>
                 
-                <p className="text-gray-400 text-sm line-clamp-2 mb-6 flex-grow">
+                <p className="text-gray-400 text-sm line-clamp-2 mb-6 flex-grow leading-relaxed">
                   {product.description[0]}
                 </p>
 
-                <div className="flex items-center gap-2 text-yellow-400 text-sm font-bold tracking-wider uppercase group-hover:gap-3 transition-all">
-                  View Details <ArrowRight size={16} />
+                <div className="flex items-center justify-between mt-auto">
+                   <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 border border-emerald-900/50">
+                      Energised
+                   </span>
+                   <div className="flex items-center gap-2 text-yellow-400 text-sm font-bold tracking-wider uppercase group-hover:gap-3 transition-all">
+                     View Details <ArrowRight size={16} />
+                   </div>
                 </div>
               </div>
             </Link>
