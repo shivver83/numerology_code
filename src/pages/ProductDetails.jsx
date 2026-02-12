@@ -20,12 +20,13 @@ const ProductDetails = () => {
   if (!product) return null;
 
   return (
-    // FIX 1: 'overflow-x-hidden' ensures no horizontal scrolling of the whole page
-    <div className="min-h-screen bg-[#001900] text-white font-sans pt-24 pb-20 relative overflow-x-hidden">
+    // FIX 1: 'overflow-x-hidden' and 'w-full' to strictly contain content
+    <div className="min-h-screen bg-[#001900] text-white font-sans pt-24 pb-20 w-full overflow-x-hidden relative">
       
       {/* Background Ambience */}
       <div className="fixed top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-emerald-900/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
 
+      {/* FIX 2: Reduced padding on mobile (px-4) to give more space to content */}
       <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
         
         {/* Back Button */}
@@ -39,16 +40,15 @@ const ProductDetails = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             
             {/* --- LEFT: IMAGE GALLERY SECTION --- */}
-            <div className="space-y-4 w-full">
+            <div className="space-y-4 w-full max-w-full">
                 
                 {/* 1. Main Image Display */}
-                {/* FIX 2: Aspect Ratio and Container Sizing for Mobile */}
                 <div className="relative w-full aspect-square md:aspect-auto md:h-[500px] bg-[#0a281e] border border-emerald-500/20 rounded-3xl p-6 flex items-center justify-center shadow-2xl overflow-hidden group">
                     
                     {/* Inner Glow */}
                     <div className="absolute inset-0 bg-radial-gradient from-[#0a281e] to-[#051510] opacity-60"></div>
                     
-                    {/* Animated Rings (Subtle Background Effect) */}
+                    {/* Animated Rings */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
                         <div className="absolute w-[70%] h-[70%] border border-emerald-500/10 rounded-full animate-[spin_15s_linear_infinite]"></div>
                         <div className="absolute w-[90%] h-[90%] border border-emerald-500/5 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
@@ -62,15 +62,15 @@ const ProductDetails = () => {
                     />
                 </div>
 
-                {/* 2. Thumbnails Slider */}
-                {/* FIX 3: Horizontal Scroll (overflow-x-auto) and hiding scrollbar */}
-                <div className="w-full overflow-x-auto pb-2 scrollbar-hide">
-                    <div className="flex gap-3 min-w-min px-1">
+                {/* 2. Thumbnails Slider (FIXED) */}
+                {/* Removed 'min-w-min', added 'max-w-full' */}
+                <div className="w-full max-w-full overflow-x-auto pb-4 scrollbar-hide">
+                    <div className="flex gap-3 px-1"> 
                         {product.images.map((img, index) => (
                             <button 
                                 key={index}
                                 onClick={() => setActiveImage(img)}
-                                // Adjusted size for mobile (w-16) and desktop (md:w-20)
+                                // Used shrink-0 so they don't squish, but scroll instead
                                 className={`relative w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-xl border p-1 bg-[#0a281e] overflow-hidden transition-all duration-300 ${
                                     activeImage === img 
                                     ? 'border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.3)] scale-105 ring-1 ring-yellow-400/50' 
@@ -85,7 +85,7 @@ const ProductDetails = () => {
             </div>
 
             {/* --- RIGHT: PRODUCT INFO --- */}
-            <div className="space-y-6 md:space-y-8">
+            <div className="space-y-6 md:space-y-8 w-full">
                 <div>
                     <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 leading-tight">
                         {product.name}
@@ -138,7 +138,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
 
-                {/* CTA Button - Sticky on Mobile Bottom (Optional, but keeping inline for now) */}
+                {/* CTA Button */}
                 <div className="pt-2 pb-6 md:pb-0">
                     <a 
                         href={`https://wa.me/917428552116?text=Hello, I am interested in buying *${product.name}*. Please share the price and details.`} 
@@ -158,7 +158,7 @@ const ProductDetails = () => {
 
       </div>
 
-      {/* Internal Styles for hiding scrollbar but keeping functionality */}
+      {/* CSS to Hide Scrollbar */}
       <style>{`
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
