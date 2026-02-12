@@ -30,7 +30,7 @@ const Products = () => {
             <Link 
               key={product.id} 
               to={`/product/${product.id}`}
-              className="group relative bg-[#0a281e] border border-emerald-500/20 rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] flex flex-col"
+              className="group relative bg-[#0a281e] border border-emerald-500/20 rounded-2xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] flex flex-col"
             >
               
               {/* --- IMAGE AREA with 2 SLOW RINGS --- */}
