@@ -20,13 +20,12 @@ const ProductDetails = () => {
   if (!product) return null;
 
   return (
-    // FIX 1: 'overflow-x-hidden' and 'w-full' to strictly contain content
-    <div className="min-h-screen bg-[#001900] text-white font-sans pt-24 pb-20 w-full overflow-x-hidden relative">
+    // FIX 1: Strict width control to prevent horizontal scrolling
+    <div className="min-h-screen bg-[#001900] text-white font-sans pt-24 pb-20 w-full max-w-[100vw] overflow-x-hidden relative">
       
       {/* Background Ambience */}
       <div className="fixed top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-emerald-900/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none"></div>
 
-      {/* FIX 2: Reduced padding on mobile (px-4) to give more space to content */}
       <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
         
         {/* Back Button */}
@@ -40,7 +39,7 @@ const ProductDetails = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             
             {/* --- LEFT: IMAGE GALLERY SECTION --- */}
-            <div className="space-y-4 w-full max-w-full">
+            <div className="space-y-4 w-full">
                 
                 {/* 1. Main Image Display */}
                 <div className="relative w-full aspect-square md:aspect-auto md:h-[500px] bg-[#0a281e] border border-emerald-500/20 rounded-3xl p-6 flex items-center justify-center shadow-2xl overflow-hidden group">
@@ -62,18 +61,18 @@ const ProductDetails = () => {
                     />
                 </div>
 
-                {/* 2. Thumbnails Slider (FIXED) */}
-                {/* Removed 'min-w-min', added 'max-w-full' */}
-                <div className="w-full max-w-full overflow-x-auto pb-4 scrollbar-hide">
-                    <div className="flex gap-3 px-1"> 
+                {/* 2. Thumbnails Grid (FIXED: 5 Columns, No Scroll) */}
+                <div className="w-full">
+                    {/* 'grid-cols-5' forces exactly 5 items in one row */}
+                    <div className="grid grid-cols-5 gap-2 md:gap-3"> 
                         {product.images.map((img, index) => (
                             <button 
                                 key={index}
                                 onClick={() => setActiveImage(img)}
-                                // Used shrink-0 so they don't squish, but scroll instead
-                                className={`relative w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-xl border p-1 bg-[#0a281e] overflow-hidden transition-all duration-300 ${
+                                // 'aspect-square' ensures boxes remain square regardless of screen width
+                                className={`relative w-full aspect-square rounded-lg md:rounded-xl border p-1 bg-[#0a281e] overflow-hidden transition-all duration-300 ${
                                     activeImage === img 
-                                    ? 'border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.3)] scale-105 ring-1 ring-yellow-400/50' 
+                                    ? 'border-yellow-400 shadow-[0_0_10px_rgba(234,179,8,0.3)] ring-1 ring-yellow-400/50' 
                                     : 'border-emerald-500/20 opacity-70 hover:opacity-100'
                                 }`}
                             >
@@ -87,7 +86,8 @@ const ProductDetails = () => {
             {/* --- RIGHT: PRODUCT INFO --- */}
             <div className="space-y-6 md:space-y-8 w-full">
                 <div>
-                    <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 leading-tight">
+                    {/* Title with overflow wrap to prevent text pushing width */}
+                    <h1 className="text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 leading-tight break-words">
                         {product.name}
                     </h1>
                     
@@ -157,17 +157,6 @@ const ProductDetails = () => {
         </div>
 
       </div>
-
-      {/* CSS to Hide Scrollbar */}
-      <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-      `}</style>
     </div>
   );
 };
