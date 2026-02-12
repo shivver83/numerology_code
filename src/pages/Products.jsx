@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { yantras } from '../data/yantras';
 
 const Products = () => {
@@ -30,43 +30,55 @@ const Products = () => {
             <Link 
               key={product.id} 
               to={`/product/${product.id}`}
-              // CHANGE 1: Lighter Green Background (#0a281e) so it looks Green, not Black
+              // Card Background: Rich Green (#0a281e) - Not Black
               className="group relative bg-[#0a281e] border border-emerald-500/20 rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] flex flex-col"
             >
               
-              {/* --- IMAGE AREA with ROTATING GLOW RINGS --- */}
+              {/* --- IMAGE AREA with 5-LAYER SOLAR SYSTEM EFFECT --- */}
               <div className="relative h-80 p-6 flex items-center justify-center overflow-hidden">
                 
-                {/* A. Darker Center for Contrast */}
-                <div className="absolute inset-0 bg-radial-gradient from-[#0a281e] to-[#051510] opacity-50"></div>
+                {/* Center Glow Behind Product */}
+                <div className="absolute inset-0 bg-radial-gradient from-[#0a281e] to-[#051510] opacity-60"></div>
 
-                {/* B. ANIMATED RINGS (Rotating Lines) */}
+                {/* --- SOLAR SYSTEM ORBITS (5 RINGS with MOVING PLANETS) --- */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     
-                    {/* Ring 1: Outer Dashed Ring (Slow Spin) */}
-                    <div className="absolute w-[280px] h-[280px] rounded-full border border-dashed border-emerald-500/20 animate-[spin_20s_linear_infinite]"></div>
-                    
-                    {/* Ring 2: Middle Dotted Ring (Reverse Spin - Yellow tint) */}
-                    <div className="absolute w-[220px] h-[220px] rounded-full border border-dotted border-yellow-500/20 animate-[spin_15s_linear_infinite_reverse]"></div>
-                    
-                    {/* Ring 3: Inner Solid Glow Ring (Pulse) */}
-                    <div className="absolute w-[160px] h-[160px] rounded-full border border-emerald-400/10 bg-emerald-500/5 animate-pulse blur-md"></div>
-                    
-                    {/* Ring 4: Hover Effect Ring (Expands on Hover) */}
-                    <div className="absolute w-[200px] h-[200px] rounded-full border border-emerald-400/0 group-hover:border-emerald-400/30 group-hover:scale-125 transition-all duration-700"></div>
+                    {/* Orbit 1 (Smallest - Inner) - YELLOW GLOW */}
+                    <div className="absolute w-[140px] h-[140px] border border-emerald-500/5 rounded-full animate-[spin_4s_linear_infinite]">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-yellow-400 rounded-full shadow-[0_0_10px_#facc15]"></div>
+                    </div>
+
+                    {/* Orbit 2 - EMERALD GLOW (Reverse Spin) */}
+                    <div className="absolute w-[190px] h-[190px] border border-emerald-500/5 rounded-full animate-[spin_7s_linear_infinite_reverse]">
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full shadow-[0_0_10px_#34d399]"></div>
+                    </div>
+
+                    {/* Orbit 3 - ORANGE GLOW */}
+                    <div className="absolute w-[240px] h-[240px] border border-emerald-500/5 rounded-full animate-[spin_10s_linear_infinite]">
+                        <div className="absolute top-1/2 right-0 translate-x-1/2 w-2 h-2 bg-orange-500 rounded-full shadow-[0_0_10px_#f97316]"></div>
+                    </div>
+
+                    {/* Orbit 4 - CYAN GLOW (Reverse Spin) */}
+                    <div className="absolute w-[290px] h-[290px] border border-emerald-500/5 rounded-full animate-[spin_14s_linear_infinite_reverse]">
+                        <div className="absolute top-1/2 left-0 -translate-x-1/2 w-3 h-3 bg-cyan-400 rounded-full shadow-[0_0_12px_#22d3ee]"></div>
+                    </div>
+
+                    {/* Orbit 5 (Largest) - PURPLE GLOW */}
+                    <div className="absolute w-[340px] h-[340px] border border-emerald-500/5 rounded-full animate-[spin_20s_linear_infinite]">
+                        <div className="absolute bottom-10 right-10 w-2 h-2 bg-purple-400 rounded-full shadow-[0_0_10px_#c084fc]"></div>
+                    </div>
+
                 </div>
 
-                {/* Product Image */}
+                {/* Product Image (Sitting in the center of the solar system) */}
                 <img 
                   src={product.images[0]} 
                   alt={product.name} 
-                  // Drop shadow + Hover Scale
-                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-all duration-700 relative z-10"
+                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-all duration-700 relative z-10"
                 />
               </div>
 
               {/* --- CONTENT AREA --- */}
-              {/* Content background blends with the card but keeps separation */}
               <div className="p-6 bg-[#0a281e] border-t border-emerald-500/20 flex flex-col flex-grow relative z-20">
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
                   {product.name}
