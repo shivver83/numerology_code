@@ -30,51 +30,37 @@ const Products = () => {
             <Link 
               key={product.id} 
               to={`/product/${product.id}`}
-              // Card Background: Rich Green (#0a281e) - Not Black
               className="group relative bg-[#0a281e] border border-emerald-500/20 rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] flex flex-col"
             >
               
-              {/* --- IMAGE AREA with 5-LAYER SOLAR SYSTEM EFFECT --- */}
+              {/* --- IMAGE AREA with 2 SLOW RINGS --- */}
               <div className="relative h-80 p-6 flex items-center justify-center overflow-hidden">
                 
                 {/* Center Glow Behind Product */}
                 <div className="absolute inset-0 bg-radial-gradient from-[#0a281e] to-[#051510] opacity-60"></div>
 
-                {/* --- SOLAR SYSTEM ORBITS (5 RINGS with MOVING PLANETS) --- */}
+                {/* --- ORBITS (Only 2 Rings now) --- */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     
-                    {/* Orbit 1 (Smallest - Inner) - YELLOW GLOW */}
-                    <div className="absolute w-[140px] h-[140px] border border-emerald-500/5 rounded-full animate-[spin_4s_linear_infinite]">
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-yellow-400 rounded-full shadow-[0_0_10px_#facc15]"></div>
+                    {/* Ring 1 (Inner) - Yellow/Gold Planet - SLOW (15s) */}
+                    <div className="absolute w-[180px] h-[180px] border border-emerald-500/10 rounded-full animate-[spin_15s_linear_infinite]">
+                        {/* Tiny Planet */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-yellow-400 rounded-full shadow-[0_0_8px_#facc15]"></div>
                     </div>
 
-                    {/* Orbit 2 - EMERALD GLOW (Reverse Spin) */}
-                    <div className="absolute w-[190px] h-[190px] border border-emerald-500/5 rounded-full animate-[spin_7s_linear_infinite_reverse]">
-                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-emerald-400 rounded-full shadow-[0_0_10px_#34d399]"></div>
-                    </div>
-
-                    {/* Orbit 3 - ORANGE GLOW */}
-                    <div className="absolute w-[240px] h-[240px] border border-emerald-500/5 rounded-full animate-[spin_10s_linear_infinite]">
-                        <div className="absolute top-1/2 right-0 translate-x-1/2 w-2 h-2 bg-orange-500 rounded-full shadow-[0_0_10px_#f97316]"></div>
-                    </div>
-
-                    {/* Orbit 4 - CYAN GLOW (Reverse Spin) */}
-                    <div className="absolute w-[290px] h-[290px] border border-emerald-500/5 rounded-full animate-[spin_14s_linear_infinite_reverse]">
-                        <div className="absolute top-1/2 left-0 -translate-x-1/2 w-3 h-3 bg-cyan-400 rounded-full shadow-[0_0_12px_#22d3ee]"></div>
-                    </div>
-
-                    {/* Orbit 5 (Largest) - PURPLE GLOW */}
-                    <div className="absolute w-[340px] h-[340px] border border-emerald-500/5 rounded-full animate-[spin_20s_linear_infinite]">
-                        <div className="absolute bottom-10 right-10 w-2 h-2 bg-purple-400 rounded-full shadow-[0_0_10px_#c084fc]"></div>
+                    {/* Ring 2 (Outer) - Emerald Planet - VERY SLOW REVERSE (25s) */}
+                    <div className="absolute w-[260px] h-[260px] border border-emerald-500/10 rounded-full animate-[spin_25s_linear_infinite_reverse]">
+                        {/* Tiny Planet */}
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-emerald-400 rounded-full shadow-[0_0_10px_#34d399]"></div>
                     </div>
 
                 </div>
 
-                {/* Product Image (Sitting in the center of the solar system) */}
+                {/* Product Image */}
                 <img 
                   src={product.images[0]} 
                   alt={product.name} 
-                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-all duration-700 relative z-10"
+                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-all duration-700 relative z-10"
                 />
               </div>
 
