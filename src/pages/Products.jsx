@@ -30,43 +30,54 @@ const Products = () => {
             <Link 
               key={product.id} 
               to={`/product/${product.id}`}
-              className="group relative bg-[#051a15] border border-emerald-900/30 rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.2)] flex flex-col"
+              // CHANGE 1: Lighter Green Background (#0a281e) so it looks Green, not Black
+              className="group relative bg-[#0a281e] border border-emerald-500/20 rounded-3xl overflow-hidden hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] flex flex-col"
             >
               
-              {/* --- IMAGE AREA with SPOTLIGHT EFFECT --- */}
-              <div className="relative h-72 p-6 flex items-center justify-center overflow-hidden">
+              {/* --- IMAGE AREA with ROTATING GLOW RINGS --- */}
+              <div className="relative h-80 p-6 flex items-center justify-center overflow-hidden">
                 
-                {/* 1. Deep Dark Base */}
-                <div className="absolute inset-0 bg-[#001005]"></div>
+                {/* A. Darker Center for Contrast */}
+                <div className="absolute inset-0 bg-radial-gradient from-[#0a281e] to-[#051510] opacity-50"></div>
 
-                {/* 2. Spotlight Gradient (The Highlight Logic) */}
-                {/* This puts a glowing emerald light BEHIND the product */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-600/20 via-[#001005]/50 to-[#001005] opacity-80 group-hover:opacity-100 transition-opacity duration-700"></div>
-                
-                {/* 3. Subtle Rotating Ring (Optional Visual Interest) */}
-                <div className="absolute w-[120%] h-[120%] border border-emerald-500/5 rounded-full animate-[spin_20s_linear_infinite] group-hover:border-emerald-500/20 transition-colors pointer-events-none"></div>
+                {/* B. ANIMATED RINGS (Rotating Lines) */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    
+                    {/* Ring 1: Outer Dashed Ring (Slow Spin) */}
+                    <div className="absolute w-[280px] h-[280px] rounded-full border border-dashed border-emerald-500/20 animate-[spin_20s_linear_infinite]"></div>
+                    
+                    {/* Ring 2: Middle Dotted Ring (Reverse Spin - Yellow tint) */}
+                    <div className="absolute w-[220px] h-[220px] rounded-full border border-dotted border-yellow-500/20 animate-[spin_15s_linear_infinite_reverse]"></div>
+                    
+                    {/* Ring 3: Inner Solid Glow Ring (Pulse) */}
+                    <div className="absolute w-[160px] h-[160px] rounded-full border border-emerald-400/10 bg-emerald-500/5 animate-pulse blur-md"></div>
+                    
+                    {/* Ring 4: Hover Effect Ring (Expands on Hover) */}
+                    <div className="absolute w-[200px] h-[200px] rounded-full border border-emerald-400/0 group-hover:border-emerald-400/30 group-hover:scale-125 transition-all duration-700"></div>
+                </div>
 
                 {/* Product Image */}
                 <img 
                   src={product.images[0]} 
                   alt={product.name} 
-                  // Drop shadow added to make the silver/metal pop against the glow
-                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:drop-shadow-[0_0_25px_rgba(16,185,129,0.4)] transition-all duration-700 relative z-10"
+                  // Drop shadow + Hover Scale
+                  className="w-full h-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-all duration-700 relative z-10"
                 />
               </div>
 
               {/* --- CONTENT AREA --- */}
-              <div className="p-6 bg-gradient-to-b from-[#051a15] to-[#020f0c] border-t border-emerald-900/30 flex flex-col flex-grow relative z-20">
+              {/* Content background blends with the card but keeps separation */}
+              <div className="p-6 bg-[#0a281e] border-t border-emerald-500/20 flex flex-col flex-grow relative z-20">
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
                   {product.name}
                 </h3>
                 
-                <p className="text-gray-400 text-sm line-clamp-2 mb-6 flex-grow leading-relaxed">
+                <p className="text-emerald-100/70 text-sm line-clamp-2 mb-6 flex-grow leading-relaxed">
                   {product.description[0]}
                 </p>
 
                 <div className="flex items-center justify-between mt-auto">
-                   <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 border border-emerald-900/50">
+                   <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-emerald-900/50 text-emerald-300 border border-emerald-500/30 tracking-wider uppercase">
                       Energised
                    </span>
                    <div className="flex items-center gap-2 text-yellow-400 text-sm font-bold tracking-wider uppercase group-hover:gap-3 transition-all">
