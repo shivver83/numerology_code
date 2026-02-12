@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Products from './pages/Products';
+import ProductDetails from './pages/ProductDetails';
 
 // 1. Components Import
 import Navbar from './components/Navbar';
@@ -35,6 +37,8 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/calculator" element={<FreeCalculator />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
         </Routes>
 
         <Footer />
