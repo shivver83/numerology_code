@@ -124,12 +124,8 @@ const FreeCalculator = () => {
 
     setLoading(true);
 
-    // 1. Prepare Data for Google Sheet
     const dataToSend = new FormData();
-    
-    // Explicitly send to Sheet2
     dataToSend.append('sheetName', 'Sheet2'); 
-
     dataToSend.append('Name', formData.name);
     dataToSend.append('Gender', formData.gender);
     dataToSend.append('DOB', formData.dateOfBirth);
@@ -137,19 +133,16 @@ const FreeCalculator = () => {
     dataToSend.append('Mobile_Number', formData.phone);
     dataToSend.append('Message', 'Calculated Free Numerology');
 
-    // 2. Send Data to Google Sheet
     fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         body: dataToSend,
         mode: "no-cors"
     })
     .then(() => {
-        // Data save hone ke baad calculation perform karein
         performCalculation();
     })
     .catch((error) => {
         console.error("Error saving data:", error);
-        // Agar error aaye tab bhi calculation dikha dein
         performCalculation();
     });
   };
@@ -167,6 +160,9 @@ const FreeCalculator = () => {
 
       const firstNameChart = calculateChaldeanChart(firstName);
       const lastNameChart = calculateChaldeanChart(lastName);
+      
+      // NEW: Calculate combined total of First and Last Name
+      const fullNameTotal = reduceToSingleDigit(firstNameChart.total + lastNameChart.total);
 
       setResults({
         driver,
@@ -175,6 +171,7 @@ const FreeCalculator = () => {
         loshuGrid: grid,
         firstNameChart,
         lastNameChart,
+        fullNameTotal, // Added to state
         analysis: getAnalysis(driver, lifePathNumber)
       });
       
@@ -182,21 +179,17 @@ const FreeCalculator = () => {
     }, 1000);
   };
 
-  // Render Loshu Cell with Theme Colors
   const renderLoshuCell = (num) => {
     if (!results || !results.loshuGrid) return null;
     const count = results.loshuGrid[num] || 0;
     
-    // Check if this number is a core number
     const isDriver = results.driver === num;
     const isConductor = results.conductor === num;
     const isKuan = results.kuan === num;
 
-    // Theme Colors for Highlights
-    let bgClass = 'bg-white/5 border-white/10 text-gray-400'; // Default empty
-    if (count > 0) bgClass = 'bg-white/10 border-white/20 text-white font-bold'; // Present
+    let bgClass = 'bg-white/5 border-white/10 text-gray-400'; 
+    if (count > 0) bgClass = 'bg-white/10 border-white/20 text-white font-bold'; 
     
-    // Highlight logic - Keeping specific colors for distinction
     if (count > 0) {
         if (isDriver) bgClass = 'bg-yellow-500/20 border-yellow-500 text-yellow-400 font-bold shadow-[0_0_10px_rgba(234,179,8,0.3)]';
         else if (isConductor) bgClass = 'bg-purple-500/20 border-purple-500 text-purple-400 font-bold shadow-[0_0_10px_rgba(168,85,247,0.3)]';
@@ -211,12 +204,10 @@ const FreeCalculator = () => {
   };
 
   return (
-    // CHANGE 1: Main Background to Ultra Dark Green (#001900)
     <div className="min-h-screen bg-[#001900] text-white font-sans pt-32 pb-20 px-6">
       
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          {/* CHANGE 2: Accent color to Emerald */}
           <span className="text-emerald-400 tracking-widest uppercase text-xs font-bold mb-2 block">Discover Your Destiny</span>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Free Numerology <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Calculator</span>
@@ -226,21 +217,18 @@ const FreeCalculator = () => {
           </p>
         </div>
 
-        {/* CHANGE 3: Container Background to Dark Green Tint (#07220d) & Border */}
         <div className="bg-[#07220d] border border-emerald-900/30 p-8 md:p-12 rounded-[2rem] backdrop-blur-md relative overflow-hidden">
-          {/* CHANGE 4: Blob Color to Emerald */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none"></div>
 
           {!results ? (
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
               
-              {/* Name & Gender Grid */}
+              {/* Form Fields... */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                     <label className="text-sm font-bold uppercase tracking-wider text-gray-500 ml-1">Full Name</label>
                     <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                        {/* CHANGE 5: Input Background to #001900 & Border */}
                         <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full bg-[#001900] border border-emerald-900/30 rounded-2xl p-4 pl-12 text-white focus:border-emerald-500 outline-none transition-all" placeholder="Amit Gupta" />
                     </div>
                 </div>
@@ -258,7 +246,6 @@ const FreeCalculator = () => {
                 </div>
               </div>
 
-              {/* DOB */}
               <div className="space-y-2">
                 <label className="text-sm font-bold uppercase tracking-wider text-gray-500 ml-1">Date of Birth</label>
                 <div className="relative">
@@ -267,7 +254,6 @@ const FreeCalculator = () => {
                 </div>
               </div>
 
-              {/* Contact Grid */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                     <label className="text-sm font-bold uppercase tracking-wider text-gray-500 ml-1">Email</label>
@@ -288,7 +274,6 @@ const FreeCalculator = () => {
               <button 
                 type="submit" 
                 disabled={loading}
-                // CHANGE 6: Button Gradient to Emerald/Green
                 className="w-full py-5 bg-gradient-to-r from-emerald-600 to-green-600 rounded-2xl font-bold text-lg uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)] flex items-center justify-center gap-3 mt-4"
               >
                 {loading ? (
@@ -310,24 +295,20 @@ const FreeCalculator = () => {
                   <h2 className="text-2xl font-bold text-white mb-6">Your Cosmic Blueprint</h2>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {/* Driver - CHANGE 7: Result Card BG to #001900 */}
                       <div className="bg-[#001900] border border-yellow-500/30 p-6 rounded-2xl flex flex-col items-center">
                           <span className="text-gray-400 text-xs uppercase tracking-widest mb-2">Driver (Birth)</span>
                           <span className="text-6xl font-bold text-yellow-400 drop-shadow-lg">{results.driver}</span>
                       </div>
-                      {/* Conductor */}
                       <div className="bg-[#001900] border border-purple-500/30 p-6 rounded-2xl flex flex-col items-center">
                           <span className="text-gray-400 text-xs uppercase tracking-widest mb-2">Conductor (Destiny)</span>
                           <span className="text-6xl font-bold text-purple-400 drop-shadow-lg">{results.conductor}</span>
                       </div>
-                      {/* Kuan */}
                       <div className="bg-[#001900] border border-green-500/30 p-6 rounded-2xl flex flex-col items-center">
                           <span className="text-gray-400 text-xs uppercase tracking-widest mb-2">Kuan Number</span>
                           <span className="text-6xl font-bold text-green-400 drop-shadow-lg">{results.kuan}</span>
                       </div>
                   </div>
                   
-                  {/* Analysis Text */}
                   <div className="mt-6 bg-[#001900] border border-emerald-900/30 p-6 rounded-2xl text-left">
                       <h3 className="text-lg font-bold text-white mb-2">Analysis</h3>
                       {results.analysis.map((line, idx) => (
@@ -344,7 +325,6 @@ const FreeCalculator = () => {
                       </h3>
                       <p className="text-xs text-gray-500 mt-1">Highlighted numbers match your Core Numbers</p>
                   </div>
-                  {/* CHANGE 8: Loshu Container BG */}
                   <div className="max-w-xs mx-auto grid grid-cols-3 gap-3 p-4 bg-[#001900] border border-emerald-900/30 rounded-2xl">
                       {renderLoshuCell(4)} {renderLoshuCell(9)} {renderLoshuCell(2)}
                       {renderLoshuCell(3)} {renderLoshuCell(5)} {renderLoshuCell(7)}
@@ -353,40 +333,53 @@ const FreeCalculator = () => {
               </div>
 
               {/* 3. Chaldean Name Chart Section */}
-              <div className="grid md:grid-cols-2 gap-6">
-                  {/* First Name */}
-                  {/* CHANGE 9: Chart Card BG */}
-                  <div className="bg-[#001900] border border-emerald-900/30 rounded-2xl p-6">
-                      <h3 className="text-lg font-bold text-white mb-4 border-b border-emerald-900/30 pb-2">First Name Vibration</h3>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                          {results.firstNameChart.letterValues.map((item, idx) => (
-                              <div key={idx} className="flex flex-col items-center bg-[#07220d] p-2 rounded-lg min-w-[2.5rem]">
-                                  <span className="text-xs text-gray-400">{item.letter}</span>
-                                  <span className="font-bold text-yellow-400">{item.value}</span>
-                              </div>
-                          ))}
+              <div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                      {/* First Name */}
+                      <div className="bg-[#001900] border border-emerald-900/30 rounded-2xl p-6">
+                          <h3 className="text-lg font-bold text-white mb-4 border-b border-emerald-900/30 pb-2">First Name Vibration</h3>
+                          <div className="flex flex-wrap gap-2 mb-4">
+                              {results.firstNameChart.letterValues.map((item, idx) => (
+                                  <div key={idx} className="flex flex-col items-center bg-[#07220d] p-2 rounded-lg min-w-[2.5rem]">
+                                      <span className="text-xs text-gray-400">{item.letter}</span>
+                                      <span className="font-bold text-yellow-400">{item.value}</span>
+                                  </div>
+                              ))}
+                          </div>
+                          <div className="flex justify-between items-center bg-emerald-900/20 p-3 rounded-xl">
+                              <span className="text-sm font-medium">Total</span>
+                              <span className="text-2xl font-bold text-white">{results.firstNameChart.total}</span>
+                          </div>
                       </div>
-                      <div className="flex justify-between items-center bg-emerald-900/20 p-3 rounded-xl">
-                          <span className="text-sm font-medium">Total Vibration</span>
-                          <span className="text-2xl font-bold text-white">{results.firstNameChart.total}</span>
+
+                      {/* Last Name */}
+                      <div className="bg-[#001900] border border-emerald-900/30 rounded-2xl p-6">
+                          <h3 className="text-lg font-bold text-white mb-4 border-b border-emerald-900/30 pb-2">Last Name Vibration</h3>
+                          <div className="flex flex-wrap gap-2 mb-4">
+                              {results.lastNameChart.letterValues.map((item, idx) => (
+                                  <div key={idx} className="flex flex-col items-center bg-[#07220d] p-2 rounded-lg min-w-[2.5rem]">
+                                      <span className="text-xs text-gray-400">{item.letter}</span>
+                                      <span className="font-bold text-blue-400">{item.value}</span>
+                                  </div>
+                              ))}
+                          </div>
+                          <div className="flex justify-between items-center bg-emerald-900/20 p-3 rounded-xl">
+                              <span className="text-sm font-medium">Total</span>
+                              <span className="text-2xl font-bold text-white">{results.lastNameChart.total}</span>
+                          </div>
                       </div>
                   </div>
 
-                  {/* Last Name */}
-                  <div className="bg-[#001900] border border-emerald-900/30 rounded-2xl p-6">
-                      <h3 className="text-lg font-bold text-white mb-4 border-b border-emerald-900/30 pb-2">Last Name Vibration</h3>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                          {results.lastNameChart.letterValues.map((item, idx) => (
-                              <div key={idx} className="flex flex-col items-center bg-[#07220d] p-2 rounded-lg min-w-[2.5rem]">
-                                  <span className="text-xs text-gray-400">{item.letter}</span>
-                                  <span className="font-bold text-blue-400">{item.value}</span>
-                              </div>
-                          ))}
-                      </div>
-                      <div className="flex justify-between items-center bg-emerald-900/20 p-3 rounded-xl">
-                          <span className="text-sm font-medium">Total Vibration</span>
-                          <span className="text-2xl font-bold text-white">{results.lastNameChart.total}</span>
-                      </div>
+                  {/* NEW: Full Name Combination Box */}
+                  <div className="mt-6 bg-[#001900] border border-yellow-500/30 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.1)]">
+                       <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-emerald-500/5 pointer-events-none"></div>
+                       <div className="relative z-10 text-center md:text-left mb-4 md:mb-0">
+                           <h3 className="text-2xl font-bold text-white mb-1">Full Name Vibration</h3>
+                           <p className="text-gray-400 text-sm">The combined destiny number of your First and Last Name.</p>
+                       </div>
+                       <div className="relative z-10 flex items-center justify-center w-20 h-20 bg-[#07220d] border border-yellow-500/50 rounded-full shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+                           <span className="text-4xl font-bold text-yellow-400">{results.fullNameTotal}</span>
+                       </div>
                   </div>
               </div>
 
@@ -401,7 +394,6 @@ const FreeCalculator = () => {
                     <button onClick={() => setResults(null)} className="text-gray-400 hover:text-white underline text-sm">
                         Calculate for someone else
                     </button>
-                    {/* CHANGE 10: Book Consultation Button Color */}
                     <Link to="/contact" className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-bold text-white transition-colors">
                         Book Consultation
                     </Link>
