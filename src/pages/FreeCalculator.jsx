@@ -54,6 +54,16 @@ const calculateKuanNumber = (dob, gender) => {
   return kuanNum;
 };
 
+// UPDATED: Now returns RAW total (unreduced) along with letter values
+const calculateChaldeanChart = (name) => {
+  const cleanName = name.toUpperCase().replace(/[^A-Z]/g, '');
+  const letterValues = cleanName.split('').map(letter => ({
+    letter, value: chaldeanMap[letter] || 0
+  }));
+  const rawTotal = letterValues.reduce((sum, lv) => sum + lv.value, 0);
+  return { letterValues, rawTotal };
+};
+
 const FreeCalculator = () => {
   // --- STATE MANAGEMENT ---
   const [formData, setFormData] = useState({
@@ -93,15 +103,6 @@ const FreeCalculator = () => {
       return day;
     }
     return 0;
-  };
-
-  const calculateChaldeanChart = (name) => {
-    const cleanName = name.toUpperCase().replace(/[^A-Z]/g, '');
-    const letterValues = cleanName.split('').map(letter => ({
-      letter, value: chaldeanMap[letter] || 0
-    }));
-    const total = reduceToSingleDigit(letterValues.reduce((sum, lv) => sum + lv.value, 0));
-    return { letterValues, total };
   };
 
   const getAnalysis = (driverNum, conductorNum) => {
@@ -154,23 +155,41 @@ const FreeCalculator = () => {
       const kuan = calculateKuanNumber(formData.dateOfBirth, formData.gender);
       const grid = generateLoshuGrid(formData.dateOfBirth, driver, lifePathNumber, kuan);
 
+      // EXTRACT FIRST, MIDDLE, LAST NAME
       const names = formData.name.trim().split(/\s+/);
-      const firstName = names[0] || '';
-      const lastName = names.length > 1 ? names.slice(1).join(' ') : '';
-
-      const firstNameChart = calculateChaldeanChart(firstName);
-      const lastNameChart = calculateChaldeanChart(lastName);
+      let first = '', middle = '', last = '';
       
-      const fullNameTotal = reduceToSingleDigit(firstNameChart.total + lastNameChart.total);
+      if (names.length === 1) {
+          first = names[0];
+      } else if (names.length === 2) {
+          first = names[0];
+          last = names[1];
+      } else if (names.length >= 3) {
+          first = names[0];
+          last = names[names.length - 1];
+          // Join all middle words into one string for calculation
+          middle = names.slice(1, -1).join(''); 
+      }
+
+      // Calculate charts (gives raw totals like 11, 15, 15)
+      const firstChart = calculateChaldeanChart(first);
+      const middleChart = calculateChaldeanChart(middle);
+      const lastChart = calculateChaldeanChart(last);
+      
+      // Calculate Full Name Vibration (Sum of raw totals e.g. 11+15+15 = 41)
+      const fullNameVibration = firstChart.rawTotal + middleChart.rawTotal + lastChart.rawTotal;
+      
+      // Calculate Combine Vibration (Reduce the 41 to single digit e.g. 5)
+      const combineVibration = reduceToSingleDigit(fullNameVibration);
 
       setResults({
         driver,
         conductor: lifePathNumber,
         kuan,
         loshuGrid: grid,
-        firstNameChart,
-        lastNameChart,
-        fullNameTotal, 
+        nameCharts: { first: firstChart, middle: middleChart, last: lastChart },
+        fullNameVibration, 
+        combineVibration,
         analysis: getAnalysis(driver, lifePathNumber)
       });
       
@@ -202,8 +221,30 @@ const FreeCalculator = () => {
     );
   };
 
+  // Helper function to render a Name Box
+  const renderNameBox = (title, chart, colorClass) => {
+      if (!chart || chart.rawTotal === 0) return null;
+      return (
+          <div className="bg-[#001900] border border-emerald-900/30 rounded-2xl p-6 flex flex-col h-full">
+              <h3 className="text-lg font-bold text-white mb-4 border-b border-emerald-900/30 pb-2">{title}</h3>
+              <div className="flex flex-wrap gap-2 mb-4 flex-grow">
+                  {chart.letterValues.map((item, idx) => (
+                      <div key={idx} className="flex flex-col items-center bg-[#07220d] p-2 rounded-lg min-w-[2.5rem]">
+                          <span className="text-xs text-gray-400">{item.letter}</span>
+                          <span className={`font-bold ${colorClass}`}>{item.value}</span>
+                      </div>
+                  ))}
+              </div>
+              <div className="flex justify-between items-center bg-emerald-900/20 p-3 rounded-xl mt-auto">
+                  <span className="text-sm font-medium">Total</span>
+                  <span className="text-2xl font-bold text-white">{chart.rawTotal}</span>
+              </div>
+          </div>
+      );
+  };
+
   return (
-    // BACK TO GREEN THEME
+    // STRICT ULTRA DARK GREEN THEME
     <div className="min-h-screen bg-[#001900] text-white font-sans pt-32 pb-20 px-6">
       
       <div className="max-w-4xl mx-auto">
@@ -228,7 +269,7 @@ const FreeCalculator = () => {
                     <label className="text-sm font-bold uppercase tracking-wider text-gray-500 ml-1">Full Name</label>
                     <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                        <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full bg-[#001900] border border-emerald-900/30 rounded-2xl p-4 pl-12 text-white focus:border-emerald-500 outline-none transition-all" placeholder="Amit Gupta" />
+                        <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full bg-[#001900] border border-emerald-900/30 rounded-2xl p-4 pl-12 text-white focus:border-emerald-500 outline-none transition-all" placeholder="Aman Kumar Sinha" />
                     </div>
                 </div>
                 <div className="space-y-2">
@@ -304,7 +345,7 @@ const FreeCalculator = () => {
                           <span className="text-6xl font-bold text-purple-400 drop-shadow-lg">{results.conductor}</span>
                       </div>
 
-                      {/* --- KUAN NUMBER: BACKGROUND CHANGED HERE --- */}
+                      {/* KUAN NUMBER - Highlighted with gradient */}
                       <div className="bg-gradient-to-b from-green-900/40 to-[#001900] border border-green-500/50 p-6 rounded-2xl flex flex-col items-center shadow-[0_0_20px_rgba(34,197,94,0.15)]">
                           <span className="text-gray-300 font-semibold text-xs uppercase tracking-widest mb-2">Kuan Number</span>
                           <span className="text-6xl font-bold text-green-400 drop-shadow-lg">{results.kuan}</span>
@@ -333,49 +374,40 @@ const FreeCalculator = () => {
                   </div>
               </div>
 
+              {/* --- NEW: FIRST, MIDDLE, LAST NAME BOXES --- */}
               <div>
-                  <div className="grid md:grid-cols-2 gap-6">
-                      <div className="bg-[#001900] border border-emerald-900/30 rounded-2xl p-6">
-                          <h3 className="text-lg font-bold text-white mb-4 border-b border-emerald-900/30 pb-2">First Name Vibration</h3>
-                          <div className="flex flex-wrap gap-2 mb-4">
-                              {results.firstNameChart.letterValues.map((item, idx) => (
-                                  <div key={idx} className="flex flex-col items-center bg-[#07220d] p-2 rounded-lg min-w-[2.5rem]">
-                                      <span className="text-xs text-gray-400">{item.letter}</span>
-                                      <span className="font-bold text-yellow-400">{item.value}</span>
-                                  </div>
-                              ))}
-                          </div>
-                          <div className="flex justify-between items-center bg-emerald-900/20 p-3 rounded-xl">
-                              <span className="text-sm font-medium">Total</span>
-                              <span className="text-2xl font-bold text-white">{results.firstNameChart.total}</span>
-                          </div>
-                      </div>
-
-                      <div className="bg-[#001900] border border-emerald-900/30 rounded-2xl p-6">
-                          <h3 className="text-lg font-bold text-white mb-4 border-b border-emerald-900/30 pb-2">Last Name Vibration</h3>
-                          <div className="flex flex-wrap gap-2 mb-4">
-                              {results.lastNameChart.letterValues.map((item, idx) => (
-                                  <div key={idx} className="flex flex-col items-center bg-[#07220d] p-2 rounded-lg min-w-[2.5rem]">
-                                      <span className="text-xs text-gray-400">{item.letter}</span>
-                                      <span className="font-bold text-blue-400">{item.value}</span>
-                                  </div>
-                              ))}
-                          </div>
-                          <div className="flex justify-between items-center bg-emerald-900/20 p-3 rounded-xl">
-                              <span className="text-sm font-medium">Total</span>
-                              <span className="text-2xl font-bold text-white">{results.lastNameChart.total}</span>
-                          </div>
-                      </div>
+                  <div className={`grid grid-cols-1 ${results.nameCharts.middle.rawTotal > 0 ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-6`}>
+                      {renderNameBox("First Name Vibration", results.nameCharts.first, "text-yellow-400")}
+                      {renderNameBox("Middle Name Vibration", results.nameCharts.middle, "text-purple-400")}
+                      {renderNameBox("Last Name Vibration", results.nameCharts.last, "text-blue-400")}
                   </div>
 
-                  <div className="mt-6 bg-[#001900] border border-yellow-500/30 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.1)]">
+                  {/* COMBINED TOTAL BOX */}
+                  <div className="mt-6 bg-[#001900] border border-yellow-500/30 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.1)]">
                        <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-emerald-500/5 pointer-events-none"></div>
-                       <div className="relative z-10 text-center md:text-left mb-4 md:mb-0">
-                           <h3 className="text-2xl font-bold text-white mb-1">Full Name Vibration</h3>
-                           <p className="text-gray-400 text-sm">The combined destiny number of your First and Last Name.</p>
+                       
+                       <div className="relative z-10 text-center md:text-left mb-6 md:mb-0">
+                           <h3 className="text-2xl font-bold text-white mb-1">Name Destiny</h3>
+                           <p className="text-gray-400 text-sm">The complete vibration of your identity.</p>
                        </div>
-                       <div className="relative z-10 flex items-center justify-center w-20 h-20 bg-[#07220d] border border-yellow-500/50 rounded-full shadow-[0_0_15px_rgba(234,179,8,0.2)]">
-                           <span className="text-4xl font-bold text-yellow-400">{results.fullNameTotal}</span>
+                       
+                       <div className="relative z-10 flex items-center gap-6 md:gap-10">
+                           {/* Full Name Vibration (e.g. 41) */}
+                           <div className="flex flex-col items-center">
+                               <span className="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest mb-1 text-center">Full Name<br/>Vibration</span>
+                               <span className="text-3xl font-bold text-white">{results.fullNameVibration}</span>
+                           </div>
+                           
+                           {/* Divider Line */}
+                           <div className="h-12 w-px bg-yellow-500/30"></div>
+                           
+                           {/* Combine Vibration (e.g. 5) */}
+                           <div className="flex flex-col items-center">
+                               <span className="text-gray-400 text-[10px] md:text-xs uppercase tracking-widest mb-1 text-center">Combine<br/>Vibration</span>
+                               <div className="w-14 h-14 md:w-16 md:h-16 bg-[#07220d] border border-yellow-500/50 rounded-full shadow-[0_0_15px_rgba(234,179,8,0.2)] flex items-center justify-center">
+                                   <span className="text-2xl md:text-3xl font-bold text-yellow-400">{results.combineVibration}</span>
+                               </div>
+                           </div>
                        </div>
                   </div>
               </div>
