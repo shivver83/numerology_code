@@ -269,7 +269,7 @@ const FreeCalculator = () => {
                     <label className="text-sm font-bold uppercase tracking-wider text-gray-500 ml-1">Full Name</label>
                     <div className="relative">
                         <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                        <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full bg-[#001900] border border-emerald-900/30 rounded-2xl p-4 pl-12 text-white focus:border-emerald-500 outline-none transition-all" placeholder="Aman Kumar Sinha" />
+                        <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full bg-[#001900] border border-emerald-900/30 rounded-2xl p-4 pl-12 text-white focus:border-emerald-500 outline-none transition-all" placeholder="Amit Gupta" />
                     </div>
                 </div>
                 <div className="space-y-2">
