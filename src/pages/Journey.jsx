@@ -22,7 +22,7 @@ const Journey = () => {
 
       {/* --- NEW INTERACTIVE CALL TO ACTION (Replaced Pricing) --- */}
       <div className="max-w-5xl mx-auto mb-24 relative z-10">
-        <div className="relative bg-[#07220d] border border-emerald-500/30 rounded-[3rem] p-8 md:p-16 text-center shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden group">
+        <div className="relative bg-[#07220d] border border-emerald-500/30 rounded-[2rem] p-8 md:p-16 text-center shadow-[0_0_50px_rgba(16,185,129,0.15)] overflow-hidden group">
             
             {/* Animated Inner Glow */}
             <div className="absolute inset-0 bg-radial-gradient from-emerald-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
