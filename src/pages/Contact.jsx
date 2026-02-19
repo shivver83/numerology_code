@@ -256,28 +256,6 @@ const Contact = () => {
 
             </form>
 
-            <div className="mt-8 pt-6 border-t border-emerald-900/30">
-                <h4 className="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-3">Consultation Charges</h4>
-                
-                {/* CHANGE 7: Charges Box Styling */}
-                <div className="space-y-3 bg-[#001900] p-4 rounded-xl border border-emerald-900/30">
-                    <div className="flex justify-between items-center border-b border-emerald-900/30 pb-2">
-                        <span className="text-gray-300 font-medium">Full Consultation</span>
-                        <span className="text-yellow-400 font-bold text-lg">₹ 14,567</span>
-                    </div>
-                    
-                    <div className="pt-1">
-                        <div className="flex justify-between items-center mb-1">
-                            <span className="text-gray-300 font-medium">Specific Block</span>
-                            <span className="text-yellow-400 font-bold text-lg">₹ 5,666</span>
-                        </div>
-                        <p className="text-xs text-gray-500 leading-relaxed">
-                            (For any one: Name change, Health, Marriage Compatibility, Business Partnership, Money Sector, Children's Education, Foreign settlement, Firm/Org name)
-                        </p>
-                    </div>
-                </div>
-            </div>
-
           </div>
         </div>
       </div>
