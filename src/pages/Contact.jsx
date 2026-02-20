@@ -159,7 +159,7 @@ const Contact = () => {
 
           {/* RIGHT SIDE: FORM */}
           {/* CHANGE 4: Form Container Background */}
-          <div className="bg-[#07220d] border border-emerald-900/30 p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden group animate-fade-in-up delay-200">
+          <div className="bg-[#07220d] border border-emerald-900/30 p-8 md:p-10 rounded-xl relative overflow-hidden group animate-fade-in-up delay-200">
             <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none"></div>
 
             <h3 className="text-2xl font-bold mb-6 relative z-10">Consultation Form</h3>
