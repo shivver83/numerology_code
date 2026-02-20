@@ -95,7 +95,7 @@ const TestimonialScroll = () => {
 // --- Single Card Component ---
 const TestimonialCard = ({ item }) => (
   // UPDATED: Card BG to Dark Green Tint (#07220d) & Border
-  <div className="w-[350px] md:w-[400px] flex-shrink-0 bg-[#07220d] border border-emerald-900/30 p-8 rounded-3xl relative backdrop-blur-sm group hover:bg-[#092b1f] transition-colors">
+  <div className="w-[350px] md:w-[400px] flex-shrink-0 bg-[#07220d] border border-emerald-900/30 p-8 rounded-2xl relative backdrop-blur-sm group hover:bg-[#092b1f] transition-colors">
     
     {/* UPDATED: Quote Icon Color to Emerald Tint */}
     <Quote className="absolute top-6 right-6 text-emerald-900/40 w-16 h-16 group-hover:text-emerald-500/10 transition-colors" />
