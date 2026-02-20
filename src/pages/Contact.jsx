@@ -266,7 +266,7 @@ const Contact = () => {
 // ... Reusable Components ...
 const ContactCard = ({ icon, title, value, isLink, href, subValue }) => (
   // CHANGE 8: Card Background to Dark Green Tint
-  <div className="flex items-center gap-4 p-4 bg-[#07220d] border border-emerald-900/30 rounded-2xl hover:bg-[#092b1f] transition-colors group">
+  <div className="flex items-center gap-4 p-4 bg-[#07220d] border border-emerald-900/30 rounded-xl hover:bg-[#092b1f] transition-colors group">
     <div className="p-3 bg-[#001900] rounded-xl border border-emerald-900/30 group-hover:scale-110 transition-transform">{icon}</div>
     <div>
       <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wide">{title}</h4>
