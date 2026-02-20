@@ -134,7 +134,7 @@ const Contact = () => {
             </div>
 
             {/* CHANGE 3: Info Box Background */}
-            <div className="bg-[#07220d]/60 border border-emerald-900/30 p-8 rounded-3xl backdrop-blur-md">
+            <div className="bg-[#07220d]/60 border border-emerald-900/30 p-8 rounded-xl backdrop-blur-md">
               <h3 className="text-xl font-bold mb-2">Stay Connected</h3>
               <p className="text-gray-400 text-sm mb-6">Follow us for daily tips and lucky numbers.</p>
               <div className="flex gap-4 flex-wrap">
@@ -145,7 +145,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="h-64 w-full rounded-3xl overflow-hidden border border-emerald-900/30 relative group">
+            <div className="h-64 w-full rounded-xl overflow-hidden border border-emerald-900/30 relative group">
               <div className="absolute inset-0 bg-emerald-900/20 mix-blend-overlay pointer-events-none z-10"></div>
               <iframe 
                 src="https://maps.google.com/maps?q=Mahagunpuram%20NH%2024%20Ghaziabad&t=&z=15&ie=UTF8&iwloc=&output=embed"
