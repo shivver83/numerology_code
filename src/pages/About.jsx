@@ -149,7 +149,7 @@ const About = () => {
           <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
           
           {/* CHANGE 10: Mission Card Background */}
-          <div className="relative max-w-4xl mx-auto bg-[#07220d] border border-emerald-900/30 rounded-[3rem] p-12 text-center shadow-[0_0_50px_rgba(16,185,129,0.1)]">
+          <div className="relative max-w-4xl mx-auto bg-[#07220d] border border-emerald-900/30 rounded-xl p-12 text-center shadow-[0_0_50px_rgba(16,185,129,0.1)]">
             <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#001900] px-6">
               <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
                 <Star className="text-white fill-current" size={32} />
