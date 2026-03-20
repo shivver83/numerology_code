@@ -49,7 +49,9 @@ const TestimonialScroll = () => {
     { name: "Pannkaj D Gautam", video: "https://www.youtube.com/embed/0sORefzxvp8" },
     { name: "Shivanchal D Vermma", video: "https://www.youtube.com/embed/trJc2qwUIMg" },
     { name: "Diinesh Kumar Verma", video: "https://www.youtube.com/embed/RccvBU5eaBY" },
-    { name: "Ashi Gupta", video: "https://www.youtube.com/embed/dEvJNgkWzQM" }
+    { name: "Ashi Gupta", video: "https://www.youtube.com/embed/dEvJNgkWzQM" },
+    { name: "Hradesh S Yadav", video: "https://www.youtube.com/embed/hwjE1q-apkY" },
+    { name: "Dr Pinnky Sharrma", video: "https://www.youtube.com/embed/SSIY8F1bN6s" }
   ];
 
   return (
