@@ -44,12 +44,12 @@ const TestimonialScroll = () => {
 
   // --- NEW VIDEO TESTIMONIALS ---
   const videoTestimonials = [
-    { name: "Suman Kumar Thakur", video: "https://www.youtube.com/embed/KJZZH_uTUmk" },
-    { name: "Manoj Prajapati", video: "https://www.youtube.com/embed/kpmCemfuutw" },
-    { name: "Pankaj D Gautam", video: "https://www.youtube.com/embed/0sORefzxvp8" },
-    { name: "Shivanchal Verma", video: "https://www.youtube.com/embed/trJc2qwUIMg" },
+    { name: "Suman K Thakur", video: "https://www.youtube.com/embed/KJZZH_uTUmk" },
+    { name: "Manoj Kumar", video: "https://www.youtube.com/embed/kpmCemfuutw" },
+    { name: "Pannkaj D Gautam", video: "https://www.youtube.com/embed/0sORefzxvp8" },
+    { name: "Shivanchal D Vermma", video: "https://www.youtube.com/embed/trJc2qwUIMg" },
     { name: "Diinesh Kumar Verma", video: "https://www.youtube.com/embed/RccvBU5eaBY" },
-    { name: "Aashi Gupta", video: "https://www.youtube.com/embed/dEvJNgkWzQM" }
+    { name: "Ashi Gupta", video: "https://www.youtube.com/embed/dEvJNgkWzQM" }
   ];
 
   return (
