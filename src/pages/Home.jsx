@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Brain, PenTool, Briefcase, Heart, Baby, CalendarDays, ShieldCheck } from 'lucide-react'; 
 // Make sure this path is correct based on your folder structure
 import TestimonialScroll from '../components/TestimonialScroll';
+import TestimonialVideo from '../components/VideoTestimonials';
 
 const Home = () => {
   // --- BACKGROUND ANIMATION CONFIG (Gold Numbers) ---
@@ -139,6 +140,20 @@ const Home = () => {
         </div>
       </section>
 
+
+
+     {/* --- VIDEO TESTIMONIALS --- */}
+      {/* CHANGE 6: Background & Border Updated */}
+      <section className="bg-[#001900] border-t border-emerald-900/30 py-10">
+        <TestimonialVideo />
+      </section>
+
+
+
+
+
+
+      
 
       {/* --- WHY CHOOSE US --- */}
       {/* CHANGE 5: Background & Border Updated */}
