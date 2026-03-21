@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const VideoTestimonials = () => {
@@ -82,7 +82,6 @@ const VideoTestimonials = () => {
 
       {/* CSS For Animations & Masking */}
       <style>{`
-        /* Mobile Marquee (Slowed down to 50s) */
         .animate-marquee-slow {
           animation: marquee-mobile 50s linear infinite;
         }
@@ -90,8 +89,6 @@ const VideoTestimonials = () => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-
-        /* Hide Scrollbar for Desktop Slider */
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
         }
@@ -99,8 +96,6 @@ const VideoTestimonials = () => {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
-
-        /* Fade out edges */
         .gradient-mask {
           mask-image: linear-gradient(to right, transparent, #001900 10%, #001900 90%, transparent);
           -webkit-mask-image: linear-gradient(to right, transparent, #001900 10%, #001900 90%, transparent);
@@ -114,34 +109,70 @@ const VideoTestimonials = () => {
   );
 };
 
-// --- REDUCED HEIGHT, ROUNDED-XL & GOLD BORDER CARD ---
-const VideoCard = ({ item }) => (
-  <div className="w-[200px] h-[350px] md:w-[240px] md:h-[420px] flex-shrink-0 relative rounded-xl overflow-hidden border-[3px] border-[#D4AF37] shadow-[0_5px_20px_rgba(212,175,55,0.15)] group hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)] transition-all duration-300 bg-[#0a0a0a]">
-    
-    <iframe
-      width="100%"
-      height="100%"
-      src={item.video}
-      title={item.name}
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      className="w-full h-full object-cover"
-    ></iframe>
+// --- CUSTOM HD THUMBNAIL VIDEO CARD ---
+const VideoCard = ({ item }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  // YouTube link se Video ID nikalna
+  const videoId = item.video.split('/').pop();
+  
+  // YouTube ka High-Res aur Standard-Res Thumbnail URL
+  const highResThumb = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const standardThumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  
+  const [imgSrc, setImgSrc] = useState(highResThumb);
 
-    {/* Elegant Gold Tint Overlay on Bottom */}
-    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 pt-12 pointer-events-none">
-      <h4 className="text-white font-bold text-sm md:text-base text-center drop-shadow-md mb-2">
-        {item.name}
-      </h4>
-      <div className="flex justify-center">
-        <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-[#D4AF37] font-extrabold bg-[#D4AF37]/10 px-3 py-1 rounded-md border border-[#D4AF37]/40 backdrop-blur-md">
-          Verified
-        </span>
+  return (
+    <div className="w-[200px] h-[350px] md:w-[240px] md:h-[420px] flex-shrink-0 relative rounded-xl overflow-hidden border-[3px] border-[#D4AF37] shadow-[0_5px_20px_rgba(212,175,55,0.15)] group hover:shadow-[0_8px_30px_rgba(212,175,55,0.3)] transition-all duration-300 bg-[#0a0a0a]">
+      
+      {!isPlaying ? (
+        // STATE 1: Sirf HD Image aur Play Button dikhega (Super Fast & High Quality)
+        <div 
+          className="w-full h-full relative cursor-pointer"
+          onClick={() => setIsPlaying(true)}
+        >
+          <img 
+            src={imgSrc} 
+            alt={item.name} 
+            onError={() => setImgSrc(standardThumb)} // Agar High-res na mile toh standard load karega
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          
+          {/* Custom Golden Play Button */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors duration-300">
+            <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full border-2 border-[#D4AF37] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.6)] group-hover:scale-110 transition-transform">
+              <span className="text-[#D4AF37] ml-1 text-xl">▶</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        // STATE 2: Click karne par asli YouTube iframe load hoga aur auto-play hoga
+        <iframe
+          width="100%"
+          height="100%"
+          src={`${item.video}?autoplay=1&rel=0`}
+          title={item.name}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full object-cover"
+        ></iframe>
+      )}
+
+      {/* Elegant Gold Tint Overlay on Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 pt-12 pointer-events-none z-10">
+        <h4 className="text-white font-bold text-sm md:text-base text-center drop-shadow-md mb-2">
+          {item.name}
+        </h4>
+        <div className="flex justify-center">
+          <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-[#D4AF37] font-extrabold bg-[#D4AF37]/10 px-3 py-1 rounded-md border border-[#D4AF37]/40 backdrop-blur-md">
+            Verified
+          </span>
+        </div>
       </div>
+      
     </div>
-    
-  </div>
-);
+  );
+};
 
 export default VideoTestimonials;
