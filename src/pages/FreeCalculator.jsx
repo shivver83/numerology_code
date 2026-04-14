@@ -4,6 +4,7 @@ import {
   User, Mail, Phone, Calendar, Users, Grid3X3 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 // --- HELPER LOGIC ---
 const chaldeanMap = {
@@ -246,6 +247,13 @@ const FreeCalculator = () => {
   return (
     // STRICT ULTRA DARK GREEN THEME
     <div className="min-h-screen bg-[#001900] text-white font-sans pt-32 pb-20 px-6">
+
+      <SEO 
+        title="Free Numerology Calculator | Check Your Life Path Number" 
+        description="Use our free online numerology calculator by Happiness Creations to discover your Life Path Number, Destiny Number, and hidden potentials instantly."
+        canonicalUrl="https://happinessccreattions.in/calculator"
+        keywords="free numerology calculator, life path number calculator, name numerology calculator, destiny number, online numerology reading free"
+      />
       
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
