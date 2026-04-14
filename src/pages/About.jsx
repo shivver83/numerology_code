@@ -1,5 +1,6 @@
 import React from 'react';
 import { Quote, Star, Youtube, Instagram, Compass, Gem, Lightbulb, ScanLine } from 'lucide-react'; 
+import SEO from '../components/SEO';
 
 const About = () => {
   return (
