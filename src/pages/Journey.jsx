@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Info, CalendarClock, Globe, ShieldCheck, Sparkles, ArrowRight, Rocket } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Journey = () => {
   return (
     <div className="min-h-screen bg-[#001900] text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
+      <SEO 
+        title="My Journey | Amit Gupta" 
+        description="Explore the inspiring journey of Amit Gupta and Happiness Creations. Discover how authentic numerology and occult sciences have transformed thousands of lives."
+        canonicalUrl="https://happinessccreattions.in/journey"
+        keywords="amit gupta journey, numerology success stories, happiness creations history, occult science expert ghaziabad, life transformation"
+      />
       
       {/* Background Glow - Green/Gold mix */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none"></div>
