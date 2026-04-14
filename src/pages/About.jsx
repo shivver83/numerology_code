@@ -5,6 +5,12 @@ const About = () => {
   return (
     // CHANGE 1: Main Background to Ultra Dark Green (#001900)
     <div className="min-h-screen bg-[#001900] text-white font-sans overflow-x-hidden pt-24 pb-20">
+
+      <SEO 
+        title="About Amit Gupta | Expert Numerologist | Best Numerologist" 
+        description="Meet Amit Gupta, a renowned Numerologist in Ghaziabad. Learn about his mission to demystify numerology and provide actionable remedies."
+        canonicalUrl="https://happinessccreattions.in/about"
+      />
       
       {/* --- BACKGROUND DECOR --- */}
       {/* CHANGE 2: Updated blobs to Green/Emerald tones */}
