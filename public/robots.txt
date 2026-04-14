@@ -1,0 +1,10 @@
+# Allow all search engine bots to crawl the website
+User-agent: *
+Allow: /
+
+# Disallow crawling of specific private/legal pages (Optional but good practice)
+Disallow: /privacy-policy
+Disallow: /terms-of-service
+
+# Pointing to the XML Sitemap to help Google index pages faster
+Sitemap: https://happinessccreattions.in/sitemap.xml
