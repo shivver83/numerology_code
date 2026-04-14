@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, Brain, PenTool, Briefcase, Heart, Baby, CalendarD
 // Make sure this path is correct based on your folder structure
 import TestimonialScroll from '../components/TestimonialScroll';
 import TestimonialVideo from '../components/VideoTestimonials';
+import SEO from '../components/SEO';
 
 const Home = () => {
   // --- BACKGROUND ANIMATION CONFIG (Gold Numbers) ---
@@ -23,6 +24,13 @@ const Home = () => {
   return (
     // CHANGE 1: Global Background set to Ultra Dark Green (#001900)
     <div className="min-h-screen bg-[#001900] text-white font-sans overflow-x-hidden">
+
+    <SEO 
+        title="Amit Gupta is Best Numerologist in Ghaziabad, Uttar Pradesh" 
+        description="Unlock your true potential with expert Numerology services by Amit Gupta. Transform your life, career, and relationships."
+        canonicalUrl="https://happinessccreattions.in/"
+        keywords="amit gupta, numerologist, numerologist in ghaziabad, amit gupta numerology, name correction, best numerologist"
+      />
       
       {/* --- HERO SECTION --- */}
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-0"> 
