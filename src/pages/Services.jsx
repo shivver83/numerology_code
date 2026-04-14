@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PenTool, Briefcase, Heart, Sparkles, ArrowUpRight, Baby, Calendar, CheckCircle2, Crown } from 'lucide-react';
-
+import SEO from '../components/SEO';
 const Services = () => {
   const services = [
     {
@@ -105,6 +105,13 @@ const Services = () => {
   return (
     // CHANGE 1: Main Background set to Ultra Dark Green (#001900)
     <div className="min-h-screen bg-[#001900] text-white font-sans pt-32 pb-20 px-6 relative overflow-hidden">
+
+        <SEO 
+        title="Numerology Services" 
+        description="Explore our expert numerology services including Name Correction, Business Numerology, Child Birth Planning, and Relationship Matching."
+        canonicalUrl="https://happinessccreattions.in/services"
+        keywords="numerology services, name correction, business numerology, relationship match"
+      />
       
       {/* Background Ambience - Updated to Green/Emerald tones */}
       <div className="fixed top-0 left-0 w-[800px] h-[800px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
