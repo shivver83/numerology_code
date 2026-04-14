@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { MapPin, Phone, Mail, Instagram, Facebook, Youtube, Send, Calendar, Clock, Globe, MessageCircle, Car, Home, Smartphone, User, CheckCircle, AlertCircle, X, Sparkles, Briefcase } from 'lucide-react';
 import ReCAPTCHA from "react-google-recaptcha";
+import SEO from '../components/SEO';
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -60,6 +61,13 @@ const Contact = () => {
   return (
     // CHANGE 1: Main Background to Ultra Dark Green (#001900)
     <div className="min-h-screen bg-[#001900] text-white font-sans pt-32 pb-20 px-6 relative overflow-hidden">
+
+      <SEO 
+        title="Contact Us | Book a Numerology Consultation" 
+        description="Get in touch with Happiness Creations. Book your personalized numerology session, name correction, or business consultation with Amit Gupta in Ghaziabad or online."
+        canonicalUrl="https://happinessccreattions.in/contact"
+        keywords="contact amit gupta, book numerology consultation, numerologist phone number, best numerologist near me, happiness creations contact ghaziabad"
+      />
       
       {/* --- PREMIUM NOTIFICATION --- */}
       {notification && (
