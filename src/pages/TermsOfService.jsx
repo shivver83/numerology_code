@@ -1,10 +1,19 @@
 import React from 'react';
 import { Scale, AlertTriangle, BookOpen } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const TermsOfService = () => {
   return (
     // CHANGE 1: Main Background to Ultra Dark Green (#001900)
     <div className="min-h-screen bg-[#001900] text-white font-sans pt-32 pb-20 px-6 relative overflow-hidden">
+
+      <SEO 
+        title="Terms of Service" 
+        description="Review the Terms of Service for using the Happiness Creations website, free numerology tools, and booking consultations with Amit Gupta."
+        canonicalUrl="https://happinessccreattions.in/terms-of-service"
+      />
+      {/* Legal page hone ki wajah se hum isko index hone se rokenge */}
+      <meta name="robots" content="noindex, follow" />
       
       {/* Background Ambience - Added Green/Gold Glows */}
       <div className="fixed top-0 left-0 w-[600px] h-[600px] bg-emerald-900/10 rounded-full blur-[120px] pointer-events-none"></div>
